@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\ParentStudent;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class ParentSeeder extends Seeder
 {
@@ -14,7 +15,7 @@ class ParentSeeder extends Seeder
     public function run(): void
     {
         ParentStudent::create([
-            'name'=>'ahmed',
+            'name'=>['en'=>'ahmed','ar'=>'احمد'],
             'mobile'=>'01226717838',
             'email'=>'ahmed@gmail.com',
             'national_id'=>'1245678129542',
@@ -22,7 +23,7 @@ class ParentSeeder extends Seeder
             'job'=>'accountant',
             'gender'=>'male',
             'date_birth'=>'1980-05-02',
-            'password'=>bcrypt('12345678'),
+            'password'=>Hash::make('12345678'),
         ]);
     }
 }

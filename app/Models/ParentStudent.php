@@ -18,8 +18,7 @@ class ParentStudent extends Authenticatable implements JWTSubject
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes,CustomiseDateTrait;
     protected $table = 'parents';
     public $timestamps = true;
-
-
+    public $translatable =['name'];
     protected $fillable = [
         'name',
         'mobile',
@@ -40,6 +39,7 @@ class ParentStudent extends Authenticatable implements JWTSubject
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'name'=>'array'
     ];
 
     protected function photo(): Attribute

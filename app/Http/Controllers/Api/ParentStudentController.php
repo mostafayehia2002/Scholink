@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ParentResource;
 use App\Models\Register;
 use App\Traits\GeneralResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ParentStudentController extends Controller
 {
@@ -19,7 +22,7 @@ class ParentStudentController extends Controller
     public function profile()
     {
         try {
-            return $this->data(200, 'data', auth()->guard('parent')->user());
+            return $this->data(200, 'data',ParentResource::make( auth()->guard('parent')->user()));
         } catch (\Exception $e) {
             return  $this->error( 500,$e->getMessage());
         }
@@ -30,7 +33,7 @@ class ParentStudentController extends Controller
     {
         try {
             auth()->guard('parent')->logout();
-            return $this->successMessage(200, trans('response.Successfully_Logged_out'));
+            return $this->successMessage(200, trans('response.Successfully_Logged_Out'));
         } catch (\Exception $e) {
             return  $this->error( 500,$e->getMessage());
         }
@@ -76,7 +79,8 @@ class ParentStudentController extends Controller
                 $img = $oldImg;
             }
             $validate = Validator::make(request()->all(), [
-                'name' => "required",
+                'name_en' =>"required|regex:/^[a-zA-Z ]+/",
+                'name_ar'=> "required|regex:/^[\p{Arabic} ]+/u",
                 'email' => "required|email|unique:parents,email," . $user->id,
                 'mobile' => "required|string|unique:parents,mobile," . $user->id,
                 'national_id' => "required|min:14,max:14",
@@ -89,6 +93,7 @@ class ParentStudentController extends Controller
             }
             $data = $validate->validate();
             $data['photo']='uploads/parents/profile/'.$img;
+            $data['name']=['en'=>$request->name_en,'ar'=>$request->name_ar];
             $user->update($data);
             return $this->successMessage(200, trans('response.Successfully_Update_Profile'));
         } catch (\Exception $e) {
@@ -96,7 +101,7 @@ class ParentStudentController extends Controller
         }
     }
 
-    public function changePassword(Register $request){
+    public function changePassword(Request $request){
         try {
             $user = auth('parent')->user();
             $validate = Validator::make(request()->all(), [
@@ -105,8 +110,10 @@ class ParentStudentController extends Controller
             if ($validate->fails()) {
                 return $this->error( 422,$validate->errors());
             }
-            $user->update(['password'=>bcrypt($request->password)]);
-            return $this->successMessage(200, trans('response.Successfully_Change_Password'));
+             $user->update(['password' => Hash::make($request->password)]);
+                // تحديث ناجح
+                return $this->successMessage(200, trans('response.Successfully_Change_Password'));
+
        }catch (\Exception $e){
             return  $this->error(500,$e->getMessage());
         }

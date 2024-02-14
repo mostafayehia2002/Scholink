@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\StudentResource;
 use App\Models\Register;
+use App\Models\Student;
 use App\Traits\GeneralResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use PHPUnit\Exception;
 
@@ -18,7 +22,9 @@ class StudentController extends Controller
     public function profile()
     {
         try {
-            return $this->data(200, 'data', auth()->guard('student')->user());
+            $user_id=auth('student')->user()->id;
+            $data=Student::with('classe')->where('id',$user_id)->first();
+            return $this->data(200, 'data',StudentResource::make($data));
         } catch (\Exception $e) {
             return  $this->error(500,$e->getMessage());
         }
@@ -53,16 +59,16 @@ class StudentController extends Controller
             return  $this->error( 500,$e->getMessage());
         }
     }
-    public function changePassword(Register $request){
+    public function changePassword(Request $request){
         try {
-            $user = auth('student')->user();
+            $user = auth()->guard('student')->user();
             $validate = Validator::make(request()->all(), [
                 'password' => "required|confirmed|min:6",
             ]);
             if ($validate->fails()) {
                 return $this->error( 422,$validate->errors());
             }
-            $user->update(['password'=>bcrypt($request->password)]);
+             $user->update(['password'=>bcrypt($request->password)]);
             return $this->successMessage(200, trans('response.Successfully_Change_Password'));
         }catch (\Exception $e){
             return  $this->error( 500,$e->getMessage());

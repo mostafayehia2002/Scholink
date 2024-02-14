@@ -19,6 +19,7 @@ class Student extends Authenticatable implements JWTSubject
 
     protected $table = 'students';
     public $timestamps = true;
+    public $translatable =['name'];
     protected $fillable = [
         'parent_id',
         'name',
@@ -38,6 +39,7 @@ class Student extends Authenticatable implements JWTSubject
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'name'=>'array'
     ];
 
     protected function photo(): Attribute
@@ -56,7 +58,7 @@ class Student extends Authenticatable implements JWTSubject
 
     public function classe()
     {
-        return $this->belongsTo(Classe::class);
+        return $this->belongsTo(Classe::class,'id');
     }
 
     public function attendances(): hasMany
