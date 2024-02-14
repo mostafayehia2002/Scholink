@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Models;
+
+use App\Traits\CustomiseDateTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Reaction extends Model
+{
+    use HasFactory,CustomiseDateTrait;
+    protected $guarded=[];
+
+    public function content()
+    {
+        return $this->belongsTo(Content::class);
+    }
+
+    public function reactable()
+    {
+        return $this->morphTo();
+    }
+}
