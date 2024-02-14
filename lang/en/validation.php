@@ -150,6 +150,7 @@ return [
     'attributes'=>[
         'name_en'                =>'English Name',
         'name_ar'                 =>'Arabic Name',
+
         'name'                  => 'Name',
         'username'              => 'Username',
         'email'                 => 'Email',
