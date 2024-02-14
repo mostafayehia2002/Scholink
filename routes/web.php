@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -30,10 +31,10 @@ Route::group(
         });
 });
 
-
 Route::get('/clear', function () {
     Artisan::call('cache:clear');
     Artisan::call('config:cache');
     Artisan::call('view:clear');
     return "Cleared!";
     });
+
