@@ -89,10 +89,7 @@ return [
             'model' => App\Models\ParentStudent::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+
     ],
 
     /*

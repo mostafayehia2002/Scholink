@@ -148,6 +148,8 @@ return [
     'url'                  => 'The :attribute must be a valid URL.',
     'uuid'                 => 'The :attribute must be a valid UUID.',
     'attributes'=>[
+        'name_en'                =>'English Name',
+        'name_ar'                 =>'Arabic Name',
         'name'                  => 'Name',
         'username'              => 'Username',
         'email'                 => 'Email',
