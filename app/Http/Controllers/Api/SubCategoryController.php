@@ -26,7 +26,7 @@ class SubCategoryController extends Controller
             })->where(function ($query) use ($request){
                $news=Category::where('name','news')->first();
                 $query->where('category_id',$news->id);
-            })->get();
+            })->orderBy('created_at','desc')->get();
 
             if($data->count()<0){
                 return $this->error(404,trans('response.Data_Not_Found'));
@@ -47,9 +47,9 @@ class SubCategoryController extends Controller
                     $query->where('id',$request->id);
                 }
             })->where(function ($query) use ($request){
-                $news=Category::where('name','announcement')->first();
+                $news=Category::where('name','announcements')->first();
                   $query->where('category_id',$news->id);
-            })->get();
+            })->orderBy('created_at','desc')->get();
             if($data->count()<0){
                 return $this->error(404,trans('response.Data_Not_Found'));
             }
