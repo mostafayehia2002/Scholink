@@ -14,5 +14,8 @@ class News extends Model
     {
         return $this->morphMany(Photo::class,'photoble');
     }
-
+    public function photo()
+    {
+        return $this->morphOne(Photo::class,'photoble');
+    }
 }

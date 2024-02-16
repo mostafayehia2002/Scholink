@@ -10,7 +10,7 @@
                             Home
                         </li>
 
-                        <li class="breadcrumb-item active" aria-current="page">News</li>
+                        <li class="breadcrumb-item active" aria-current="page">Announcements</li>
                     </ol>
                 </nav>
             </div>
@@ -24,7 +24,7 @@
                 <div class="col-6 col-md-4">
                     {{--=====================Add=================--}}
                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                            data-bs-target="#exampleModaladd"><i class="bx bx-plus"></i> Add New News
+                            data-bs-target="#exampleModaladd"><i class="bx bx-plus"></i> Add New Announcement
                     </button>
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModaladd" tabindex="-1"
@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <form class="row g-3" method="POST"
-                                          action="{{route('admin.news.store')}}" enctype="multipart/form-data">
+                                          action="{{route('admin.announcements.store')}}" enctype="multipart/form-data">
                                         @csrf
                                         <div class="col-12">
                                             <label for="inputEmail" class="form-label">Subcategory</label>
@@ -116,10 +116,10 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <form class="row g-3" method="POST"
-                                                          action="{{route('admin.news.destroy',$row->id)}}">
+                                                          action="{{route('admin.announcements.destroy',$row->id)}}">
                                                         @method('DELETE')
                                                         @csrf
-                                                        <p>Are You Sure Delete Post</p>
+                                                        <p>Are You Sure Delete Announcement</p>
 
                                                 </div>
                                                 <div class="modal-footer">
@@ -150,7 +150,7 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <form class="row g-3" method="POST"
-                                                          action="{{route('admin.news.update',$row->id)}}" enctype="multipart/form-data">
+                                                          action="{{route('admin.announcements.update',$row->id)}}" enctype="multipart/form-data">
                                                         @csrf
                                                         @method("PUT")
 

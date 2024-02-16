@@ -15,8 +15,7 @@ class Photo extends Model
     protected function name(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => asset("$value"),
-
+            get: fn (string $value) => asset($value),
         );
     }
     public function photoble()

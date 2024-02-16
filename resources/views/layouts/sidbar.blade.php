@@ -34,10 +34,8 @@
                 </a>
                 <ul>
                    @foreach(\App\Models\Category::all() as $category)
-                        @if($category->name=='news')
                             <li> <a href="{{route("admin.".$category->name.".index")}}"><i class="bx bx-right-arrow-alt"></i>{{$category->name}}</a>
                             </li>
-                        @endif
                    @endforeach
                 </ul>
             </li>
