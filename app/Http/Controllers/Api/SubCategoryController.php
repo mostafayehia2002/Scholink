@@ -42,14 +42,13 @@ class SubCategoryController extends Controller
     public function getAnnouncements(Request $request)
     {
         try {
+            $announcement=Category::where('name','announcements')->first();
             $data=SubCategory::with('announcements')->where(function ($query) use ($request) {
                 if ($request->has('id') && SubCategory::find($request->id)){
                     $query->where('id',$request->id);
                 }
-            })->where(function ($query) use ($request){
-                $news=Category::where('name','announcements')->first();
-                  $query->where('category_id',$news->id);
-            })->orderBy('created_at','desc')->get();
+            })->where('category_id',$announcement->id)
+            ->orderBy('created_at','desc')->get();
             if($data->count()<0){
                 return $this->error(404,trans('response.Data_Not_Found'));
             }
