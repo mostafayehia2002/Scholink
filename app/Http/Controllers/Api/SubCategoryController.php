@@ -48,7 +48,7 @@ class SubCategoryController extends Controller
                     $query->where('id',$request->id);
                 }
 
-            })->where('category_id',$announcement->id)->get();
+            })->where('category_id',$announcement->id)->orderBy('created_at','desc')->get();
 
             if($data->count()<0){
                 return $this->error(404,trans('response.Data_Not_Found'));
