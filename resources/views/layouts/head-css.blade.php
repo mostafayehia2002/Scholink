@@ -10,6 +10,8 @@
     <link href="{{asset("assets/plugins-rtl/perfect-scrollbar/css/perfect-scrollbar.css")}}" rel="stylesheet" />
     <link href="{{asset("assets/plugins-rtl/metismenu/css/metisMenu.min.css")}}" rel="stylesheet" />
     <link href="{{asset('assets/plugins/datatable/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/plugins/fancy-file-uploader/fancy_fileupload.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/plugins/Drag-And-Drop/dist/imageuploadify.min.css')}}" rel="stylesheet" />
 
     <script src="{{asset("assets/js/pace.min.js")}}"></script>
       @if(app()->getLocale()=='ar')
