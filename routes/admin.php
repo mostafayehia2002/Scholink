@@ -3,7 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Admin\RegisterController;
-
+use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\NewController;
+use App\Http\Controllers\Admin\GuidelineController;
+use App\Http\Controllers\Admin\VisionController;
+use App\Http\Controllers\Admin\AnnouncementController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,5 +31,11 @@ Route::group(
     })->name('dashboard');
     Route::resource('registers', RegisterController::class);
     //News
-    Route::resource('news', \App\Http\Controllers\Admin\NewController::class);
+    Route::resource('news', NewController::class);
+    Route::resource('posts', PostController::class);
+    Route::resource('guidelines', GuidelineController::class);
+    Route::resource('visions', VisionController::class);
+    Route::resource('announcements', AnnouncementController::class);
+
+
 });

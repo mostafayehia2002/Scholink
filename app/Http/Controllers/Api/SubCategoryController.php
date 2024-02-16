@@ -47,6 +47,7 @@ class SubCategoryController extends Controller
                 if ($request->has('id') && SubCategory::find($request->id)){
                     $query->where('id',$request->id);
                 }
+
             })->where('category_id',$announcement->id)
             ->orderBy('created_at','desc')->get();
             if($data->count()<0){

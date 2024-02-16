@@ -10,7 +10,7 @@
                             Home
                         </li>
 
-                        <li class="breadcrumb-item active" aria-current="page">News</li>
+                        <li class="breadcrumb-item active" aria-current="page">Guidelines</li>
                     </ol>
                 </nav>
             </div>
@@ -19,12 +19,16 @@
 
         <div class="card">
 
+
+
+
+
             <div class="card-body">
 
                 <div class="col-6 col-md-4">
                     {{--=====================Add=================--}}
                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                            data-bs-target="#exampleModaladd"><i class="bx bx-plus"></i> Add New News
+                            data-bs-target="#exampleModaladd"><i class="bx bx-plus"></i> Add New Guideline
                     </button>
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModaladd" tabindex="-1"
@@ -32,26 +36,16 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
 
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Add
-                                        News</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form class="row g-3" method="POST"
-                                          action="{{route('admin.news.store')}}" enctype="multipart/form-data">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Update
+                                            Guideline</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="row g-3" method="POST"
+                                              action="{{route('admin.guidelines.store')}}">
                                         @csrf
-                                        <div class="col-12">
-                                            <label for="inputEmail" class="form-label">Subcategory</label>
-                                            <select class="form-select mb-3" name="subcategory_id" id="select_status"
-                                                    required aria-label="Default select example">
-                                                <option selected disabled>Select Subcategory</option>
-                                                @foreach($categories as $category)
-                                                    <option value="{{$category->id}}">{{$category->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
                                         <div class="col-12">
                                             <label for="inputAddress2"
                                                    class="form-label">Content</label>
@@ -60,24 +54,21 @@
                                                       placeholder="Enter Message"
                                                       rows="3"></textarea>
                                         </div>
-                                        <div class="col-12">
-                                            <label for="inputAddress2"
-                                                   class="form-label">Photos</label>
-                                            <input type="file" name="images[]" multiple accept="images/*">
-                                        </div>
 
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close
-                                    </button>
-                                    <button type="submit" class="btn btn-primary">Send</button>
-                                </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">Send</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
 
 
                 <div class="table-responsive">
@@ -86,7 +77,6 @@
                         <tr>
                             <th>#</th>
                             <th>Category</th>
-                            <th>SubCategory</th>
                             <th>content</th>
                             <th>Action</th>
                         </tr>
@@ -96,8 +86,7 @@
                         @foreach($data as $row)
                             <tr>
                                 <td>{{$loop->index+1}}</td>
-                                <td>{{$row->category_id}}</td>
-                                <td>{{$row->subcategory_id}}</td>
+                                <td>{{$row->category->name}}</td>
                                 <td>{{$row->content}}</td>
                                 <td>
                                     {{--=============Delate Request=========================--}}
@@ -110,16 +99,16 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">Delete Guideline</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <form class="row g-3" method="POST"
-                                                          action="{{route('admin.news.destroy',$row->id)}}">
+                                                          action="{{route('admin.guidelines.destroy',$row->id)}}">
                                                         @method('DELETE')
                                                         @csrf
-                                                        <p>Are You Sure Delete Post</p>
+                                                        <p>Are You Sure Delete Guideline</p>
 
                                                 </div>
                                                 <div class="modal-footer">
@@ -135,7 +124,7 @@
 
 
                                     {{--=============Upadate=========================--}}
-                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
                                             data-bs-target="#exampleModal{{$loop->index}}">Update
                                     </button>
                                     <!-- Modal -->
@@ -143,57 +132,35 @@
                                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form class="row g-3" method="POST"
-                                                          action="{{route('admin.news.update',$row->id)}}" enctype="multipart/form-data">
+
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Update
+                                                            Guideline</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form class="row g-3" method="POST"
+                                                              action="{{route('admin.guidelines.update',$row->id)}}">
                                                         @csrf
-                                                        @method("PUT")
-
-
-                                                        <div class="col-12">
-                                                            <label for="inputEmail"
-                                                                   class="form-label">Subcategory</label>
-                                                            <select class="form-select mb-3" name="subcategory_id"
-                                                                    id="select_status" required
-                                                                    aria-label="Default select example">
-                                                                @foreach($categories as $category)
-                                                                    <option
-                                                                        @selected($category->id==$row->subcategory_id) value="{{$category->id}}">{{$category->name}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
+                                                            @method('PUT')
                                                         <div class="col-12">
                                                             <label for="inputAddress2"
                                                                    class="form-label">Content</label>
+                                                            <input type="hidden" value="{{$row->id}}" name="id">
                                                             <textarea class="form-control" id="inputAddress2"
                                                                       name="content" required
                                                                       placeholder="Enter Message"
                                                                       rows="3">{{$row->content}}</textarea>
                                                         </div>
-                                                        <div class="col-12">
-                                                            <label for="inputAddress2"
-                                                                   class="form-label">Photos</label>
-                                                            <input type="file" name="images[]" multiple
-                                                                   accept="images/*">
-                                                        </div>
-                                                        <div class="col-12">
-                                                            @foreach($row->photos as $image)
-                                                                <img style="width: 50px;height: 50px;border-radius: 50%" src="{{$image->name}}">
-                                                            @endforeach
-                                                        </div>
 
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Close
-                                                    </button>
-                                                    <button type="submit" class="btn btn-primary">Send</button>
-                                                </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close
+                                                        </button>
+                                                        <button type="submit" class="btn btn-success">Update</button>
+                                                    </div>
                                                 </form>
                                             </div>
                                         </div>
@@ -222,13 +189,13 @@
     <script src="{{asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js')}}"></script>
     <script>
 
-        $(document).ready(function() {
-            var table = $('#example2').DataTable( {
-                "paging":   false,
+        $(document).ready(function () {
+            var table = $('#example2').DataTable({
+                "paging": false,
                 "ordering": false,
-                "info":     false
-            } );
+                "info": false
+            });
 
-        } );
+        });
     </script>
 @endpush

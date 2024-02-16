@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Content extends Model
 {
     use HasFactory;
-    protected $fillable=['content'];
+    protected $fillable=['content','category_id'];
 
 
     public function category()
@@ -37,6 +37,9 @@ class Content extends Model
     {
         return $this->morphMany(Photo::class,'photoble');
     }
-
+    public function photo()
+    {
+        return $this->morphOne(Photo::class,'photoble');
+    }
 
 }

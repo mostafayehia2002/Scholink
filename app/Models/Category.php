@@ -31,7 +31,8 @@ class Category extends Model
 
     public function announcements()
     {
-        return $this->belongsToMany(SubCategory::class,'announcements','category_id')->select('announcements.price','announcements.photo','announcements.created_at','announcements.updated_at');
+        return $this->belongsToMany(SubCategory::class,'announcements','subcategory_id')
+            ->select('announcements.price','announcements.photo','announcements.created_at','announcements.updated_at');
     }
     public function contents()
     {

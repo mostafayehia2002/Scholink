@@ -45,14 +45,21 @@ return [
         ],
         'parent' => [
             'driver' => 'local',
-            'root' => public_path('uploads/parents/'),
+            'root' => public_path('uploads/parents'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
         ],
         'student' => [
             'driver' => 'local',
-            'root' => public_path('uploads/students/'),
+            'root' => public_path('uploads/students'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+        'medias' => [
+            'driver' => 'local',
+            'root' => public_path('uploads/medias'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
