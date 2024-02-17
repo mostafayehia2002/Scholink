@@ -34,7 +34,7 @@ class SubCategory extends Model
     //return news
     public function news()
     {
-        return $this->belongsToMany(Category::class,'news','subcategory_id')->select('news.id','news.content','news.created_at','news.updated_at');
+        return $this->belongsToMany(Category::class,'news','subcategory_id')->select('news.id','news.admin_id','news.title','news.content','news.created_at','news.updated_at');
     }
 
 
