@@ -23,8 +23,8 @@ class NewsResource extends JsonResource
         foreach ($this->news as $new){
            $id= $new->id;
            $content=$new->content;
-          $image= Photo::where('photoble_id',$id)->where('photoble_type','App\Models\News')->get();
-            $this->News[$i++]=['content'=>$content,'photos'=>$image,'created_at'=>$new->created_at,'updated_at'=>$new->updated_at];
+           $image= Photo::where('photoble_id',$id)->where('photoble_type','App\Models\News')->get();
+            $this->News[$i++]=['title'=>$new->title,'content'=>$content,'photos'=>$image,'created_at'=>$new->created_at,'updated_at'=>$new->updated_at];
         }
         return [
             "category_id"=>$this->id,

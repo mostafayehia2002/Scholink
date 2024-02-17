@@ -13,7 +13,6 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        Admin::truncate();
         Admin::create([
             'name'=>'Admin',
             'email'=>'admin@gmail.com',

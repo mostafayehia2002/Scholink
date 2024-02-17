@@ -41,6 +41,6 @@ class SubCategory extends Model
     //return  announcements
     public function announcements()
     {
-        return $this->belongsToMany(Category::class,'announcements','subcategory_id')->select('announcements.price','announcements.photo','announcements.created_at','announcements.updated_at');
+        return $this->belongsToMany(Category::class,'announcements','subcategory_id')->select('announcements.admin_id','announcements.price','announcements.photo','announcements.created_at','announcements.updated_at');
     }
 }
