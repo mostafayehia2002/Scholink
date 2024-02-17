@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\File;
 
 class VisionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -43,6 +48,7 @@ class VisionController extends Controller
             $post = Content::create([
                 'category_id' => $category_id,
                 'content' => $request->content,
+                'admin_id'=>auth()->user()->id,
             ]);
             foreach ($request->file('images') as $image) {
                 $name = uniqid(10) . $image->getClientOriginalName();

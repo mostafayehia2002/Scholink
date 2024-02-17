@@ -34,10 +34,15 @@ class NewController extends Controller
      */
     public function store(Request $request)
     {
+        public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
         try {
             $request->validate([
                 'subcategory_id' => 'required|exists:sub_categories,id',
                 'content' => 'required|string',
+                'title'=>"required|string|max:255",
                 'images.*' => 'required|mimes:jpeg,png,jpg,gif'
             ]);
             $category_id = Category::where('name', 'news')->first()->id;
@@ -45,6 +50,8 @@ class NewController extends Controller
                 'category_id' => $category_id,
                 'subcategory_id' => $request->subcategory_id,
                 'content' => $request->content,
+                'title'=>$request->title,
+                'admin_id'=>auth()->user()->id,
             ]);
 
             foreach ($request->file('images') as $image) {
@@ -84,6 +91,7 @@ class NewController extends Controller
             $request->validate([
                 'subcategory_id' => 'required|exists:sub_categories,id',
                 'content' => 'required|string',
+                'title'=>"required|string|max:255",
                 'images.*' => 'nullable|mimes:jpeg,png,jpg,gif'
             ]);
 
@@ -107,6 +115,7 @@ class NewController extends Controller
                 [
                     'subcategory_id' => $request->subcategory_id,
                     'content' => $request->content,
+                    'title'=>$request->title,
                 ]
             );
             return redirect()->back()->with('success', 'Success Update News');

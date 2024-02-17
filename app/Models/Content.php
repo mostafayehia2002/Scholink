@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Content extends Model
 {
     use HasFactory;
-    protected $fillable=['content','category_id'];
+    protected $fillable=['content','category_id','admin_id'];
 
 
     public function category()
