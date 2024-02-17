@@ -16,6 +16,9 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained('categories')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
+            $table->foreignId('admin_id')->constrained('admins')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->text('content');
             $table->timestamps();
         });

@@ -42,4 +42,10 @@ class Content extends Model
         return $this->morphOne(Photo::class,'photoble');
     }
 
+    public function admin()
+    {
+
+        return $this->belongsTo(Admin::class);
+    }
+
 }

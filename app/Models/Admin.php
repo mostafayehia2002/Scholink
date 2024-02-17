@@ -43,4 +43,20 @@ class Admin extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function news()
+    {
+        return $this->hasMany(News::class);
+    }
+
+public function announcemnts()
+{
+
+    return $this->hasMany(Announcement::class);
+}
+
+    public function contents()
+    {
+        return $this->hasMany(Content::class);
+    }
 }

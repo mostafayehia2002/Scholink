@@ -17,6 +17,9 @@ return new class extends Migration
             $table->foreignId('subcategory_id')->constrained('sub_categories')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+            $table->foreignId('admin_id')->constrained('admins')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->string('photo');
             $table->decimal('price');
             $table->timestamps();
