@@ -19,7 +19,6 @@ class AnnouncementsResource extends JsonResource
         foreach ($this->announcements as $announcement){
             $this->Announcements[$i++]=['price'=>$announcement->price,'photo'=>asset($announcement->photo),'created_at'=>$announcement->created_at,'updated_at'=>$announcement->updated_at];
         }
-
         return [
            'id' =>$this->id,
             'name'=>$this->name,
