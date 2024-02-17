@@ -14,6 +14,10 @@ class NewController extends Controller
     /**
      * Display a listing of the resource.
      */
+         public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
     public function index()
     {
         $categories = Category::where('name', 'news')->first()->subcategories;
@@ -34,10 +38,7 @@ class NewController extends Controller
      */
     public function store(Request $request)
     {
-        public function __construct()
-    {
-        $this->middleware('auth:admin');
-    }
+
         try {
             $request->validate([
                 'subcategory_id' => 'required|exists:sub_categories,id',
