@@ -22,4 +22,11 @@ class News extends Model
     {
         return $this->belongsTo(Admin::class);
     }
+    public function subcategory(){
+        return $this->belongsTo(SubCategory::class);
+    }
+
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
 }

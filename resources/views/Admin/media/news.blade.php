@@ -54,6 +54,14 @@
                                         </div>
                                         <div class="col-12">
                                             <label for="inputAddress2"
+                                                   class="form-label">Title</label>
+                                            <input type="text" class="form-control" id="inputAddress2"
+                                                   name="title" required
+                                                   placeholder="Enter Title"
+                                                   rows="3">
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="inputAddress2"
                                                    class="form-label">Content</label>
                                             <textarea class="form-control" id="inputAddress2"
                                                       name="content" required
@@ -85,8 +93,9 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Category</th>
+                            <th>User</th>
                             <th>SubCategory</th>
+                            <th>Title</th>
                             <th>content</th>
                             <th>Action</th>
                         </tr>
@@ -96,8 +105,9 @@
                         @foreach($data as $row)
                             <tr>
                                 <td>{{$loop->index+1}}</td>
-                                <td>{{$row->category_id}}</td>
-                                <td>{{$row->subcategory_id}}</td>
+                                <td>{{$row->admin->name}}</td>
+                                <td>{{$row->subcategory->name}}</td>
+                                <td>{{$row->title}}</td>
                                 <td>{{$row->content}}</td>
                                 <td>
                                     {{--=============Delate Request=========================--}}
@@ -120,6 +130,14 @@
                                                         @method('DELETE')
                                                         @csrf
                                                         <p>Are You Sure Delete Post</p>
+                                                        <div class="col-12">
+                                                            <label for="inputAddress2"
+                                                                   class="form-label">Title</label>
+                                                            <input type="text" class="form-control" id="inputAddress2"
+                                                                   name="title" readonly
+                                                                 value="{{$row->title}}"
+                                                                   rows="3">
+                                                        </div>
 
                                                 </div>
                                                 <div class="modal-footer">
@@ -150,7 +168,8 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <form class="row g-3" method="POST"
-                                                          action="{{route('admin.news.update',$row->id)}}" enctype="multipart/form-data">
+                                                          action="{{route('admin.news.update',$row->id)}}"
+                                                          enctype="multipart/form-data">
                                                         @csrf
                                                         @method("PUT")
 
@@ -169,6 +188,14 @@
                                                         </div>
                                                         <div class="col-12">
                                                             <label for="inputAddress2"
+                                                                   class="form-label">Title</label>
+                                                            <input type="text" class="form-control" id="inputAddress2"
+                                                                   name="title" required
+                                                                   value="{{$row->title}}"
+                                                                   rows="3">
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <label for="inputAddress2"
                                                                    class="form-label">Content</label>
                                                             <textarea class="form-control" id="inputAddress2"
                                                                       name="content" required
@@ -183,7 +210,8 @@
                                                         </div>
                                                         <div class="col-12">
                                                             @foreach($row->photos as $image)
-                                                                <img style="width: 50px;height: 50px;border-radius: 50%" src="{{$image->name}}">
+                                                                <img style="width: 50px;height: 50px;border-radius: 50%"
+                                                                     src="{{$image->name}}">
                                                             @endforeach
                                                         </div>
 
@@ -222,13 +250,13 @@
     <script src="{{asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js')}}"></script>
     <script>
 
-        $(document).ready(function() {
-            var table = $('#example2').DataTable( {
-                "paging":   false,
+        $(document).ready(function () {
+            var table = $('#example2').DataTable({
+                "paging": false,
                 "ordering": false,
-                "info":     false
-            } );
+                "info": false
+            });
 
-        } );
+        });
     </script>
 @endpush

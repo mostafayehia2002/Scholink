@@ -76,7 +76,7 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Category</th>
+                            <th>User</th>
                             <th>content</th>
                             <th>Photo</th>
                             <th>Action</th>
@@ -87,7 +87,7 @@
                         @foreach($data as $row)
                             <tr>
                                 <td>{{$loop->index+1}}</td>
-                                <td>{{$row->category->name}}</td>
+                                <td>{{$row->admin->name}}</td>
                                 <td>{{$row->content}}</td>
                                 <td>
                                     <img style="width: 50px;height: 50px;border-radius: 50%" src="{{$row->photos[0]->name}}">

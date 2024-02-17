@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\Validator;
 
 class GuidelineController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -37,7 +45,9 @@ class GuidelineController extends Controller
         try {
             $validator=Validator::make($request->all(),['content'=>'required|string']);
             $category=Category::where('name','guidelines')->first();
-            $category->contents()->create($validator->validated());
+            $data=$validator->validated();
+            $data['admin_id']=auth()->user()->id;
+            $category->contents()->create($data);
             return  redirect()->back()->with('success','Success Add Guideline');
         }catch (Exception $e){
             return redirect()->back()->with('error', $e->getMessage());

@@ -76,7 +76,7 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Category</th>
+                            <th>User</th>
                             <th>content</th>
                             <th>Action</th>
                         </tr>
@@ -86,7 +86,7 @@
                         @foreach($data as $row)
                             <tr>
                                 <td>{{$loop->index+1}}</td>
-                                <td>{{$row->category->name}}</td>
+                                <td>{{$row->admin->name}}</td>
                                 <td>{{$row->content}}</td>
                                 <td>
                                     {{--=============Delate Request=========================--}}
