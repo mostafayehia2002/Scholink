@@ -12,7 +12,7 @@ trait GeneralResponse
             'Status'=>$statusCode,
             'Error' => $error,
 
-        ]);
+        ],$statusCode);
     }
 
     public function successMessage($statusCode,$message='')
@@ -21,7 +21,7 @@ trait GeneralResponse
             'IsSuccess' => true,
             'Status'=>$statusCode,
             'Message'=>$message
-        ]);
+        ],$statusCode);
     }
 
     public function data($statusCode, $key, $value)
@@ -30,7 +30,7 @@ trait GeneralResponse
             'IsSuccess' => true,
             'Status'=>$statusCode,
              $key => $value
-        ]);
+        ],$statusCode);
     }
 
 }
