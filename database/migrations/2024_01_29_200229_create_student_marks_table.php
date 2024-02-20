@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('marks', function (Blueprint $table) {
+        Schema::create('student_marks', function (Blueprint $table) {
             $table->id();
             $table->enum('level',[1,2,3,4,5,6]);
             $table->enum('term',['first','second']);
-            $table->string('marks');
-
+            $table->double('tasks')->default(0);
+            $table->double('months')->default(0);
+            $table->double('subject_grade')->default(0);
+            $table->double('total_marks')->default(0);
             $table->foreignId('student_id')
                 ->references('id')->on('students')
                 ->cascadeOnUpdate()
@@ -34,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('marks');
+        Schema::dropIfExists('student_marks');
     }
 };

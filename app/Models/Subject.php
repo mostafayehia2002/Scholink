@@ -22,11 +22,11 @@ class Subject extends Model
         return $this->belongsTo(Teacher::class);
     }
 
-    public function assignments():hasMany
+    public function assignments()
     {
-
-        return $this->hasMany(Assignment::class);
+        return $this->belongsToMany(Subject::class,'assignments')->withPivot('title','task','grade','deadline');
     }
+
     public function attendances():hasMany
     {
         return $this->hasMany(Attendance::class);

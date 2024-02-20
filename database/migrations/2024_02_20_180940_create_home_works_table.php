@@ -11,19 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('class_teacher', function (Blueprint $table) {
+        Schema::create('home_works', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('teacher_id')
-                ->references('id')
-                ->on('teachers')
+            $table->foreignId('assignment_id')
+                ->constrained('assignments')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-
-            $table->foreignId('class_id')
-                ->references('id')
-                ->on('classes')
+            $table->foreignId('student_id')
+                ->constrained('students')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+              $table->string('homework');
+              $table->double('grade')->default(0);
+              $table->enum('status',['pending','accept','reject'])->default('pending');
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('class_teacher');
+        Schema::dropIfExists('home_works');
     }
 };

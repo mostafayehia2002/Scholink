@@ -18,16 +18,22 @@ class Classe extends Model
         return $this->hasMany(Student::class);
     }
 
-    public function teachers(): belongsToMany
+    public function teachers()
     {
-        return $this->belongsToMany(Teacher::class,'class_teacher');
+        return $this->hasMany(ClassTeacher::class,'class_id');
+    }
+    public function subjects()
+    {
+        return $this->hasMany(ClassTeacher::class,'class_id');
     }
 
-    public function assignments():hasMany
+    public function assignments()
     {
-
-        return $this->hasMany(Assignment::class);
+        return $this->belongsToMany(Subject::class,'assignments')->withPivot('title','task','grade','deadline');
     }
+
+
+
 
     public function attendances():hasMany
     {

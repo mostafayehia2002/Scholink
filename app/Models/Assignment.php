@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\CustomiseDateTrait;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,20 +11,23 @@ class Assignment extends Model
 {
     use HasFactory,CustomiseDateTrait;
 
-    protected $fillable=[
-        'title',
-        'description',
-        'deadline'
-    ];
+    protected $guarded=[];
 
-    public function class()
+    protected function task(): Attribute
+    {
+        return Attribute::make(
+            get: fn(string $value) => asset($value),
+        );
+
+    }
+        public function class()
     {
         return $this->belongsTo(Classe::class);
     }
 
-    public function teacher()
+    public function homeworks()
     {
-        return $this->belongsTo(Teacher::class);
+        return $this->hasMany(HomeWork::class);
     }
 
     public function subject()

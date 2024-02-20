@@ -210,6 +210,7 @@ return [
         'message_otp' => 'OTP Message',
         'id'=>'ID',
         'post_id'=>'Post ID',
+        'subject_id'=>'Subject Id',
         'comment'=>'comment',
     ],
 ];

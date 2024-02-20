@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\ContentController;
 use App\Http\Controllers\Api\ReactionController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\SubCategoryController;
+use App\Http\Controllers\Api\SubjectController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\StudentController;
 use Illuminate\Support\Facades\Route;
@@ -12,7 +13,7 @@ use App\Http\Controllers\Api\AuthenticationController;
 use App\Http\Controllers\Api\ParentStudentController;
 use Mcamara\LaravelLocalization\LaravelLocalization;
 
-
+use App\Traits\GeneralResponse;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,7 +28,9 @@ use Mcamara\LaravelLocalization\LaravelLocalization;
 Route::get('/', function () {
     return response()->json('welcome to smart school system api');
 });
-
+Route::fallback(function (){
+    return  response()->json(['IsSuccess'=>false,'statusCode'=>404,'error'=>'route not found'],404);
+});
 //this route  student and parents login operation
 Route::group(['middleware' => 'api.lang'],
     function(){
@@ -63,6 +66,11 @@ Route::group([
         Route::post('/refresh',  'refresh');
         Route::post('/profile', 'profile');
         Route::post('/change-password', 'changePassword');
+    });
+
+    Route::controller(SubjectController::class)->group(function (){
+        Route::get('/subjects','getStudentSubjects');
+        Route::post('/assignments','getStudentAssignments');
     });
 });
 

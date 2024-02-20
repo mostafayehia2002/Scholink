@@ -12,8 +12,8 @@ class Mark extends Model
 {
     use HasFactory,CustomiseDateTrait;
 
-    protected $fillable=['term','marks','level'];
-
+    protected $fillable=['term','marks','level','tasks','months','subject_grade','total_marks'];
+ protected  $table='student_marks';
     public function students():belongsTo
     {
         return $this->belongsTo(Student::class);

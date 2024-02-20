@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -61,13 +62,11 @@ class Student extends Authenticatable implements JWTSubject
         return $this->belongsTo(Classe::class,'id');
     }
 
-    public function attendances(): hasMany
+
+
+    public function homeworks()
     {
-        return $this->hasMany(Attendance::class);
-    }
-    public function marks(): hasMany
-    {
-        return $this->hasMany(Mark::class);
+        return $this->hasMany(HomeWork::class);
     }
 
     public function comment()
