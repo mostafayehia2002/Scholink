@@ -17,11 +17,9 @@ class SubjectResource extends JsonResource
     public function toArray(Request $request): array
     {
         $i=0;
-        foreach ($this->subjects as $s){
-             $subject=Subject::where('id',$s->subject_id)->first();
-             $this->array[$i++]=['subject_id'=>$subject->id,'subject_name'=>trans("subject.$subject->name"),'created_at'=>$subject->created_at];
+        foreach ($this->subjects as $subject){
+             $this->array[$i++]=['subject_id'=>$subject->id,'subject_name'=>trans("subject.$subject->name"),'term'=>$subject->term,'created_at'=>$subject->created_at];
         }
-
         return [
             'level_number'=>$this->level,
             'level_name'=> trans("level.$this->level"),

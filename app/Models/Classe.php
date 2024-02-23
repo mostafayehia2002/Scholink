@@ -13,30 +13,27 @@ class Classe extends Model
     use SoftDeletes,CustomiseDateTrait;
     protected $table = 'classes';
     protected $fillable = ['level','class_name','number_seats','available_seats'];
-    public function students()
+    //done
+    public function students():hasMany
     {
         return $this->hasMany(Student::class);
     }
 
-    public function teachers()
+    //done
+    public function teachers():belongsToMany
     {
-        return $this->hasMany(ClassTeacher::class,'class_id');
-    }
-    public function subjects()
-    {
-        return $this->hasMany(ClassTeacher::class,'class_id');
+        return $this->belongsToMany(Teacher::class,'class_teachers','class_id');
     }
 
-    public function assignments()
+    //done
+    public function subjects():belongsToMany
     {
-        return $this->belongsToMany(Subject::class,'assignments')->withPivot('title','task','grade','deadline');
+        return $this->belongsToMany(Subject::class,'class_teachers','class_id');
+    }
+  //done
+    public function assignments():belongsToMany
+    {
+        return $this->belongsToMany(Subject::class,'assignments','class_id')->withPivot('title','task','grade','deadline');
     }
 
-
-
-
-    public function attendances():hasMany
-    {
-        return $this->hasMany(Attendance::class);
-    }
 }

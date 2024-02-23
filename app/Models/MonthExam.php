@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class MonthExam extends Model
 {
     use HasFactory;
+    protected $guarded=[];
+
 }

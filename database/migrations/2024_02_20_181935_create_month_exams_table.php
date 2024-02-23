@@ -17,17 +17,14 @@ return new class extends Migration
                 ->constrained('students')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-
-            $table->foreignId('class_id')
-                ->constrained('classes')
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
-
             $table->foreignId('subject_id')
-               ->constrained('subjects')
+                ->constrained('subjects')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-
+            $table->string('level');
+            $table->enum('term',['first','second'])->default('first');
+            $table->date('date');
+            $table->double('grade');
             $table->timestamps();
         });
     }

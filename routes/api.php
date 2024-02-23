@@ -67,10 +67,12 @@ Route::group([
         Route::post('/profile', 'profile');
         Route::post('/change-password', 'changePassword');
     });
-
     Route::controller(SubjectController::class)->group(function (){
         Route::get('/subjects','getStudentSubjects');
-        Route::post('/assignments','getStudentAssignments');
+        Route::post('/assignments','getAssignments');
+        Route::post('/upload-homework','uploadHomework');
+        Route::get('/assignments/grade','getAssignmentsGrade');
+        Route::get('/subject/month-exams/grade','getMonthExamsGrade');
     });
 });
 

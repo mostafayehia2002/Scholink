@@ -16,8 +16,10 @@ class SubjectSeeder extends Seeder
         //
         $subjects=['arabic','english','math','science'];
         foreach ($subjects as $subject){
-            Subject::create(['name'=>$subject]);
+            Subject::create(['name'=>$subject,'term'=>'first']);
         }
-
+        foreach ($subjects as $subject){
+            Subject::create(['name'=>$subject,'term'=>'second']);
+        }
     }
 }

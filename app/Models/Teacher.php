@@ -32,18 +32,10 @@ class Teacher extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function subject():hasOne
-    {
-        return $this->hasOne(Subject::class);
-    }
     public function  classes(): belongsToMany
     {
-        return $this->belongsToMany(Classe::class,'class_teacher');
+        return $this->belongsToMany(Classe::class,'class_teachers','teacher_id');
     }
 
-    public function assignments():hasMany
-    {
 
-        return $this->hasMany(Assignment::class);
-    }
 }

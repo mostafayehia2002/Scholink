@@ -13,6 +13,8 @@ return[
     'Successfully_Create_Comment'=>'Successfully Create Comment',
     'Successfully_Update_Comment'=>'Successfully Update Comment',
     'Successfully_Delete_Comment'=>'Successfully Delete Comment',
+    'Successfully_Uploaded_Homework'=>'Successfully Uploaded Homework',
+    'Assignment_Already_Uploaded'=>'Assignment Already Uploaded',
     'Otp_Is_Failed'=>'Otp Is Failed',
     'Failed_Confirm_Data'=>'Failed To Confirm Data',
     'Data_Not_Found'=>'Data Not Found',

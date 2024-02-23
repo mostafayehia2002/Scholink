@@ -211,6 +211,8 @@ return [
         'post_id'=>'رقم البوست',
         'subject_id'=>'رقم المادة',
         'comment'=>'تعليق',
+        'assignment_id'=>'رقم التكليف',
+        'homework'=>'الواجب',
 
 
 

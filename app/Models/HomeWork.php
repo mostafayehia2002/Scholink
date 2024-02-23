@@ -9,4 +9,10 @@ class HomeWork extends Model
 {
     use HasFactory;
     protected $guarded=[];
+   protected  $table='homeworks';
+    //done
+    public function assignments()
+    {
+        return $this->belongsTo(Assignment::class,'assignment_id');
+    }
 }

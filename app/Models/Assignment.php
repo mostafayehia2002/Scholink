@@ -20,16 +20,21 @@ class Assignment extends Model
         );
 
     }
+
+    //done
         public function class()
     {
-        return $this->belongsTo(Classe::class);
+        return $this->belongsToMany(Classe::class,'assignments','assignment_id');
     }
 
-    public function homeworks()
+    //done
+    public function students()
     {
-        return $this->hasMany(HomeWork::class);
+        return $this->belongsToMany(Student::class,'homeworks','assignment_id')->withPivot('homework',
+           'grade','status');
     }
 
+    //done
     public function subject()
     {
         return $this->belongsTo(Subject::class);

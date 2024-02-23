@@ -212,5 +212,7 @@ return [
         'post_id'=>'Post ID',
         'subject_id'=>'Subject Id',
         'comment'=>'comment',
+        'assignment_id'=>'Assignment Id',
+        'homework'=>'Homework',
     ],
 ];

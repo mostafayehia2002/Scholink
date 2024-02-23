@@ -31,6 +31,7 @@ class Student extends Authenticatable implements JWTSubject
         'password',
         'message_otp',
         'photo',
+        'term',
     ];
 
     protected $hidden = [
@@ -52,31 +53,30 @@ class Student extends Authenticatable implements JWTSubject
     }
 
 
+    //done
     public function parent()
     {
         return $this->belongsTo(ParentStudent::class);
     }
 
+    //done
     public function classe()
     {
         return $this->belongsTo(Classe::class,'id');
     }
 
-
-
-    public function homeworks()
+    //done
+    public function assignments()
     {
-        return $this->hasMany(HomeWork::class);
+        return $this->belongsToMany(Assignment::class,'homeworks','student_id')->withPivot('homework', 'grade','status');
     }
 
-    public function comment()
+    public function monthExams()
     {
-        return$this->morphOne(Comment::class,'commentable');
+
+        return $this->hasMany(MonthExam::class,'student_id');
     }
-    public function comments()
-    {
-        return$this->morphMany(Comment::class,'commentable');
-    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();

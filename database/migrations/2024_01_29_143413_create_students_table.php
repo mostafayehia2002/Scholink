@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('class_id')->references('id')->on('classes')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+            $table->enum('term',['first','second'])->default('first');
             $table->string('name');
             $table->string('email');
             $table->date('date_birth');
