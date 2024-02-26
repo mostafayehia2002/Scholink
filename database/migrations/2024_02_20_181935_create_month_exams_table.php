@@ -11,19 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('class_teacher', function (Blueprint $table) {
+        Schema::create('month_exams', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('teacher_id')
-                ->references('id')
-                ->on('teachers')
+            $table->foreignId('student_id')
+                ->constrained('students')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-
-            $table->foreignId('class_id')
-                ->references('id')
-                ->on('classes')
+            $table->foreignId('subject_id')
+                ->constrained('subjects')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+            $table->string('level');
+            $table->enum('term',['first','second'])->default('first');
+            $table->date('date');
+            $table->double('grade');
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('class_teacher');
+        Schema::dropIfExists('month_exams');
     }
 };

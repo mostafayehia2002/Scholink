@@ -5,35 +5,20 @@ namespace App\Models;
 use App\Traits\CustomiseDateTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Translatable\HasTranslations;
 
 class Subject extends Model
 {
-    use HasFactory,CustomiseDateTrait;
+    use HasFactory,HasTranslations,CustomiseDateTrait;
+    public $translatable =['name'];
     protected $fillable=['name'];
-
-
-
-//
-    public function teacher(): belongsTo
+    public function assignments()
     {
-        return $this->belongsTo(Teacher::class);
+        return $this->belongsToMany(Subject::class,'assignments','subject_id')->withPivot('title','task','grade','deadline');
     }
 
-    public function assignments():hasMany
-    {
+    protected $casts=[
+        'name'=>'array',
+    ];
 
-        return $this->hasMany(Assignment::class);
-    }
-    public function attendances():hasMany
-    {
-        return $this->hasMany(Attendance::class);
-    }
-
-    public function marks():hasMany
-    {
-        return $this->hasMany(Mark::class);
-    }
 }

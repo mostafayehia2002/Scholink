@@ -11,20 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('marks', function (Blueprint $table) {
+        Schema::create('homeworks', function (Blueprint $table) {
             $table->id();
-            $table->enum('level',[1,2,3,4,5,6]);
-            $table->enum('term',['first','second']);
-            $table->string('marks');
-
+            $table->foreignId('assignment_id')
+                ->constrained('assignments')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->foreignId('student_id')
-                ->references('id')->on('students')
+                ->constrained('students')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->foreignId('subject_id')
-                ->references('id')->on('subjects')
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+              $table->string('homework');
+              $table->double('grade')->default(0);
+              $table->enum('status',['pending','accept','reject'])->default('pending');
             $table->timestamps();
         });
     }
@@ -34,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('marks');
+        Schema::dropIfExists('homeworks');
     }
 };

@@ -15,9 +15,8 @@ class ParentResource extends JsonResource
     public function toArray(Request $request): array
     {
 
-        $lang=app()->getLocale();
         return [
-            'name'=>$this->name[$lang],
+            'name'=>$this->name,
             'email'=>$this->email,
             'mobile'=>$this->mobile,
             'national_id'=>$this->national_id,
