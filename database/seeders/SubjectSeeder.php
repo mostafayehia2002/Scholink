@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Subject;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class SubjectSeeder extends Seeder
@@ -14,12 +13,15 @@ class SubjectSeeder extends Seeder
     public function run(): void
     {
         //
-        $subjects=['arabic','english','math','science'];
+        $subjects=[
+            ['en'=>'arabic','ar'=>'عربي'],
+            ['en'=>'english','ar'=>'انجليزي'],
+            ['en'=>'math','ar'=>'رياضيات'],
+            ['en'=>'science','ar'=>'علوم']
+        ];
         foreach ($subjects as $subject){
-            Subject::create(['name'=>$subject,'term'=>'first']);
+            Subject::create(['name'=>$subject]);
         }
-        foreach ($subjects as $subject){
-            Subject::create(['name'=>$subject,'term'=>'second']);
-        }
+
     }
 }

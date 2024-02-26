@@ -12,22 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('student_marks', function (Blueprint $table) {
-            $table->id();
-            $table->enum('level',[1,2,3,4,5,6]);
+            $table->id()->autoIncrement();
+            $table->foreignId('student_id')
+                ->constrained('students')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('level_id')
+                ->constrained('levels')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('subject_id')
+                ->constrained('subjects')->cascadeOnUpdate()->cascadeOnDelete();
             $table->enum('term',['first','second']);
             $table->double('tasks')->default(0);
             $table->double('months')->default(0);
             $table->double('subject_grade')->default(0);
             $table->double('total_marks')->default(0);
-            $table->foreignId('student_id')
-                ->references('id')->on('students')
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
-            $table->foreignId('subject_id')
-                ->references('id')->on('subjects')
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
             $table->timestamps();
+
         });
     }
 

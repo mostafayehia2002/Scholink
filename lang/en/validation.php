@@ -214,5 +214,8 @@ return [
         'comment'=>'comment',
         'assignment_id'=>'Assignment Id',
         'homework'=>'Homework',
+        'level_id'=>'Level Id',
+        'term'=>'Term',
+
     ],
 ];

@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('classes', function (Blueprint $table) {
             $table->id();
-            $table->enum('level', [1, 2, 3, 4, 5, 6]);
+            $table->foreignId('level_id')->constrained("levels")->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('class_name');
             $table->integer('number_seats')->default(30);
             $table->integer('available_seats')->default(30);

@@ -26,7 +26,8 @@ class SubjectController extends Controller
     {
         try {
             $student=auth('student')->user();
-            $class=Classe::with('subjects')->where('id',$student->class_id)->first();
+            $class=Classe::with('subjects','level')->where('id',$student->class_id)->first();
+           //SubjectResource::make($class)
             return  $this->data(200,'class',SubjectResource::make($class));
         }catch (\Exception $e){
             return  $this->error(500,$e->getMessage());

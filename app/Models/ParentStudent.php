@@ -11,11 +11,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Translatable\HasTranslations;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class ParentStudent extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes,CustomiseDateTrait;
+    use HasApiTokens,HasTranslations, HasFactory, Notifiable, SoftDeletes,CustomiseDateTrait;
     protected $table = 'parents';
     public $timestamps = true;
     public $translatable =['name'];

@@ -12,11 +12,12 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Translatable\HasTranslations;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class Student extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Notifiable,CustomiseDateTrait;
+    use HasApiTokens,HasTranslations, HasFactory, Notifiable,CustomiseDateTrait;
 
     protected $table = 'students';
     public $timestamps = true;
@@ -58,25 +59,27 @@ class Student extends Authenticatable implements JWTSubject
     {
         return $this->belongsTo(ParentStudent::class);
     }
-
     //done
     public function classe()
     {
-        return $this->belongsTo(Classe::class,'id');
+        return $this->belongsTo(Classe::class,'class_id');
     }
-
     //done
     public function assignments()
     {
         return $this->belongsToMany(Assignment::class,'homeworks','student_id')->withPivot('homework', 'grade','status');
     }
-
+    //done
     public function monthExams()
     {
 
         return $this->hasMany(MonthExam::class,'student_id');
     }
-
+   //done
+    public function marks()
+    {
+        return $this->hasMany(Mark::class,'student_id');
+    }
     public function getJWTIdentifier()
     {
         return $this->getKey();

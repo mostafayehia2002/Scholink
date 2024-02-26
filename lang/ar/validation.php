@@ -213,8 +213,8 @@ return [
         'comment'=>'تعليق',
         'assignment_id'=>'رقم التكليف',
         'homework'=>'الواجب',
-
-
+        'level_id'=>'رقم الصف ',
+        'term'=>'الترم',
 
     ],
 ];

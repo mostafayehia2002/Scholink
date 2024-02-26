@@ -36,4 +36,11 @@ class Classe extends Model
         return $this->belongsToMany(Subject::class,'assignments','class_id')->withPivot('title','task','grade','deadline');
     }
 
+
+    public function level()
+    {
+        return $this->belongsTo(Level::class);
+    }
+
+
 }

@@ -34,6 +34,11 @@ class Assignment extends Model
            'grade','status');
     }
 
+    public function homeworks()
+    {
+        return $this->hasMany(HomeWork::class,'assignment_id');
+    }
+
     //done
     public function subject()
     {

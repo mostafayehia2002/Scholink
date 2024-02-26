@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,13 +17,12 @@ class SubjectResource extends JsonResource
     {
         $i=0;
         foreach ($this->subjects as $subject){
-             $this->array[$i++]=['subject_id'=>$subject->id,'subject_name'=>trans("subject.$subject->name"),'term'=>$subject->term,'created_at'=>$subject->created_at];
+             $this->array[$i++]=['subject_id'=>$subject->id,'subject_name'=>$subject->name];
         }
         return [
-            'level_number'=>$this->level,
-            'level_name'=> trans("level.$this->level"),
+            'level_number'=>$this->level->level_number,
+            'level_name'=> $this->level->level_name,
             'class_name'=> $this->class_name,
-            'created_at'=>$this->created_at,
              'subjects'=>$this->array,
         ];
     }
