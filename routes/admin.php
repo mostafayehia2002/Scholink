@@ -8,6 +8,10 @@ use App\Http\Controllers\Admin\NewController;
 use App\Http\Controllers\Admin\GuidelineController;
 use App\Http\Controllers\Admin\VisionController;
 use App\Http\Controllers\Admin\AnnouncementController;
+use App\Http\Controllers\Admin\LevelController;
+use App\Http\Controllers\Admin\ClassController;
+use App\Http\Controllers\Admin\SubjectController;
+use App\Http\Controllers\Admin\TeacherController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,6 +40,8 @@ Route::group(
     Route::resource('guidelines', GuidelineController::class);
     Route::resource('visions', VisionController::class);
     Route::resource('announcements', AnnouncementController::class);
-
-
+    Route::resource('levels',LevelController::class);
+    Route::resource('classes',ClassController::class);
+    Route::resource('subjects',SubjectController::class);
+    Route::resource('teachers',TeacherController::class);
 });
