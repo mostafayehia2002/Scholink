@@ -14,7 +14,7 @@ class teacherSeeder extends Seeder
     public function run(): void
     {
         Teacher::create([
-            'name'=>'Teacher',
+            'name'=>['en'=>'Teacher','ar'=>"معلم"],
             'email'=>'teacher@gmail.com',
             'phone'=>"01064564850",
             'address'=>'Mansoura',

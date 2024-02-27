@@ -27,6 +27,10 @@ Route::group(
             Route::post('/login','login')->name('login');
             Route::post('/logout','logout')->name('logout');
         });
+
+        Route::get('posts',function (){
+           return view('posts');
+        });
 });
 
 Route::get('/clear', function () {
