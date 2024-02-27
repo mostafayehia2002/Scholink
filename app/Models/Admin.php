@@ -12,7 +12,7 @@ use Spatie\Translatable\HasTranslations;
 
 class Admin extends Authenticatable
 {
-    use HasApiTokens, HasTranslations,HasFactory, Notifiable,CustomiseDateTrait;
+    use HasApiTokens,HasFactory, Notifiable,CustomiseDateTrait;
 
     /**
      * The attributes that are mass assignable.
