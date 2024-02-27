@@ -13,7 +13,7 @@
     @auth('admin')
         <ul class="metismenu" id="menu">
             <li>
-                <a href="#">
+                <a href="{{route('admin.dashboard')}}">
                     <div class="parent-icon"><i class='bx bx-home-circle'></i>
                     </div>
                     <div class="menu-title">Home</div>
@@ -38,6 +38,34 @@
                             </li>
                    @endforeach
                 </ul>
+            </li>
+            <li>
+                <a href="{{route('admin.levels.index')}}">
+                    <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                    </div>
+                    <div class="menu-title">Levels</div>
+                </a>
+            </li>
+            <li>
+                <a href="{{route('admin.classes.index')}}">
+                    <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                    </div>
+                    <div class="menu-title">Classes</div>
+                </a>
+            </li>
+            <li>
+                <a href="{{route('admin.subjects.index')}}">
+                    <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                    </div>
+                    <div class="menu-title">Subjects</div>
+                </a>
+            </li>
+            <li>
+                <a href="{{route('admin.teachers.index')}}">
+                    <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                    </div>
+                    <div class="menu-title">Teachers</div>
+                </a>
             </li>
         </ul>
     @elseauth('teacher')

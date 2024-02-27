@@ -11,10 +11,13 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Translatable\HasTranslations;
 
 class Teacher extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable,CustomiseDateTrait;
+    use HasTranslations;
+    public $translatable =['name'];
     protected  $fillable=[
         'name',
         'email',
