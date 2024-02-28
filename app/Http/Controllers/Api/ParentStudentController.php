@@ -56,7 +56,7 @@ class ParentStudentController extends Controller
             return response()->json([
                 'access_token' => $token,
                 'token_type' => 'bearer',
-                'expires_in' => auth()->guard('parent')->factory()->getTTL() * 60*240,
+                'expires_in' => auth()->guard('parent')->factory()->getTTL() *60*24*30,
             ]);
         } catch (\Exception $e) {
 

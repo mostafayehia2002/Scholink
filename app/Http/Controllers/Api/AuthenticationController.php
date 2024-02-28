@@ -122,7 +122,6 @@ class AuthenticationController extends Controller
         $user->update([
             'password' => bcrypt($request->password),
         ]);
-
         return $this->successMessage(200, trans('response.Successfully_Change_Password'));
     } catch (\Exception $e) {
        return  $this->error(500,$e->getMessage());

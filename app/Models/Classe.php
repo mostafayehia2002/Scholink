@@ -24,7 +24,10 @@ class Classe extends Model
     {
         return $this->belongsToMany(Teacher::class,'class_teachers','class_id');
     }
-
+    public function table():hasMany
+    {
+        return $this->hasMany(ClassTeacher::class,'class_id');
+    }
     //done
     public function subjects():belongsToMany
     {
