@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\ReactionController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\SubCategoryController;
 use App\Http\Controllers\Api\SubjectController;
+use App\Http\Controllers\Api\TableController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\StudentController;
 use Illuminate\Support\Facades\Route;
@@ -76,12 +77,10 @@ Route::group([
         Route::get('/assignments/grade','getAssignmentsGrade');
         Route::get('/subject/month-exams/grade','getMonthExamsGrade');
     });
-    Route::controller(LevelController::class)->group(function (){
-        Route::get('/levels','getLevels');
-    });
-    Route::controller(MarkController::class)->group(function (){
-        Route::get('/marks','getStudentMarks');
-    });
+
+    Route::get('/levels',[LevelController::class,'getLevels']);
+    Route::get('/marks',[MarkController::class,'getStudentMarks']);
+    Route::get('/table',[TableController::class,'getStudentTable']);
 });
 
 
