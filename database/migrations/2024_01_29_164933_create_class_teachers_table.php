@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\WeekDay;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -25,7 +26,10 @@ return new class extends Migration
                 ->constrained('subjects')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-
+            $table->enum('day',WeekDay::getValues())->default(WeekDay::SUNDAY);
+            $table->integer('number_lesson');
+             $table->time('start_at');
+            $table->time('end_at');
             $table->timestamps();
         });
     }
