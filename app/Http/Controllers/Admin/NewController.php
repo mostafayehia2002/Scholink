@@ -21,7 +21,7 @@ class NewController extends Controller
     public function index()
     {
         $categories = Category::where('name', 'news')->first()->subcategories;
-        $data = News::latest()->paginate(12);
+        $data = News::latest()->paginate(15);
         return view('Admin.media.news', compact('data', 'categories'));
     }
 
