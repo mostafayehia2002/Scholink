@@ -1,5 +1,119 @@
+
 @extends('layouts.master')
+
 @section('content')
+    <style>
+        .post-container .btns {
+            margin: 20px 2px 0px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .right h4,
+        .left h4 {
+            cursor: pointer;
+            font-size: 17px;
+            color: #777;
+            text-align: center;
+            font-weight: 500;
+            position: relative;
+        }
+        .left .like-container,
+        .right .comment-container {
+            position: absolute;
+            top: 150px;
+            left: 310px;
+            z-index: 1000;
+            background-color: #fcfcfc;
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15), -5px -5px 5px rgba(0, 0, 0, 0.15);
+            border-radius: 3px;
+            width: 400px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 20px;
+            display: none;
+        }
+
+        .left .like-container.active,
+        .right .comment-container.active {
+            display: block;
+        }
+        .left .like-container .likes-content,
+        .right .comment-container .comments-content {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .left .like-container span,
+        .right .comment-container span {
+            position: absolute;
+            top: -50px;
+            right: -20px;
+            z-index: 1001;
+            width: 40px;
+            height: 40px;
+            background-color: #ccc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .left .like-container span,
+        .right .comment-container span {
+            color: #000;
+            font-size: 15px;
+        }
+        .left .like-container h3,
+        .right .comment-container h3 {
+            text-align: center;
+            font-size: 27px;
+            font-style: italic;
+            color: blue;
+        }
+        .left .like-container .content {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 20px 0px;
+        }
+        .right .comment-container .content {
+            display: flex;
+            align-items: center;
+            padding: 20px 0px;
+        }
+        .left .like-container .content h3,
+        .right .comment-container .content h3 {
+            font-size: 20px;
+            color: #000;
+        }
+        .right .comment-container .content .single-comment {
+            margin-left: 10px;
+            padding: 10px;
+            background-color: #ccc;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            border-radius: 5px;
+        }
+        .left .like-container .content a {
+            font-size: 15px;
+            color: #000;
+            text-decoration: none;
+        }
+
+        @media (max-width: 650px) {
+            .post-container {
+                width: 300px;
+            }
+            .left .like-container,
+            .right .comment-container {
+                left: 50px;
+                width: 300px;
+            }
+        }
+    </style>
     <div class="page-content">
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -184,14 +298,66 @@
                             <div class="swiper-button-next next"></div>
                         </div>
                     @endif
+
+
+
+
+
                     <div class="btns">
                         <div class="left">
-                            <h4>{{count($row->reactions)}} like</h4>
+                            <h4>{{count($row->reactions)}} React</h4>
+                            <div class="like-container">
+                                <h3>{{count($row->reactions)}} React</h3>
+                                <div class="likes-content">
+                                    <span><i class="lni lni-close"></i></span>
+                                    @foreach($row->reactions as $react)
+                                        <div class="content">
+                                            <div class="profile_img">
+                                                <img src="{{asset($react->reactable->photo)}}"  alt="user" class="cover">
+                                            </div>
+                                            <h3>{{$react->reactable->name}}</h3>
+                                            <a href="#">View Profile</a>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
                         </div>
                         <div class="right">
                             <h4>{{count($row->comments)}} comments</h4>
+                            <div class="comment-container">
+                                <h3>{{count($row->comments)}} comments</h3>
+                                <div class="comments-content">
+                                    <span><i class="lni lni-close"></i></span>
+                                </div>
+                                @foreach($row->comments as $comment)
+                                    <div class="content">
+                                        <div class="profile_img">
+                                            <img src="{{asset($comment->commentable->photo)}}" alt="user" class="cover">
+                                        </div>
+                                        <div class="single-comment">
+
+
+                                            <h3>{{$comment->commentable->name}}</h3>
+                                            <p>{{$comment->comment}}</p>
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                            </div>
                         </div>
                     </div>
+
+
+
+
+{{--                    <div class="btns">--}}
+{{--                        <div class="left">--}}
+{{--                            <h4>{{count($row->reactions)}} like</h4>--}}
+{{--                        </div>--}}
+{{--                        <div class="right">--}}
+{{--                            <h4>{{count($row->comments)}} comments</h4>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                 </div>
 
             @empty
@@ -211,6 +377,33 @@
 
 
 @push('js')
+    <script>
+        // likes & comment
+        const like = document.querySelector('.left h4');
+        const likesContainer = document.querySelector('.left .like-container');
+        const comment = document.querySelector('.right h4');
+        const commentsContainer = document.querySelector('.right .comment-container');
+        const removeLike = document.querySelector('.likes-content span');
+        const removeComment = document.querySelector('.comments-content span');
+
+        like.addEventListener('click',()=>{
+            likesContainer.classList.toggle('active');
+            commentsContainer.classList.remove('active');
+        });
+
+        removeLike.addEventListener('click',()=>{
+            likesContainer.classList.remove('active');
+        });
+
+        comment.addEventListener('click',()=>{
+            commentsContainer.classList.toggle('active');
+            likesContainer.classList.remove('active');
+        });
+
+        removeComment.addEventListener('click',()=>{
+            commentsContainer.classList.remove('active');
+        });
+    </script>
     <script src="{{asset('js/swiper-bundle.min.js')}}"></script>
     <script src="{{asset('js/script.js')}}"></script>
 @endpush
