@@ -51,7 +51,7 @@ class TeacherController extends Controller
                 'address'=>$request->address,
                 'password'=>bcrypt('123456'),
             ]);
-            return redirect()->back()->with('success', 'Success Addedd Teacher');
+            return redirect()->back()->with('success', 'Success Added Teacher');
         }catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

@@ -55,7 +55,6 @@ class VisionController extends Controller
                 $image->storeAs('', $name, 'medias');
                 $post->photo()->create(['name' => "uploads/medias/$name"]);
             }
-
             return redirect()->back()->with('success', 'Success Add Visions');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());

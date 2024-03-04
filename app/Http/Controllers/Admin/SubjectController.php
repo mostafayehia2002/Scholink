@@ -43,7 +43,7 @@ class SubjectController extends Controller
             Subject::create([
                 'name'=>['ar'=>$request->name_ar,'en'=>$request->name_en],
             ]);
-            return redirect()->back()->with('success', 'Success Addedd Subject');
+            return redirect()->back()->with('success', 'Success Added Subject');
         }catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
