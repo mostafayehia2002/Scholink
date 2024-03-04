@@ -1,4 +1,6 @@
+
 @extends('layouts.master')
+
 @section('content')
     <style>
         .post-container .btns {
@@ -296,14 +298,10 @@
                             <div class="swiper-button-next next"></div>
                         </div>
                     @endif
-{{--                    <div class="btns">--}}
-{{--                        <div class="left">--}}
-{{--                            <h4>{{count($row->reactions)}} like</h4>--}}
-{{--                        </div>--}}
-{{--                        <div class="right">--}}
-{{--                            <h4>{{count($row->comments)}} comments</h4>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+
+
+
+
 
                     <div class="btns">
                         <div class="left">
@@ -312,15 +310,15 @@
                                 <h3>{{count($row->reactions)}} React</h3>
                                 <div class="likes-content">
                                     <span><i class="lni lni-close"></i></span>
-                                   @foreach($row->reactions as $reaction)
+                                    @foreach($row->reactions as $react)
                                         <div class="content">
                                             <div class="profile_img">
-                                                <img src="{{asset('uploads/students/profile.jpg')}}" alt="user" class="cover" />
+                                                <img src="{{asset($react->reactable->photo)}}"  alt="user" class="cover">
                                             </div>
-                                            <h3>Mostafa Maher</h3>
+                                            <h3>{{$react->reactable->name}}</h3>
                                             <a href="#">View Profile</a>
                                         </div>
-                                   @endforeach
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -330,25 +328,36 @@
                                 <h3>{{count($row->comments)}} comments</h3>
                                 <div class="comments-content">
                                     <span><i class="lni lni-close"></i></span>
-                                @foreach($row->comments as $comment)
-                                        <div class="content">
-                                            <div class="profile_img">
-                                                <img src="{{asset('uploads/students/profile.jpg')}}" alt="user" class="cover" />
-                                            </div>
-                                            <div class="single-comment">
-                                                <h3>Mostafa Maher</h3>
-                                                <p>{{$comment->$comment}}</p>
-                                            </div>
-                                        </div>
-                                @endforeach
-                                  </div>
-
                                 </div>
+                                @foreach($row->comments as $comment)
+                                    <div class="content">
+                                        <div class="profile_img">
+                                            <img src="{{asset($comment->commentable->photo)}}" alt="user" class="cover">
+                                        </div>
+                                        <div class="single-comment">
+
+
+                                            <h3>{{$comment->commentable->name}}</h3>
+                                            <p>{{$comment->comment}}</p>
+                                        </div>
+                                    </div>
+                                @endforeach
+
                             </div>
                         </div>
                     </div>
 
 
+
+
+{{--                    <div class="btns">--}}
+{{--                        <div class="left">--}}
+{{--                            <h4>{{count($row->reactions)}} like</h4>--}}
+{{--                        </div>--}}
+{{--                        <div class="right">--}}
+{{--                            <h4>{{count($row->comments)}} comments</h4>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                 </div>
 
             @empty
@@ -368,8 +377,6 @@
 
 
 @push('js')
-    <script src="{{asset('js/swiper-bundle.min.js')}}"></script>
-    <script src="{{asset('js/script.js')}}"></script>
     <script>
         // likes & comment
         const like = document.querySelector('.left h4');
@@ -397,6 +404,8 @@
             commentsContainer.classList.remove('active');
         });
     </script>
+    <script src="{{asset('js/swiper-bundle.min.js')}}"></script>
+    <script src="{{asset('js/script.js')}}"></script>
 @endpush
 
 

@@ -24,6 +24,7 @@ class AnnouncementController extends Controller
         $announcement = Category::where('name', 'announcements')->first();
         $data = SubCategory::with('announcements')->where('category_id', $announcement->id)->get();
         $categories = $announcement->subcategories;
+        $data=Announcement::latest()->paginate(20);
 //        return  $data;
         return view('Admin.media.announcements', compact('data', 'categories'));
 

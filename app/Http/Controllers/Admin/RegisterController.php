@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\MessageRequest;
 use App\Mail\StatusRequest;
 use App\Models\Classe;
+use App\Models\Level;
 use App\Models\ParentStudent;
 use App\Models\Register;
 use App\Models\Student;
@@ -103,7 +104,7 @@ class RegisterController extends Controller
                 DB::beginTransaction();
                 $data->update(['status' => $request->status]);
                 $parent = ParentStudent::create([
-                    'name' => $data->parent_name,
+                    'name' => ['ar'=>$data->getTranslation('parent_name','ar'),'en'=>$data->getTranslation('parent_name','en'),],
                     'mobile' => $data->parent_mobile,
                     'email' => $data->parent_email,
                     'national_id' => $data->parent_national_id,
@@ -114,14 +115,17 @@ class RegisterController extends Controller
                     'password' => bcrypt($data->parent_national_id),
                 ]);
 
-                $level = Classe::where('level', $data->child_level)->where('available_seats', '<=', 30)->where('available_seats', '!=', 0)->first();
+                $level=Level::where('level_number',$data->child_level)->with(['classes'=>function ($query){
+                    $query->where('available_seats', '<=', 30)->where('available_seats', '!=', 0)->first();
+                }])->first();
+
                 if ($level) {
                     $student = Student::create([
                         'parent_id' => $parent->id,
-                        'name' => $data->child_name,
+                        'name' => ['ar'=>$data->getTranslation('child_name','ar'),'en'=>$data->getTranslation('child_name','en'),],
                         'email' => substr($data->getTranslation('child_name', 'en'), 0, 10) . rand(1111, 9999) . "@gmail.com",
                         'gender' => $data->child_gender,
-                        'class_id' => $level->id,
+                        'class_id' => $level->classes[0]->id,
                         'date_birth' => $data->child_date_birth,
                         'password' => bcrypt('123456'),
                     ]);

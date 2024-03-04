@@ -77,8 +77,8 @@
 
 
         <div class="posts">
-            @forelse($data as $row)
-              @foreach($row->announcements as $ann)
+            @forelse($data as $ann)
+{{--              @foreach($row->announcements as $ann)--}}
                     <div class="post-container">
                         <div class="top">
                             <div class="user_details">
@@ -86,9 +86,10 @@
                                     <img src="{{asset('uploads/students/profile.jpg')}}" alt="user" class="cover"/>
                                 </div>
                                 <h3>
-                                    {{$ann->admin}}<br/><span class="role">admin</span>
+                                    {{$ann->admin->name}}<br/><span class="role">{{$ann->admin->name}}</span>
                                     <span class="date">{{$ann->created_at}}</span>
-                                    <span class="globDot">.</span>
+                                    <br>
+                                    <span class="globDot">{{$ann->price}}.</span>
                                 </h3>
                             </div>
                             <div>
@@ -166,7 +167,7 @@
                                                     <div class="col-12">
                                                         <label for="inputAddress2"
                                                                class="form-label">Photos</label>
-                                                        <input type="file" name="images[]" multiple
+                                                        <input type="file" name="photo"
                                                                accept="images/*">
                                                     </div>
                                                     <div class="col-12">
@@ -196,7 +197,7 @@
                             </div>
                         </div>
                     </div>
-              @endforeach
+{{--              @endforeach--}}
 
             @empty
                 <h1 class="text-center text-danger">No Announcements Found</h1>
