@@ -41,7 +41,6 @@ class Handler extends ExceptionHandler
             return $this->error(401,trans('response.Unauthenticated'));
         }
         return redirect()->route('login_form');
-
     }
 }
 
