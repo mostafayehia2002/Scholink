@@ -16,6 +16,15 @@ class ClassTeacher extends Model
     {
         return $this->belongsTo(Subject::class);
     }
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
+    }
+    public function classe()
+    {
+        return $this->belongsTo(Classe::class,'class_id');
+    }
     protected $casts=[
         'day'=>WeekDay::class,
     ];

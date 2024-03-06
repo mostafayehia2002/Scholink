@@ -43,14 +43,14 @@ class PostController extends Controller
     {
         try {
             $request->validate([
-                'content' => 'required|string',
+                'content1' => 'required|string',
                 'images.*' => 'required|mimes:jpeg,png,jpg,gif'
             ]);
 
             $category_id = Category::where('name', 'posts')->first()->id;
             $post = Content::create([
                 'category_id' => $category_id,
-                'content' => $request->content,
+                'content' => $request->content1,
                 'admin_id'=>auth()->user()->id,
             ]);
             foreach ($request->file('images') as $image) {
@@ -88,7 +88,7 @@ class PostController extends Controller
     {
         try {
             $request->validate([
-                'content' => 'required|string',
+                'content1' => 'required|string',
                 'images.*' => 'nullable|mimes:jpeg,png,jpg,gif'
             ]);
 
@@ -108,7 +108,7 @@ class PostController extends Controller
                 }
 
             }
-            $post->update(['content' => $request->content]);
+            $post->update(['content' => $request->content1]);
             return redirect()->back()->with('success', 'Success Update Post');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
