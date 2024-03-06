@@ -39,7 +39,7 @@ class PostController extends Controller
                 'images.*' => 'mimes:jpeg,png,jpg,gif'
             ]);
             $category = Category::where('name', 'posts')->first();
-             $category->contents()->create([
+           $post=$category->contents()->create([
                 'content' => $request->post_content,
                 'admin_id'=>auth()->user()->id,
             ]);
