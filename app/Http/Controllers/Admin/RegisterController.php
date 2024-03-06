@@ -115,7 +115,7 @@ class RegisterController extends Controller
                     'password' => bcrypt($data->parent_national_id),
                 ]);
 
-                $level=Level::where('level_number',$data->child_level)->with(['classes'=>function ($query){
+                $level=Level::where('id',$data->child_level)->with(['classes'=>function ($query){
                     $query->where('available_seats', '<=', 30)->where('available_seats', '!=', 0)->first();
                 }])->first();
 
