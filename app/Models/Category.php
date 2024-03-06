@@ -25,7 +25,7 @@ class Category extends Model
     //return news
     public function news()
     {
-        return $this->belongsToMany(SubCategory::class,'news','category_id')->select('news.content','news.created_at','news.updated_at');
+        return $this->belongsToMany(SubCategory::class,'news','category_id')->select('news.title','news.content','news.created_at','news.updated_at');
     }
 //return announcements
 

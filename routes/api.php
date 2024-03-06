@@ -47,6 +47,7 @@ Route::controller(RegisterController::class)->group(function (){
     Route::post('register', 'register');
     Route::post('register/confirmed','registerConfirmed');
 });
+Route::get('/levels',[LevelController::class,'getLevels']);
 //media
         Route::get('/posts',[ContentController::class,'getPosts']);
         Route::get('/react',[ReactionController::class,'reaction']);
@@ -77,8 +78,7 @@ Route::group([
         Route::get('/assignments/grade','getAssignmentsGrade');
         Route::get('/subject/month-exams/grade','getMonthExamsGrade');
     });
-
-    Route::get('/levels',[LevelController::class,'getLevels']);
+    Route::get('/levels',[LevelController::class,'getStudentLevels']);
     Route::get('/marks',[MarkController::class,'getStudentMarks']);
     Route::get('/table',[TableController::class,'getStudentTable']);
 });

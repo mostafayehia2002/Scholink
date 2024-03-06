@@ -10,7 +10,17 @@ use App\Traits\GeneralResponse;
 class LevelController extends Controller
 {
     use GeneralResponse;
+
     public function getLevels()
+    {
+        try {
+          $levels= Level::get();
+          return  $this->data(200,'levels',LevelResource::collection($levels));
+        }catch (\Exception $e){
+            return $this->error(500,$e->getMessage());
+        }
+    }
+    public function getStudentLevels()
     {
         try{
          $student=auth('student')->user();

@@ -34,7 +34,7 @@ class RegisterController extends Controller
                         $query->where('status', $request->status);
                     }
                 }
-            )->paginate(1);
+            )->paginate(20);
             return view('Admin.registers.index', compact('data'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());

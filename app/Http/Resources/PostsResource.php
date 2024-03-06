@@ -18,11 +18,7 @@ class PostsResource extends JsonResource
              $id=$comment->commentable_id;
              $model=$comment->commentable_type;
              $content=$comment->comment;
-            if(str_contains($model,'ParentStudent')){
-                $user=ParentStudent::find($id);
-            }else{
-                $user=Student::find($id);
-            }
+             $user=$comment->commentable;
             $this->Comments[$i++]=['username'=>$user->name,'email'=>$user->email,'comment'=>$content,'created_at'=>$comment->created_at];
         }
 
@@ -30,13 +26,8 @@ class PostsResource extends JsonResource
         foreach ($this->reactions as $reaction){
             $id=$reaction->reactable_id;
             $model=$reaction->reactable_type;
-            if(str_contains($model,'ParentStudent')){
-                $user=ParentStudent::find($id);
-            }else{
-                $user=Student::find($id);
-            }
+            $user=$reaction->reactable;
             $this->Reactions[$x++]=['username'=>$user->name,'email'=>$user->email,'created_at'=>$comment->created_at];
-
         }
 
 
