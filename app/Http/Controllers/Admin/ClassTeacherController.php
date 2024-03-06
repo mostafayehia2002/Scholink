@@ -59,8 +59,9 @@ class ClassTeacherController extends Controller
             $teacher=ClassTeacher::where('teacher_id', $request->teacher_id)
                 ->where('subject_id', $request->subject_id)
                 ->where('class_id', $request->class_id)
-                ->where('start_at', $request->start_at)->first();
-
+                ->where('start_at', $request->start_at)
+                ->where('day',$request->day)
+                ->first();
             if ($teacher) {
                 return redirect()->back()->with('error', 'Teacher Is Already Exist');
             }
