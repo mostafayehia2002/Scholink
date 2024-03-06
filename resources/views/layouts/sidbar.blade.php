@@ -67,6 +67,13 @@
                     <div class="menu-title">Teachers</div>
                 </a>
             </li>
+            <li>
+                <a href="{{route('admin.class_teachers.index')}}">
+                    <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                    </div>
+                    <div class="menu-title">Class Teachers</div>
+                </a>
+            </li>
         </ul>
     @elseauth('teacher')
         <ul class="metismenu" id="menu">

@@ -14,7 +14,7 @@ class WeekDay extends Enum implements LocalizedEnum
     const WEDNESDAY='wednesday';
     const THURSDAY='thursday';
     const FRIDAY='friday';
-    const SATERDAY='saterday';
+    const SATURDAY='saturday';
 
     public static function getTranslatedDay($day, $language)
     {

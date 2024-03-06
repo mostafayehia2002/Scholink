@@ -6,13 +6,19 @@
     <link rel="icon" href="{{asset("assets/images/favicon-32x32.png")}} type=" image
     /png" />
     <!--plugins-->
-    <link href="{{asset("assets/plugins-rtl/vectormap/jquery-jvectormap-2.0.2.css")}}" rel="stylesheet"/>
-    <link href="{{asset("assets/plugins-rtl/simplebar/css/simplebar.css")}}" rel="stylesheet"/>
-    <link href="{{asset("assets/plugins-rtl/perfect-scrollbar/css/perfect-scrollbar.css")}}" rel="stylesheet"/>
-    <link href="{{asset("assets/plugins-rtl/metismenu/css/metisMenu.min.css")}}" rel="stylesheet"/>
+    <link href="{{asset("assets/plugins/vectormap/jquery-jvectormap-2.0.2.css")}}" rel="stylesheet"/>
+    <link href="{{asset("assets/plugins/simplebar/css/simplebar.css")}}" rel="stylesheet"/>
+    <link href="{{asset("assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css")}}" rel="stylesheet"/>
+    <link href="{{asset("assets/plugins/metismenu/css/metisMenu.min.css")}}" rel="stylesheet"/>
     <link href="{{asset('assets/plugins/datatable/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('assets/plugins/fancy-file-uploader/fancy_fileupload.css')}}" rel="stylesheet"/>
     <link href="{{asset('assets/plugins/Drag-And-Drop/dist/imageuploadify.min.css')}}" rel="stylesheet"/>
+
+    <link href="{{asset('assets/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/plugins/datetimepicker/css/classic.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/plugins/datetimepicker/css/classic.time.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/plugins/datetimepicker/css/classic.date.css')}}" rel="stylesheet" />
+
 
     <link rel="stylesheet" href="{{asset('css/swiper-bundle.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/all.min.css')}}"/>

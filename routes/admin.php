@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\ClassController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\TeacherController;
+use App\Http\Controllers\Admin\ClassTeacherController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,4 +45,6 @@ Route::group(
     Route::resource('classes',ClassController::class);
     Route::resource('subjects',SubjectController::class);
     Route::resource('teachers',TeacherController::class);
+    Route::resource('class_teachers',ClassTeacherController::class);
+    Route::get('getClasses/{id}',[ClassTeacherController::class,'getClass'])->name('getclass');
 });
