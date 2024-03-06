@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "bensampo/laravel-enum": "^6.10",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
@@ -13,9 +14,9 @@
         "mcamara/laravel-localization": "^1.8",
         "spatie/laravel-translatable": "^6.5",
         "tymon/jwt-auth": "^2.0"
-
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.10",
         "fakerphp/faker": "^1.9.1",
         "laravel-lang/lang": "^14.2",
         "laravel/pint": "^1.0",

@@ -39,20 +39,7 @@ class Register extends Model
     ];
 
 
-//    public function getParentNameAttribute($value)
-//    {
-//    $arr= json_decode($value,true);
-//        return    $arr[app()->getLocale()];
-//
-//    }
-//
-//    public function getChildNameAttribute($value)
-//    {
-//        $arr= json_decode($value,true);
-//
-//        return    $arr[app()->getLocale()];
-//
-//    }
+
 
 
 }

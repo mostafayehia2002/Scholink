@@ -40,14 +40,14 @@ class VisionController extends Controller
     {
         try {
             $request->validate([
-                'content' => 'required|string',
+                'vision_content' => 'required|string',
                 'images.*' => 'required|mimes:jpeg,png,jpg,gif'
             ]);
 
             $category_id = Category::where('name', 'visions')->first()->id;
             $post = Content::create([
                 'category_id' => $category_id,
-                'content' => $request->content,
+                'content' => $request->vision_content,
                 'admin_id'=>auth()->user()->id,
             ]);
             foreach ($request->file('images') as $image) {
@@ -55,7 +55,6 @@ class VisionController extends Controller
                 $image->storeAs('', $name, 'medias');
                 $post->photo()->create(['name' => "uploads/medias/$name"]);
             }
-
             return redirect()->back()->with('success', 'Success Add Visions');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
@@ -85,7 +84,7 @@ class VisionController extends Controller
     {
         try {
             $request->validate([
-                'content' => 'required|string',
+                'vision_content' => 'required|string',
                 'images.*' => 'nullable|mimes:jpeg,png,jpg,gif'
             ]);
 
@@ -105,7 +104,7 @@ class VisionController extends Controller
                 }
 
             }
-            $post->update(['content'=>$request->content]);
+            $post->update(['content'=>$request->vision_content]);
             return redirect()->back()->with('success', 'Success Update Post');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());

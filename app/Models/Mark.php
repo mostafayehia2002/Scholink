@@ -6,20 +6,19 @@ use App\Traits\CustomiseDateTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-
 class Mark extends Model
 {
     use HasFactory,CustomiseDateTrait;
+    protected $fillable=['term','marks','level_id','tasks','months','subject_grade','total_marks'];
+ protected  $table='student_marks';
 
-    protected $fillable=['term','marks','level'];
-
-    public function students():belongsTo
+    public function student():belongsTo
     {
         return $this->belongsTo(Student::class);
     }
 
-    public function subjects():belongsTo
+    //done
+    public function subject():belongsTo
     {
         return $this->belongsTo(Subject::class);
     }

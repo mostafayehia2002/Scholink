@@ -43,6 +43,7 @@ class RegisterController extends Controller
             if ($validate->fails()) {
                 return $this->error(422,$validate->errors());
             }
+
             $data=$validate->validate();
             //store images
             $img1 =time().$request->file('parent_personal_identification')->getClientOriginalName();

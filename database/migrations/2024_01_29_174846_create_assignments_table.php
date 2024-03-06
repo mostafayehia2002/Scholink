@@ -13,24 +13,18 @@ return new class extends Migration
     {
         Schema::create('assignments', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description');
-            $table->dateTime('deadline');
-
             $table->foreignId('class_id')
-                ->references('id')->on('classes')
+               ->constrained('classes')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-
-            $table->foreignId('teacher_id')
-                ->references('id')->on('teachers')
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
-
             $table->foreignId('subject_id')
-                ->references('id')->on('subjects')
+                ->constrained('subjects')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+            $table->string('title');
+            $table->text('task');
+            $table->double('grade')->default(0);
+            $table->date('deadline');
             $table->timestamps();
         });
     }

@@ -53,7 +53,7 @@ class StudentController extends Controller
             return response()->json([
                 'access_token' => $token,
                 'token_type' => 'bearer',
-                'expires_in' => auth()->guard('student')->factory()->getTTL() * 60
+                'expires_in' => auth()->guard('student')->factory()->getTTL()*60*24*30
             ]);
         } catch (\Exception $e) {
             return  $this->error( 500,$e->getMessage());

@@ -24,11 +24,13 @@ class DatabaseSeeder extends Seeder
   $this->call([
       AdminSeeder::class,
       teacherSeeder::class,
+      LevelsSeeder::class,
       ClasseSeeder::class,
       ParentSeeder::class,
       StudentSeeder::class,
       CategorySeeder::class,
       SubCategorySeeder::class,
+      SubjectSeeder::class,
   ]);
     }
 }

@@ -14,14 +14,14 @@ class NewController extends Controller
     /**
      * Display a listing of the resource.
      */
-         public function __construct()
+    public function __construct()
     {
         $this->middleware('auth:admin');
     }
     public function index()
     {
         $categories = Category::where('name', 'news')->first()->subcategories;
-        $data = News::latest()->paginate(12);
+        $data = News::latest()->paginate(15);
         return view('Admin.media.news', compact('data', 'categories'));
     }
 
@@ -42,15 +42,15 @@ class NewController extends Controller
         try {
             $request->validate([
                 'subcategory_id' => 'required|exists:sub_categories,id',
-                'content' => 'required|string',
+                'news_content' => 'required|string',
                 'title'=>"required|string|max:255",
                 'images.*' => 'required|mimes:jpeg,png,jpg,gif'
             ]);
-            $category_id = Category::where('name', 'news')->first()->id;
+            $category_id =Category::where('name', 'news')->first()->id;
             $new = News::create([
                 'category_id' => $category_id,
                 'subcategory_id' => $request->subcategory_id,
-                'content' => $request->content,
+                'content' => $request->news_content,
                 'title'=>$request->title,
                 'admin_id'=>auth()->user()->id,
             ]);
@@ -91,7 +91,7 @@ class NewController extends Controller
         try {
             $request->validate([
                 'subcategory_id' => 'required|exists:sub_categories,id',
-                'content' => 'required|string',
+                'news_content' => 'required|string',
                 'title'=>"required|string|max:255",
                 'images.*' => 'nullable|mimes:jpeg,png,jpg,gif'
             ]);
@@ -115,7 +115,7 @@ class NewController extends Controller
             $news->update(
                 [
                     'subcategory_id' => $request->subcategory_id,
-                    'content' => $request->content,
+                    'content' => $request->news_content,
                     'title'=>$request->title,
                 ]
             );

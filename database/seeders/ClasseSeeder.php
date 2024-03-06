@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Classe;
+use App\Models\Level;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,10 +14,11 @@ class ClasseSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($x=1;$x<=6;$x++) {
-            for ($i = 1; $i <= 3; $i++) {
-                Classe::create(['level'=>$x,'class_name' => $i]);
-            }
-        }
+       $levels= Level::all();
+       foreach ($levels as $level) {
+           for ($i = 1; $i <= 3; $i++) {
+               Classe::create(['level_id' => $level->id, 'class_name' => $i]);
+           }
+       }
     }
 }

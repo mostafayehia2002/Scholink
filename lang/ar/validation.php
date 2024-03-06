@@ -209,9 +209,12 @@ return [
         'child_birth_certificate'=>'صورة شهادة ميلاد الطفل',
         'id'=>'رقم',
         'post_id'=>'رقم البوست',
+        'subject_id'=>'رقم المادة',
         'comment'=>'تعليق',
-
-
+        'assignment_id'=>'رقم التكليف',
+        'homework'=>'الواجب',
+        'level_id'=>'رقم الصف ',
+        'term'=>'الترم',
 
     ],
 ];

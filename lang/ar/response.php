@@ -13,6 +13,8 @@ return [
     'Successfully_Create_Comment'=>'تم إنشاء التعليق بنجاح',
     'Successfully_Update_Comment'=>'تم تعديل التعليق بنجاح',
     'Successfully_Delete_Comment'=>'تم حذف التعليق بنجاح',
+    'Successfully_Uploaded_Homework'=>'تم تسليم التاسك بنجاح',
+    'Assignment_Already_Uploaded'=>'تم رفع التاسك مسبقا',
     'Failed_Confirm_Data'=>'فشل تاكيد البيانات',
     'Otp_Is_Failed' => 'فشلت عملية OTP',
     'Data_Not_Found'=>'لم يتم العثور على البيانات',
