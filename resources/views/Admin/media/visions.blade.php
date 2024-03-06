@@ -42,7 +42,7 @@
                                         <label for="inputAddress2"
                                                class="form-label">Content</label>
                                         <textarea class="form-control" id="inputAddress2"
-                                                  name="content" required
+                                                  name="vision_content" required
                                                   placeholder="Enter Message"
                                                   rows="3"></textarea>
                                     </div>
@@ -142,7 +142,7 @@
                                                            class="form-label">Content</label>
                                                     <input type="hidden" value="{{$row->id}}" name="id">
                                                     <textarea class="form-control" id="inputAddress2"
-                                                              name="content" required
+                                                              name="vision_content" required
                                                               placeholder="Enter Message"
                                                               rows="3">{{$row->content}}</textarea>
                                                 </div>
