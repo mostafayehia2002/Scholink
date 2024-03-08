@@ -216,6 +216,7 @@ return [
         'homework'=>'Homework',
         'level_id'=>'Level Id',
         'term'=>'Term',
+        'type'=>'Type'
 
     ],
 ];

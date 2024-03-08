@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\ContentController;
 use App\Http\Controllers\Api\LevelController;
 use App\Http\Controllers\Api\MarkController;
+use App\Http\Controllers\Api\MaterialController;
 use App\Http\Controllers\Api\ReactionController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\SubCategoryController;
@@ -81,6 +82,7 @@ Route::group([
     Route::get('/levels',[LevelController::class,'getStudentLevels']);
     Route::get('/marks',[MarkController::class,'getStudentMarks']);
     Route::get('/table',[TableController::class,'getStudentTable']);
+    Route::get('/materials',[MaterialController::class,'getMaterials']);
 });
 
 
