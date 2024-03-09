@@ -16,7 +16,10 @@ class Subject extends Model
     {
         return $this->belongsToMany(Subject::class,'assignments','subject_id')->withPivot('title','task','grade','deadline');
     }
-
+    public function materials()
+    {
+        return $this->hasMany(Material::class,'subject_id');
+    }
     protected $casts=[
         'name'=>'array',
     ];

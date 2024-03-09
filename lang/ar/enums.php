@@ -9,4 +9,9 @@ return [
         'friday' => 'الجمعة',
         'saturday' => 'السبت',
     ],
+    'material_type'=>[
+        'lesson'=>'حصة',
+        'exam'=>'امتحان',
+        'video'=>'فيديو'
+    ],
 ];

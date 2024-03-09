@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
       CategorySeeder::class,
       SubCategorySeeder::class,
       SubjectSeeder::class,
+      Materials::class
   ]);
     }
 }

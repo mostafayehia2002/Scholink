@@ -8,5 +8,10 @@ return [
         'thursday' => 'Thursday',
         'friday' => 'Friday',
         'saturday' => 'Saturday',
+        'material_type'=>[
+            'lesson'=>'lesson',
+            'exam'=>'exam',
+            'video'=>'video'
+        ],
     ],
 ];
