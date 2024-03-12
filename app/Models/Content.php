@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Content extends Model
 {
-    use HasFactory;
+    use HasFactory,CustomiseDateTrait;
   //  protected $fillable=['content','category_id','admin_id'];
  protected  $guarded=[];
 

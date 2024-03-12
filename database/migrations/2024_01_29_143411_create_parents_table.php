@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('mobile', 30)->unique();
             $table->string('email', 100)->unique();
             $table->string('national_id', 14)->unique();
+            $table->string('personal_identification')->nullable();
             $table->string('address');
             $table->string('job');
             $table->enum('gender', array('male', 'female'));

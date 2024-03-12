@@ -93,11 +93,12 @@ Route::group(
             'middleware' => 'auth:parent'
         ], function () {
             Route::controller(ParentStudentController::class)->group(function () {
-                Route::post('logout',  'logout');
-                Route::post('refresh', 'refresh');
-                Route::post('profile',  'profile');
-                Route::post('update-profile',  'updateProfile');
-                Route::post('change-password', 'changePassword');
+                Route::post('/logout',  'logout');
+                Route::post('/refresh', 'refresh');
+                Route::post('/profile',  'profile');
+                Route::post('/update-profile',  'updateProfile');
+                Route::post('/change-password', 'changePassword');
+                Route::get('/children','getChildren');
             });
             Route::get('/table', [TableController::class, 'getTable']);
             Route::get('/levels', [LevelController::class, 'getLevel']);

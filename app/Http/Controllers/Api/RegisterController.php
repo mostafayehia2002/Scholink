@@ -26,7 +26,6 @@ class RegisterController extends Controller
                     'parent_email' => "required|email",
                     'parent_mobile' => "required|string|max:11",
                     'parent_data_birth'=>'required|date',
-                    'parent_personal_identification'=>'required|image|mimes:jpeg,png,jpg',
                     'parent_national_id' => 'required|numeric|min:14,max:14',
                     'parent_address' => 'required|string',
                     'parent_job' => 'required',
