@@ -34,11 +34,11 @@ public function getMaterials(Request $request)
             })->orderBy('created_at','desc')
             ->get();
         if(count($data)<0){
-            return $this->error(404,trans('response.Data_Not_Found'));
+            return $this->errorMessage(404,trans('response.Data_Not_Found'));
         }
         return $this->data(200, 'materials',MaterialResource::collection($data));
     }catch (\Exception $e){
-        return  $this->error(500,$e->getMessage());
+        return  $this->errorMessage(500,$e->getMessage());
     }
 
 }

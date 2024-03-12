@@ -20,7 +20,7 @@ class LevelController extends Controller
             $levels = Level::get();
             return  $this->data(200, 'levels', LevelResource::collection($levels));
         } catch (\Exception $e) {
-            return $this->error(500, $e->getMessage());
+            return $this->errorMessage(500, $e->getMessage());
         }
     }
 
@@ -30,11 +30,11 @@ class LevelController extends Controller
             $student = auth('student')->user();
             $levels = Level::where('id', '<=', $student->classe->level_id)->get();
             if (count($levels) < 0) {
-                return $this->error(404, trans('response.Data_Not_Found'));
+                return $this->errorMessage(404, trans('response.Data_Not_Found'));
             }
             return $this->data(200, 'data', LevelResource::collection($levels));
         } catch (\Exception $e) {
-            return $this->error(500, $e->getMessage());
+            return $this->errorMessage(500, $e->getMessage());
         }
     }
 
@@ -55,11 +55,11 @@ class LevelController extends Controller
             $student = Student::find($request->student_id);
             $levels = Level::where('id', '<=', $student->classe->level_id)->get();
             if (count($levels) < 0) {
-                return $this->error(404, trans('response.Data_Not_Found'));
+                return $this->errorMessage(404, trans('response.Data_Not_Found'));
             }
             return $this->data(200, 'data', LevelResource::collection($levels));
         } catch (\Exception $e) {
-            return $this->error(500, $e->getMessage());
+            return $this->errorMessage(500, $e->getMessage());
         }
     }
 }

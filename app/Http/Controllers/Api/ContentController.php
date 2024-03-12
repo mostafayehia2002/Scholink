@@ -20,9 +20,9 @@ class ContentController extends Controller
       if(count($data)>0){
           return $this->data(200,'posts',PostsResource::collection($data));
       }
-      return  $this->error(404,trans('response.Data_Not_Found'));
+      return  $this->errorMessage(404,trans('response.Data_Not_Found'));
       }catch (\Exception $e){
-          return $this->error(500,$e->getMessage());
+          return $this->errorMessage(500,$e->getMessage());
       }
   }
 
@@ -34,9 +34,9 @@ class ContentController extends Controller
             if(count($data)>0){
                 return $this->data(200,'guidelines',$data);
             }
-            return  $this->error(404,trans('response.Data_Not_Found'));
+            return  $this->errorMessage(404,trans('response.Data_Not_Found'));
         }catch (\Exception $e){
-            return $this->error(500,$e->getMessage());
+            return $this->errorMessage(500,$e->getMessage());
         }
     }
     public function getVision()
@@ -47,9 +47,9 @@ class ContentController extends Controller
             if(count($data)>0){
                 return $this->data(200,'visions',$data);
             }
-            return  $this->error(404,trans('response.Data_Not_Found'));
+            return  $this->errorMessage(404,trans('response.Data_Not_Found'));
         }catch (\Exception $e){
-            return $this->error(500,$e->getMessage());
+            return $this->errorMessage(500,$e->getMessage());
         }
     }
 

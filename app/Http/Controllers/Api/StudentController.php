@@ -26,7 +26,7 @@ class StudentController extends Controller
             $data=Student::with('classe')->where('id',$user_id)->first();
             return $this->data(200, 'data',StudentResource::make($data));
         } catch (\Exception $e) {
-            return  $this->error(500,$e->getMessage());
+            return  $this->errorMessage(500,$e->getMessage());
         }
     }
     public function logout()
@@ -36,7 +36,7 @@ class StudentController extends Controller
             return $this->successMessage(200, trans('response.Successfully_Logged_Out'));
         } catch (\Exception $e) {
 
-            return  $this->error( 500,$e->getMessage());
+            return  $this->errorMessage( 500,$e->getMessage());
         }
     }
     public function refresh()
@@ -44,7 +44,7 @@ class StudentController extends Controller
         try {
             return $this->respondWithToken(auth()->guard('student')->refresh());
         } catch (\Exception $e) {
-            return  $this->error( 500,$e->getMessage());
+            return  $this->errorMessage( 500,$e->getMessage());
         }
     }
     protected function respondWithToken($token)
@@ -56,7 +56,7 @@ class StudentController extends Controller
                 'expires_in' => auth()->guard('student')->factory()->getTTL()*60*24*30
             ]);
         } catch (\Exception $e) {
-            return  $this->error( 500,$e->getMessage());
+            return  $this->errorMessage( 500,$e->getMessage());
         }
     }
     public function changePassword(Request $request){
@@ -71,7 +71,7 @@ class StudentController extends Controller
              $user->update(['password'=>bcrypt($request->password)]);
             return $this->successMessage(200, trans('response.Successfully_Change_Password'));
         }catch (\Exception $e){
-            return  $this->error( 500,$e->getMessage());
+            return  $this->errorMessage( 500,$e->getMessage());
         }
     }
 }

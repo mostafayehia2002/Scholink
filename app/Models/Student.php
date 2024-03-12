@@ -46,6 +46,22 @@ class Student extends Authenticatable implements JWTSubject
         'level_name' => 'array',
     ];
 
+    public function comment()
+    {
+        return$this->morphOne(Comment::class,'commentable');
+    }
+    public function comments()
+    {
+        return$this->morphMany(Comment::class,'commentable');
+    }
+    public function reaction()
+    {
+        return$this->morphOne(Reaction::class,'reactable');
+    }
+    public function reactions()
+    {
+        return$this->morphMany(Reaction::class,'reactable');
+    }
     protected function photo(): Attribute
     {
         return Attribute::make(

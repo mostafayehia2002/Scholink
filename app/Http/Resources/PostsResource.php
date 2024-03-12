@@ -19,7 +19,7 @@ class PostsResource extends JsonResource
              $model=$comment->commentable_type;
              $content=$comment->comment;
              $user=$comment->commentable;
-            $this->Comments[$i++]=['username'=>$user->name,'email'=>$user->email,'comment'=>$content,'created_at'=>$comment->created_at];
+            $this->Comments[$i++]=['id'=>$comment->id,'username'=>$user->name,'email'=>$user->email,'comment'=>$content,'created_at'=>$comment->created_at];
         }
 
         $x=0;

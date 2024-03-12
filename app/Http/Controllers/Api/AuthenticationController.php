@@ -30,7 +30,7 @@ class AuthenticationController extends Controller
             return $this->error(422,$validate->errors());
         }
         if (!$token = auth()->guard($this->status)->attempt($credentials)) {
-            return $this->error(  401,trans('response.User_Not_Found'));
+            return $this->errorMessage(  401,trans('response.User_Not_Found'));
         }
 
         return  $this->data(200, 'token', $token);
@@ -51,12 +51,12 @@ class AuthenticationController extends Controller
             if (request('status') == 'student') {
                 $user = Student::where('email', '=', $request->email)->first();
                 if (!$user) {
-                    return $this->error( 401,trans('response.User_Not_Found'));
+                    return $this->errorMessage( 401,trans('response.User_Not_Found'));
                 }
             } else {
                 $user = ParentStudent::where('email', '=', $request->email)->first();
                 if (!$user) {
-                    return $this->error(401,trans('response.User_Not_Found'));
+                    return $this->errorMessage(401,trans('response.User_Not_Found'));
                 }
             }
             $message_otp = rand(1111, 9999);
@@ -64,7 +64,7 @@ class AuthenticationController extends Controller
             Mail::to($user)->send(new ValidationCode($user->name, $message_otp,'Reset Password'));
             return $this->successMessage(200, trans('response.Successfully_Send_Code'));
         } catch (\Exception $e) {
-            return  $this->error(500,$e->getMessage());
+            return  $this->errorMessage(500,$e->getMessage());
         }
     }
 
@@ -83,17 +83,17 @@ class AuthenticationController extends Controller
         if (request('status') == 'student') {
             $user = Student::where('email', '=', $request->email)->where('message_otp', $request->message_otp)->first();
             if (!$user) {
-                return $this->error(422,trans("response.Otp_Is_Failed"));
+                return $this->errorMessage(422,trans("response.Otp_Is_Failed"));
             }
         } else {
             $user = ParentStudent::where('email', '=', $request->email)->where('message_otp', $request->message_otp)->first();
             if (!$user) {
-                return $this->error(422,trans("response.Otp_Is_Failed"));
+                return $this->errorMessage(422,trans("response.Otp_Is_Failed"));
             }
         }
         return $this->successMessage(200, trans('response.Successfully_Confirm_Code'));
     } catch (\Exception $e) {
-      return  $this->error(500,$e->getMessage());
+      return  $this->errorMessage(500,$e->getMessage());
 }
     }
     public function newPassword(Request $request)
@@ -111,12 +111,12 @@ class AuthenticationController extends Controller
         if (request('status') == 'student') {
             $user = Student::where('email', '=', $request->email)->first();
             if (!$user) {
-                return $this->error(401,trans('response.User_Not_Found'));
+                return $this->errorMessage(401,trans('response.User_Not_Found'));
             }
         } else {
             $user = ParentStudent::where('email', '=', $request->email)->first();
             if (!$user){
-                return $this->error(401,trans('response.User_Not_Found'));
+                return $this->errorMessage(401,trans('response.User_Not_Found'));
             }
         }
         $user->update([
@@ -124,7 +124,7 @@ class AuthenticationController extends Controller
         ]);
         return $this->successMessage(200, trans('response.Successfully_Change_Password'));
     } catch (\Exception $e) {
-       return  $this->error(500,$e->getMessage());
+       return  $this->errorMessage(500,$e->getMessage());
     }
     }
 }
