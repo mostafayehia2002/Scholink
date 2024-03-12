@@ -23,6 +23,7 @@ class ParentSeeder extends Seeder
             'job'=>'accountant',
             'gender'=>'male',
             'date_birth'=>'1980-05-02',
+            'personal_identification'=>'uploads/register/img.jpg',
             'password'=>Hash::make('12345678'),
         ]);
     }

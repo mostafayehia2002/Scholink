@@ -30,6 +30,7 @@ class RegisterController extends Controller
                     'parent_address' => 'required|string',
                     'parent_job' => 'required',
                     'parent_gender' => 'required|in:male,female',
+                    'parent_personal_identification'=>'required|image|mimes:jpeg,png,jpg',
                     'child_name_en' =>"required|regex:/^[a-zA-Z ]+/",
                     'child_name_ar' => "required|regex:/^[\p{Arabic} ]+/u",
                     'child_date_birth' => 'required|date',
