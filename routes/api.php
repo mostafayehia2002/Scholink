@@ -29,9 +29,6 @@ use App\Traits\GeneralResponse;
 |
 */
 
-Route::get('/', function () {
-    return response()->json('welcome to smart school system api');
-});
 Route::fallback(function () {
     return  response()->json(['IsSuccess' => false, 'statusCode' => 404, 'error' => 'route not found'], 404);
 });
@@ -87,6 +84,7 @@ Route::group(
         });
 
 
+
         //parents routes
         Route::group([
             'prefix' => 'auth/parent',
@@ -99,6 +97,7 @@ Route::group(
                 Route::post('/update-profile',  'updateProfile');
                 Route::post('/change-password', 'changePassword');
                 Route::get('/children','getChildren');
+                Route::post('/add-child','addNewChild');
             });
             Route::get('/table', [TableController::class, 'getTable']);
             Route::get('/levels', [LevelController::class, 'getLevel']);
