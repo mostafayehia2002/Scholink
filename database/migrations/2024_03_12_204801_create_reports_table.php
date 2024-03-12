@@ -11,20 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('materials', function (Blueprint $table) {
+        Schema::create('reports', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('class_id')
-                ->constrained('classes')
+            $table->foreignId('student_id')
+                ->constrained('students')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->foreignId('subject_id')
                 ->constrained('subjects')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-
-            $table->string('title');
-            $table->text('descriptions')->nullable();
-            $table->enum('type',\App\Enums\Material::getValues());
+            $table->text('report');
+            $table->double('percentage');
             $table->timestamps();
         });
     }
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('materials');
+        Schema::dropIfExists('reports');
     }
 };

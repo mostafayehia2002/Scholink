@@ -170,7 +170,7 @@ class ParentStudentController extends Controller
             $photo = 'uploads/parents/register/' . $img;
             //store name in en and ar
             $message_otp = rand(1111, 9999);
-            $register = Register::create([
+            $register=Register::create([
                 'parent_name' => ['ar' => $user->getTranslation('name', 'ar'), 'en' => $user->getTranslation('name', 'en'),],
                 'parent_email' => $user->email,
                 'parent_mobile' => $user->mobile,
@@ -187,10 +187,9 @@ class ParentStudentController extends Controller
                 'child_level' => $request->child_level,
                 'child_school_name' => $request->child_school_name,
                 'message_otp' => $message_otp,
-
+                'status' => 'confirmed',
             ]);
-            Mail::to($register->parent_email)->send(new ValidationCode($register->parent_email, $message_otp, 'Register Confirmation'));
-            return $this->successMessage(200, trans('response.Successfully_Send_Code'));
+            return $this->successMessage(200, trans('response.Successfully_Send_Data'));
         } catch (\Exception $e) {
             return $this->errorMessage(500, $e->getMessage());
         }

@@ -5,7 +5,7 @@ namespace App\Enums;
 use BenSampo\Enum\Contracts\LocalizedEnum;
 use BenSampo\Enum\Enum;
 
-class material extends Enum implements LocalizedEnum
+class Material extends Enum implements LocalizedEnum
 {
     const SUNDAY='lesson';
     const MONDAY='exam';

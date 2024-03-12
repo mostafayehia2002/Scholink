@@ -18,6 +18,7 @@ class ChildrenResource extends JsonResource
 
 
         return [
+            'id'=>$this->id,
            'name' =>$this->name,
             'email'=>$this->email,
             'date_birth'=>$this->date_birth,
