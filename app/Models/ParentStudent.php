@@ -25,6 +25,7 @@ class ParentStudent extends Authenticatable implements JWTSubject
         'mobile',
         'email',
         'national_id',
+        'personal_identification',
         'address',
         'job',
         'gender',
@@ -53,7 +54,7 @@ class ParentStudent extends Authenticatable implements JWTSubject
 
     public function students()
     {
-        return $this->hasMany(Student::class);
+        return $this->hasMany(Student::class,'parent_id');
     }
     public function comment()
     {

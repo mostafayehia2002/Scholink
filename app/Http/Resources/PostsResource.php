@@ -30,12 +30,13 @@ class PostsResource extends JsonResource
             $this->Reactions[$x++]=['username'=>$user->name,'email'=>$user->email,'created_at'=>$comment->created_at];
         }
 
-
+        //date_format(,'d-M-Y h:i A'),
         return [
+            'id'=>$this->id,
             'content'=>$this->content,
             'total_comments'=>count($this->Comments),
             'total_reactions'=>count($this->Reactions),
-            'created_at'=>date_format($this->created_at,'d-M-Y h:i A'),
+            'created_at'=>$this->created_at,
              'comments'=>$this->Comments,
             'reactions'=>$this->Reactions,
             'photos'=>$this->photos,

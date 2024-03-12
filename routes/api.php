@@ -32,72 +32,77 @@ use App\Traits\GeneralResponse;
 Route::get('/', function () {
     return response()->json('welcome to smart school system api');
 });
-Route::fallback(function (){
-    return  response()->json(['IsSuccess'=>false,'statusCode'=>404,'error'=>'route not found'],404);
+Route::fallback(function () {
+    return  response()->json(['IsSuccess' => false, 'statusCode' => 404, 'error' => 'route not found'], 404);
 });
 //this route  student and parents login operation
-Route::group(['middleware' => 'api.lang'],
-    function(){
-Route::controller(AuthenticationController::class)->group(function () {
-    Route::post('login', 'login');
-    Route::post('reset-password', 'resetPassword');
-    Route::post('confirm-otp', 'confirmOtp');
-    Route::post('new-password', 'newPassword');
-});
-Route::controller(RegisterController::class)->group(function (){
-    Route::post('register', 'register');
-    Route::post('register/confirmed','registerConfirmed');
-});
-Route::get('/levels',[LevelController::class,'getLevels']);
-//media
-        Route::get('/posts',[ContentController::class,'getPosts']);
-        Route::get('/react',[ReactionController::class,'reaction']);
-        Route::post('/comment',[CommentController::class,'comment']);
-        Route::get('/comment/delete',[CommentController::class,'deleteComment']);
-        Route::post('/comment/update',[CommentController::class,'updateComment']);
-        Route::get('/news',[SubCategoryController::class,'getNews']);
-        Route::get('/announcements',[SubCategoryController::class,'getAnnouncements']);
-        Route::get('/guidelines',[ContentController::class,'getGuidelines']);
-        Route::get('/visions',[ContentController::class,'getVision']);
+Route::group(
+    ['middleware' => 'api.lang'],
+    function () {
+        Route::controller(AuthenticationController::class)->group(function () {
+            Route::post('login', 'login');
+            Route::post('reset-password', 'resetPassword');
+            Route::post('confirm-otp', 'confirmOtp');
+            Route::post('new-password', 'newPassword');
+        });
+        Route::controller(RegisterController::class)->group(function () {
+            Route::post('register', 'register');
+            Route::post('register/confirmed', 'registerConfirmed');
+        });
+        Route::get('/levels', [LevelController::class, 'getLevels']);
+        //media
+        Route::get('/posts', [ContentController::class, 'getPosts']);
+        Route::get('/react', [ReactionController::class, 'reaction']);
+        Route::post('/comment', [CommentController::class, 'comment']);
+        Route::get('/comment/delete', [CommentController::class, 'deleteComment']);
+        Route::post('/comment/update', [CommentController::class, 'updateComment']);
+        Route::get('/news', [SubCategoryController::class, 'getNews']);
+        Route::get('/announcements', [SubCategoryController::class, 'getAnnouncements']);
+        Route::get('/guidelines', [ContentController::class, 'getGuidelines']);
+        Route::get('/visions', [ContentController::class, 'getVision']);
 
 
-//student routes
-Route::group([
-    'prefix'=>'auth/student',
-    'middleware'=>'auth:student'
-],function (){
-    Route::controller(StudentController::class)->group(function () {
-        Route::post('/logout',  'logout');
-        Route::post('/refresh',  'refresh');
-        Route::post('/profile', 'profile');
-        Route::post('/change-password', 'changePassword');
-    });
-    Route::controller(SubjectController::class)->group(function (){
-        Route::get('/subjects','getStudentSubjects');
-        Route::post('/assignments','getAssignments');
-        Route::post('/upload-homework','uploadHomework');
-        Route::get('/assignments/grade','getAssignmentsGrade');
-        Route::get('/subject/month-exams/grade','getMonthExamsGrade');
-    });
-    Route::get('/levels',[LevelController::class,'getStudentLevels']);
-    Route::get('/marks',[MarkController::class,'getStudentMarks']);
-    Route::get('/table',[TableController::class,'getStudentTable']);
-    Route::get('/materials',[MaterialController::class,'getMaterials']);
-});
+        //student routes
+        Route::group([
+            'prefix' => 'auth/student',
+            'middleware' => 'auth:student'
+        ], function () {
+            Route::controller(StudentController::class)->group(function () {
+                Route::post('/logout',  'logout');
+                Route::post('/refresh',  'refresh');
+                Route::post('/profile', 'profile');
+                Route::post('/change-password', 'changePassword');
+            });
+            Route::controller(SubjectController::class)->group(function () {
+                Route::get('/subjects', 'getStudentSubjects');
+                Route::post('/assignments', 'getAssignments');
+                Route::post('/upload-homework', 'uploadHomework');
+                Route::get('/assignments/grade', 'getAssignmentsGrade');
+                Route::get('/subject/month-exams/grade', 'getMonthExamsGrade');
+            });
+            Route::get('/levels', [LevelController::class, 'getStudentLevels']);
+            Route::get('/marks', [MarkController::class, 'getStudentMarks']);
+            Route::get('/table', [TableController::class, 'getStudentTable']);
+            Route::get('/materials', [MaterialController::class, 'getMaterials']);
+        });
 
 
-//parents routes
-Route::group([
-    'prefix'=>'auth/parent',
-    'middleware'=>'auth:parent'
-],function (){
-    Route::controller(ParentStudentController::class)->group(function () {
-        Route::post('logout',  'logout');
-        Route::post('refresh', 'refresh');
-        Route::post('profile',  'profile');
-        Route::post('update-profile',  'updateProfile');
-        Route::post('change-password', 'changePassword');
-    });
-});
-
-});
+        //parents routes
+        Route::group([
+            'prefix' => 'auth/parent',
+            'middleware' => 'auth:parent'
+        ], function () {
+            Route::controller(ParentStudentController::class)->group(function () {
+                Route::post('/logout',  'logout');
+                Route::post('/refresh', 'refresh');
+                Route::post('/profile',  'profile');
+                Route::post('/update-profile',  'updateProfile');
+                Route::post('/change-password', 'changePassword');
+                Route::get('/children','getChildren');
+            });
+            Route::get('/table', [TableController::class, 'getTable']);
+            Route::get('/levels', [LevelController::class, 'getLevel']);
+            Route::get('/marks', [MarkController::class, 'getMarks']);
+        });
+    }
+);

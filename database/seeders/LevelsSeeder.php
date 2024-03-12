@@ -27,7 +27,7 @@ class LevelsSeeder extends Seeder
             "level_number"=> 4,
             "level_name"=>['en'=>'Four Level','ar'=>'الصف الرابع'],
         ],[
-                "level_number"=> 5,
+               "level_number"=> 5,
                 "level_name"=>['en'=>'Five Level','ar'=>'الصف الخامس'],
             ],[
                 "level_number"=> 6,

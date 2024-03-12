@@ -21,7 +21,7 @@ class Student extends Authenticatable implements JWTSubject
 
     protected $table = 'students';
     public $timestamps = true;
-    public $translatable =['name'];
+    public $translatable =['name','level_name'];
     protected $fillable = [
         'parent_id',
         'name',
@@ -42,7 +42,8 @@ class Student extends Authenticatable implements JWTSubject
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
-        'name'=>'array'
+        'name'=>'array',
+        'level_name' => 'array',
     ];
 
     protected function photo(): Attribute
