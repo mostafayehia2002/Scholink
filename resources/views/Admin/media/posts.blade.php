@@ -189,7 +189,7 @@
                             </div>
                             <h3>
                                 {{$row->admin->name}}<br/><span class="role">admin</span>
-                                <span class="date">{{date_format($row->created_at,'Y-m-d h:i A')}}</span>
+                                <span class="date">{{$row->created_at}}</span>
                                 <span class="globDot">.</span>
                             </h3>
                         </div>

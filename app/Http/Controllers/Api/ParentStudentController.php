@@ -28,7 +28,7 @@ class ParentStudentController extends Controller
         try {
             return $this->data(200, 'data',ParentResource::make( auth()->guard('parent')->user()));
         } catch (\Exception $e) {
-            return  $this->error( 500,$e->getMessage());
+            return  $this->errorMessage( 500,$e->getMessage());
         }
     }
 
@@ -39,7 +39,7 @@ class ParentStudentController extends Controller
             auth()->guard('parent')->logout();
             return $this->successMessage(200, trans('response.Successfully_Logged_Out'));
         } catch (\Exception $e) {
-            return  $this->error( 500,$e->getMessage());
+            return  $this->errorMessage( 500,$e->getMessage());
         }
     }
 
@@ -49,7 +49,7 @@ class ParentStudentController extends Controller
             return $this->respondWithToken(auth()->guard('parent')->refresh());
         } catch (\Exception $e) {
 
-            return  $this->error( 500,$e->getMessage());
+            return  $this->errorMessage( 500,$e->getMessage());
         }
     }
 
@@ -64,7 +64,7 @@ class ParentStudentController extends Controller
             ]);
         } catch (\Exception $e) {
 
-            return  $this->error( 500,$e->getMessage());
+            return  $this->errorMessage( 500,$e->getMessage());
         }
     }
 
@@ -101,7 +101,7 @@ class ParentStudentController extends Controller
             $user->update($data);
             return $this->successMessage(200, trans('response.Successfully_Update_Profile'));
         } catch (\Exception $e) {
-            return  $this->error( 500,$e->getMessage());
+            return  $this->errorMessage( 500,$e->getMessage());
         }
     }
 
@@ -119,7 +119,7 @@ class ParentStudentController extends Controller
                 return $this->successMessage(200, trans('response.Successfully_Change_Password'));
 
        }catch (\Exception $e){
-            return  $this->error(500,$e->getMessage());
+            return  $this->errorMessage(500,$e->getMessage());
         }
     }
 
@@ -138,7 +138,7 @@ class ParentStudentController extends Controller
            return  $this->data(200,'Children',ChildrenResource::collection($children) );
 
         }catch (\Exception $e){
-            return $this->error(500,$e->getMessage());
+            return $this->errorMessage(500,$e->getMessage());
         }
     }
 
@@ -163,26 +163,30 @@ class ParentStudentController extends Controller
             if ($validate->fails()) {
                 return $this->error(422,$validate->errors());
             }
-            $parent=auth('parent')->user();
+            $user=auth('parent')->user();
             $data=$validate->validate();
-            $data['parent_name']=$parent->name;
-            $data['parent_email']=$parent->email;
-            $data['parent_mobile']=$parent->mobile;
-            $data['parent_data_birth']=$parent->data_birth;
-            $data['parent_personal_identification']=$parent->personal_identification;
+            $data['parent_name']=$user->name;
+            $data['parent_email']=$user->email;
+            $data['parent_mobile']=$user->mobile;
+            $data['parent_data_birth']=$user->data_birth;
+            $data['parent_personal_identification']=$user->personal_identification;
+            $data['parent_job']=$user->job;
+            $data['parent_gender']=$user->gender;
             //store images
             $img2 =time().$request->file('child_birth_certificate')->getClientOriginalName();
             $request->file('child_birth_certificate')->storeAs('/register', $img2, 'parent');
             $data['child_birth_certificate']= 'uploads/parents/register/'.$img2;
             //store name in en and ar
             $data['child_name']=['en'=>$request->child_name_en,'ar'=>$request->child_name_ar];
+
+            //
             $message_otp = rand(1111, 9999);
             $data['message_otp']=$message_otp;
             $register =Register::create($data);
             Mail::to($register->parent_email)->send(new ValidationCode($register->parent_email, $message_otp, 'Register Confirmation'));
             return $this->successMessage(200, trans('response.Successfully_Send_Code'));
         }catch (\Exception $e){
-            return  $this->error( 500,$e->getMessage());
+            return  $this->errorMessage( 500,$e->getMessage());
         }
 
 

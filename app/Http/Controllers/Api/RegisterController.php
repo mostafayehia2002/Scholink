@@ -61,7 +61,7 @@ class RegisterController extends Controller
           Mail::to($register->parent_email)->send(new ValidationCode($register->parent_email, $message_otp, 'Register Confirmation'));
          return $this->successMessage(200, trans('response.Successfully_Send_Code'));
         }catch (\Exception $e){
-            return  $this->error( 500,$e->getMessage());
+            return  $this->errorMessage( 500,$e->getMessage());
         }
     }
 
@@ -85,16 +85,16 @@ class RegisterController extends Controller
            if(!$register){
                $visits = Cache::increment($key);
                if($visits >=3) {
-                   return $this->error(422,trans('response.Failed_Confirm_Data'));
+                   return $this->errorMessage(422,trans('response.Failed_Confirm_Data'));
                }
-              return $this->error(   401,trans('response.User_Not_Found').' '. trans('response.Or').' '.trans('response.Otp_Is_Failed'));
+              return $this->errorMessage(   401,trans('response.User_Not_Found').' '. trans('response.Or').' '.trans('response.Otp_Is_Failed'));
            }else{
                $register->update(['status'=>'confirmed']);
             return  $this->successMessage(200,trans('response.Successfully_Send_Data'));
 
            }
         }catch (\Exception $e){
-            return  $this->error( 500,$e->getMessage());
+            return  $this->errorMessage( 500,$e->getMessage());
         }
     }
 

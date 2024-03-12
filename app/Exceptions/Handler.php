@@ -38,7 +38,7 @@ class Handler extends ExceptionHandler
            app()->setLocale($lang);
        }
         if ($request->expectsJson()) {
-            return $this->error(401,trans('response.Unauthenticated'));
+            return $this->errorMessage(401,trans('response.Unauthenticated'));
         }
         return redirect()->route('login_form');
     }

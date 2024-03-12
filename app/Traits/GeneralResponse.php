@@ -10,11 +10,21 @@ trait GeneralResponse
         return response()->json([
             'IsSuccess' => false,
             'Status'=>$statusCode,
-            'Error' => $error,
+            'Error' =>$error,
 
         ],$statusCode);
     }
+    public function errorMessage($statusCode,$error)
+    {
+        return response()->json([
+            'IsSuccess' => false,
+            'Status'=>$statusCode,
+            'Error' =>[
+                'message'=>$error,
+                ]
 
+        ],$statusCode);
+    }
     public function successMessage($statusCode,$message='')
     {
         return response()->json( [

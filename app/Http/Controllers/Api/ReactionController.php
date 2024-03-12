@@ -31,7 +31,7 @@ class ReactionController extends Controller
             $content= Content::find($request->post_id);
              $react=$user->reactions->where('content_id',$content->id);
              if(empty($content)){
-                 return $this->error(404,trans('response.Data_Not_Found'));
+                 return $this->errorMessage(404,trans('response.Data_Not_Found'));
              }
              if(count($react)>0){
                  $user->reaction()->delete();
@@ -41,7 +41,7 @@ class ReactionController extends Controller
                  return $this->successMessage(201,trans('response.Successfully_Create_Reaction'));
              }
         }catch (\Exception $e){
-            return  $this->error(500,$e->getMessage()) ;
+            return  $this->errorMessage(500,$e->getMessage()) ;
         }
     }
 

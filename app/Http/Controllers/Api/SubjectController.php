@@ -27,10 +27,9 @@ class SubjectController extends Controller
         try {
             $student=auth('student')->user();
             $class=Classe::with(['subjects','level'])->where('id',$student->class_id)->first();
-           //SubjectResource::make($class)
             return  $this->data(200,'class',SubjectResource::make($class));
         }catch (\Exception $e){
-            return  $this->error(500,$e->getMessage());
+            return  $this->errorMessage(500,$e->getMessage());
         }
 
     }
@@ -78,7 +77,7 @@ class SubjectController extends Controller
             }
             return $this->data(200, 'assignments', $assignments);
         } catch (\Exception $e) {
-            return $this->error(500, $e->getMessage());
+            return $this->errorMessage(500, $e->getMessage());
         }
     }
 
@@ -97,14 +96,14 @@ class SubjectController extends Controller
                 ->where('assignment_id',$request->assignment_id)
                 ->first();
             if($checkStudent){
-                return $this->error(422,trans('response.Assignment_Already_Uploaded'));
+                return $this->errorMessage(422,trans('response.Assignment_Already_Uploaded'));
             }
             $homework =time().$request->file('homework')->getClientOriginalName();
             $request->file('homework')->storeAs('/', $homework, 'student');
             $student->assignments()->attach([$request->assignment_id=>['homework'=>"uploads/students/$homework"]]);
             return $this->successMessage(201, trans('response.Successfully_Uploaded_Homework'));
         }catch (\Exception $e){
-            return $this->error(500, $e->getMessage());
+            return $this->errorMessage(500, $e->getMessage());
         }
     }
 
@@ -122,7 +121,7 @@ class SubjectController extends Controller
             $data=$student->assignments->where('subject_id',$request->subject_id);
             return  $this->data(200,'tasks',AssignmentsGradeResource::collection($data));
         }catch (\Exception $e){
-            return $this->error(500, $e->getMessage());
+            return $this->errorMessage(500, $e->getMessage());
         }
     }
 
@@ -140,10 +139,10 @@ class SubjectController extends Controller
             if(count($data)>0) {
                 return $this->data(200, 'months', MonthExamsResource::collection($data));
             }else{
-                return  $this->error(404,trans('response.Data_Not_Found'));
+                return  $this->errorMessage(404,trans('response.Data_Not_Found'));
             }
         }catch (\Exception $e){
-            return $this->error(500, $e->getMessage());
+            return $this->errorMessage(500, $e->getMessage());
         }
     }
 

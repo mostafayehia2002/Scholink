@@ -36,9 +36,9 @@ class MarkController extends Controller
             if (count($marks) > 0) {
                 return $this->data(200, 'marks', MarksResource::collection($marks));
             }
-            return $this->error(404, trans('response.Data_Not_Found'));
+            return $this->errorMessage(404, trans('response.Data_Not_Found'));
         } catch (\Exception $e) {
-            return $this->error(500, $e->getMessage());
+            return $this->errorMessage(500, $e->getMessage());
         }
     }
 
@@ -65,9 +65,9 @@ class MarkController extends Controller
             if (count($marks) > 0) {
                 return $this->data(200, 'marks', MarksResource::collection($marks));
             }
-            return $this->error(404, trans('response.Data_Not_Found'));
+            return $this->errorMessage(404, trans('response.Data_Not_Found'));
         } catch (\Exception $e) {
-            return $this->error(500, $e->getMessage());
+            return $this->errorMessage(500, $e->getMessage());
         }
     }
 }

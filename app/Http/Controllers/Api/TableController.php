@@ -28,9 +28,9 @@ class TableController extends Controller
                 })->values();
                 return  $this->data(200, 'table', TableResource::collection($groupedSchedules));
             }
-            return $this->error(404, trans('response.Data_Not_Found'));
+            return $this->errorMessage(404, trans('response.Data_Not_Found'));
         } catch (Exception $e) {
-            return $this->error(500, $e->getMessage());
+            return $this->errorMessage(500, $e->getMessage());
         }
     }
 
@@ -54,9 +54,9 @@ class TableController extends Controller
                 })->values();
                 return  $this->data(200, 'table', TableResource::collection($groupedSchedules));
             }
-            return $this->error(404, trans('response.Data_Not_Found'));
+            return $this->errorMessage(404, trans('response.Data_Not_Found'));
         } catch (Exception $e) {
-            return $this->error(500, $e->getMessage());
+            return $this->errorMessage(500, $e->getMessage());
         }
     }
 }

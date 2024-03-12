@@ -29,13 +29,13 @@ class SubCategoryController extends Controller
             })->orderBy('created_at','desc')->get();
 
             if($data->count()<0){
-                return $this->error(404,trans('response.Data_Not_Found'));
+                return $this->errorMessage(404,trans('response.Data_Not_Found'));
             }
 
 
             return $this->data(200, 'categories',NewsResource::collection($data));
         }catch (\Exception $e){
-            return  $this->error(500,$e->getMessage());
+            return  $this->errorMessage(500,$e->getMessage());
         }
     }
 
@@ -51,12 +51,12 @@ class SubCategoryController extends Controller
             })->where('category_id',$announcement->id)
             ->orderBy('created_at','desc')->get();
             if($data->count()<0){
-                return $this->error(404,trans('response.Data_Not_Found'));
+                return $this->errorMessage(404,trans('response.Data_Not_Found'));
             }
             return $this->data(200, 'categories',AnnouncementsResource::collection($data) );
 
         }catch (\Exception $e){
-            return  $this->error(500,$e->getMessage());
+            return  $this->errorMessage(500,$e->getMessage());
         }
     }
 }
