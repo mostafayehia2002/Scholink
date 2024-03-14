@@ -6,15 +6,18 @@
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"><i class="bx bx-home-alt"></i></a>
-                            Home
+                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"><i
+                                    class="bx bx-home-alt"></i></a>
+                            {{__('sidbar.home')}}
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Teacher</li>
+
+                        <li class="breadcrumb-item active" aria-current="page">{{__('sidbar.teachers')}}</li>
                     </ol>
                 </nav>
             </div>
         </div>
         <!--end breadcrumb-->
+
 
         <div class="card">
 
@@ -24,7 +27,7 @@
                 <div class="col-6 col-md-4">
                     {{--=====================Add=================--}}
                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                            data-bs-target="#exampleModaladd"><i class="bx bx-plus"></i> Add New Teacher
+                            data-bs-target="#exampleModaladd"><i class="bx bx-plus"></i> {{__('teachers.new_teacher')}}
                     </button>
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModaladd" tabindex="-1"
@@ -33,8 +36,7 @@
                             <div class="modal-content">
 
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Add
-                                        Teacher</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">{{__('teachers.new_teacher')}}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                 </div>
@@ -44,14 +46,14 @@
                                         @csrf
                                         <div class="col-12">
                                             <label for="inputAddress2"
-                                                   class="form-label">Name En</label>
+                                                   class="form-label">{{__('teachers.name_en')}}</label>
                                             <input type="text" class="form-control" name="name_en"
                                                    value="">
 
                                         </div>
                                         <div class="col-12">
                                             <label for="inputAddress2"
-                                                   class="form-label">Name Ar</label>
+                                                   class="form-label">{{__('teachers.name_ar')}}</label>
 
                                             <input type="text" class="form-control" name="name_ar"
                                                    value="">
@@ -59,34 +61,34 @@
 
                                         <div class="col-12">
                                             <label for="inputAddress2"
-                                                   class="form-label">Email</label>
+                                                   class="form-label">{{__('teachers.email')}}</label>
 
                                             <input type="email" class="form-control"
                                                    name="email" value="">
                                         </div>
                                         <div class="col-12">
                                             <label for="inputAddress2"
-                                                   class="form-label">Phone</label>
+                                                   class="form-label">{{__('teachers.mobil')}}</label>
 
                                             <input type="text" class="form-control"
                                                    name="phone" value="">
                                         </div>
                                         <div class="col-12">
                                             <label for="inputAddress2"
-                                                   class="form-label">Adddress</label>
+                                                   class="form-label">{{__('teachers.address')}}</label>
 
                                             <textarea class="form-control" id="inputAddress2"
                                                       name="address" required
-                                                      placeholder="Enter Address"
+                                                      placeholder="{{__('teachers.enter_address')}}"
                                                       rows="3"></textarea>
                                         </div>
 
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close
+                                            data-bs-dismiss="modal">{{__('teachers.close')}}
                                     </button>
-                                    <button type="submit" class="btn btn-primary">Send</button>
+                                    <button type="submit" class="btn btn-primary">{{__('teachers.send')}}</button>
                                 </div>
                                 </form>
                             </div>
@@ -100,10 +102,11 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Address</th>
+                            <th>{{__('teachers.name')}}</th>
+                            <th>{{__('teachers.email')}}</th>
+                            <th>{{__('teachers.mobil')}}</th>
+                            <th>{{__('teachers.address')}}</th>
+                            <th>{{__('teachers.actions')}}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -118,7 +121,7 @@
                                 <td>
                                     {{--=============Delate Request=========================--}}
                                     <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModald{{$loop->index}}">Delete
+                                            data-bs-target="#exampleModald{{$loop->index}}">{{__('teachers.delete')}}
                                     </button>
                                     <!-- Modal -->
                                     <div class="modal fade" id="exampleModald{{$loop->index}}" tabindex="-1"
@@ -126,7 +129,7 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Delete Teacher</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">{{__('teachers.delete_teacher')}}</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                 </div>
@@ -135,10 +138,10 @@
                                                           action="{{route('admin.teachers.destroy',$row->id)}}">
                                                         @method('DELETE')
                                                         @csrf
-                                                        <p>Are You Sure Delete Teacher ??</p>
+                                                        <p>{{__('teachers.sure_delete')}}</p>
                                                         <div class="col-12">
                                                             <label for="inputAddress2"
-                                                                   class="form-label">Name</label>
+                                                                   class="form-label">{{__('teachers.name')}}</label>
 
                                                             <input type="text" class="form-control" name="name"
                                                                    value="{{$row->name}}" readonly>
@@ -146,9 +149,9 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Close
+                                                            data-bs-dismiss="modal">{{__('teachers.close')}}
                                                     </button>
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                    <button type="submit" class="btn btn-danger">{{__('teachers.delete')}}</button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -158,7 +161,7 @@
 
                                     {{--=============Upadate=========================--}}
                                     <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal{{$loop->index}}">Update
+                                            data-bs-target="#exampleModal{{$loop->index}}">{{__('teachers.update')}}
                                     </button>
                                     <!-- Modal -->
                                     <div class="modal fade" id="exampleModal{{$loop->index}}" tabindex="-1"
@@ -167,8 +170,7 @@
                                             <div class="modal-content">
 
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Update
-                                                        Teacher</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">{{__('teachers.update_teacher')}}</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                 </div>
@@ -180,14 +182,14 @@
                                                         @method('PUT')
                                                         <div class="col-12">
                                                             <label for="inputAddress2"
-                                                                   class="form-label">Name En</label>
+                                                                   class="form-label">{{__('teachers.name_en')}}</label>
                                                             <input type="text" class="form-control" name="name_en"
                                                                    value="{{$row->getTranslation('name','en')}}">
 
                                                         </div>
                                                         <div class="col-12">
                                                             <label for="inputAddress2"
-                                                                   class="form-label">Name Ar</label>
+                                                                   class="form-label">{{__('teachers.name_ar')}}</label>
 
                                                             <input type="text" class="form-control" name="name_ar"
                                                                    value="{{$row->getTranslation('name','ar')}}">
@@ -195,33 +197,33 @@
 
                                                         <div class="col-12">
                                                             <label for="inputAddress2"
-                                                                   class="form-label">Email</label>
+                                                                   class="form-label">{{__('teachers.email')}}</label>
 
                                                             <input type="email" class="form-control"
                                                                    name="email" value="{{$row->email}}">
                                                         </div>
                                                         <div class="col-12">
                                                             <label for="inputAddress2"
-                                                                   class="form-label">Phone</label>
+                                                                   class="form-label">{{__('teachers.mobil')}}</label>
 
                                                             <input type="text" class="form-control"
                                                                    name="phone" value="{{$row->phone}}">
                                                         </div>
                                                         <div class="col-12">
                                                             <label for="inputAddress2"
-                                                                   class="form-label">Adddress</label>
+                                                                   class="form-label">{{__('teachers.address')}}</label>
 
                                                             <textarea class="form-control" id="inputAddress2"
                                                                       name="address" required
-                                                                      placeholder="Enter Address"
+
                                                                       rows="3">{{$row->address}}</textarea>
                                                         </div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Close
+                                                            data-bs-dismiss="modal">{{__('teachers.close')}}
                                                     </button>
-                                                    <button type="submit" class="btn btn-success">Update</button>
+                                                    <button type="submit" class="btn btn-success">{{__('teachers.update')}}</button>
                                                 </div>
                                                 </form>
                                             </div>

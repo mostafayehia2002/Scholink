@@ -6,52 +6,47 @@
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"><i class="bx bx-home-alt"></i></a>
-                            Home
+                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"><i
+                                    class="bx bx-home-alt"></i></a>
+                            {{__('sidbar.home')}}
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Class Teacher</li>
+
+                        <li class="breadcrumb-item active" aria-current="page">{{__('sidbar.class_teachers')}}</li>
                     </ol>
                 </nav>
             </div>
         </div>
         <!--end breadcrumb-->
 
+
         <div class="card">
-
-
-
 
 
             <div class="card-body">
 
                 <div class="col-6 col-md-4">
                     {{--=====================Add=================--}}
-
-                    <a href="{{route('admin.class_teachers.create')}}" class="btn btn-primary btn-sm"><i class="bx bx-plus"></i> Add New Class Teacher</a>
+                    <a href="{{route('admin.class_teachers.create')}}" class="btn btn-primary btn-sm"><i
+                            class="bx bx-plus"></i>{{__('class_teachers.new_class_teacher')}}</a>
                     <!-- Modal -->
-
                 </div>
-
-
-
 
                 <div class="table-responsive">
                     <table id="example2" class="table table-striped table-bordered">
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Teacher</th>
-                            <th>Subject</th>
-                            <th>Class</th>
-                            <th>Day</th>
-                            <th>Number Lesson</th>
-                            <th>Start At</th>
-                            <th>End At</th>
-                            <th>Action</th>
+                            <th>{{__('class_teachers.teacher')}}</th>
+                            <th>{{__('class_teachers.subject')}}</th>
+                            <th>{{__('class_teachers.class')}}</th>
+                            <th>{{__('class_teachers.day')}}</th>
+                            <th>{{__('class_teachers.num_lesson')}}</th>
+                            <th>{{__('class_teachers.start_at')}}</th>
+                            <th>{{__('class_teachers.end_at')}}</th>
+                            <th>{{__('class_teachers.actions')}}</th>
                         </tr>
                         </thead>
                         <tbody>
-
                         @foreach($data as $row)
                             <tr>
                                 <td>{{$loop->index+1}}</td>
@@ -63,9 +58,9 @@
                                 <td>{{$row->start_at}}</td>
                                 <td>{{$row->end_at}}</td>
                                 <td>
-{{--                                    =============Delate Request=========================--}}
+                                    {{--                                    =============Delate Request=========================--}}
                                     <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModald{{$loop->index}}">Delete
+                                            data-bs-target="#exampleModald{{$loop->index}}">{{__('class_teachers.delete')}}
                                     </button>
                                     <!-- Modal -->
                                     <div class="modal fade" id="exampleModald{{$loop->index}}" tabindex="-1"
@@ -73,7 +68,8 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Delete Class Teacher</h5>
+                                                    <h5 class="modal-title"
+                                                        id="exampleModalLabel">{{__('class_teachers.delete_class_teacher')}}</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                 </div>
@@ -82,22 +78,22 @@
                                                           action="{{route('admin.class_teachers.destroy',$row->id)}}">
                                                         @method('DELETE')
                                                         @csrf
-                                                        <p>Are You Sure Delete Class Teacher  ????</p>
-
+                                                        <p>{{__('class_teachers.sure_delete')}}</p>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Close
+                                                            data-bs-dismiss="modal">{{__('class_teachers.close')}}
                                                     </button>
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                    <button type="submit"
+                                                            class="btn btn-danger">{{__('class_teachers.delete')}}</button>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-{{--                                    =============Upadate=========================--}}
-                                    <a href="{{route('admin.class_teachers.edit',$row->id)}}"  class="btn btn-success btn-sm">Update</a>
+                                    {{-- =============Upadate=========================--}}
+                                    <a href="{{route('admin.class_teachers.edit',$row->id)}}"
+                                       class="btn btn-success btn-sm">{{__('class_teachers.update')}}</a>
                                 </td>
 
 

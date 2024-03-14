@@ -51,7 +51,7 @@ class TeacherController extends Controller
                 'address'=>$request->address,
                 'password'=>bcrypt('123456'),
             ]);
-            return redirect()->back()->with('success', 'Success Added Teacher');
+            return redirect()->back()->with('success',__('teachers.s_add_teacher'));
         }catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -93,7 +93,7 @@ class TeacherController extends Controller
                 'phone'=>$request->phone,
                 'address'=>$request->address,
             ]);
-            return redirect()->back()->with('success', 'Success Update Teacher');
+            return redirect()->back()->with('success', __('teachers.s_update_teacher'));
         }catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -106,7 +106,7 @@ class TeacherController extends Controller
     {
         try{
             Teacher::findOrFail($id)->delete();
-            return redirect()->back()->with('success', 'Success Deleted Teacher');
+            return redirect()->back()->with('success', __('teachers.s_delete_teacher'));
         }catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

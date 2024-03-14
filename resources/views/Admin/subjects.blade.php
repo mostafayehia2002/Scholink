@@ -26,17 +26,15 @@
                 <div class="col-6 col-md-4">
                     {{--=====================Add=================--}}
                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                            data-bs-target="#exampleModaladd"><i class="bx bx-plus"></i> Add New Subject
+                            data-bs-target="#exampleModaladd"><i class="bx bx-plus"></i> {{__('subjects.new_subject')}}
                     </button>
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModaladd" tabindex="-1"
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Add
-                                        Subject</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">{{__('subjects.new_subject')}}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                 </div>
@@ -46,27 +44,22 @@
                                         @csrf
                                         <div class="col-12">
                                             <label for="inputAddress2"
-                                                   class="form-label">Name En</label>
+                                                   class="form-label">{{__('subjects.name_en')}}</label>
                                             <input type="text" class="form-control" name="name_en"
                                                    value="">
-
                                         </div>
                                         <div class="col-12">
                                             <label for="inputAddress2"
-                                                   class="form-label">Name Ar</label>
-
+                                                   class="form-label">{{__('subjects.name_ar')}}</label>
                                             <input type="text" class="form-control" name="name_ar"
                                                    value="">
                                         </div>
-
-
-
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close
+                                            data-bs-dismiss="modal">{{__('subjects.close')}}
                                     </button>
-                                    <button type="submit" class="btn btn-primary">Send</button>
+                                    <button type="submit" class="btn btn-primary">{{__('subjects.send')}}</button>
                                 </div>
                                 </form>
                             </div>
@@ -80,20 +73,19 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Subject Name</th>
+                            <th>{{__('subjects.name')}}</th>
+                            <th>{{__('subjects.actions')}}</th>
                         </tr>
                         </thead>
                         <tbody>
-
                         @foreach($data as $row)
                             <tr>
                                 <td>{{$loop->index+1}}</td>
                                 <td>{{$row->name}}</td>
-
                                 <td>
                                     {{--=============Delate Request=========================--}}
                                     <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModald{{$loop->index}}">Delete
+                                            data-bs-target="#exampleModald{{$loop->index}}">{{__('subjects.delete')}}
                                     </button>
                                     <!-- Modal -->
                                     <div class="modal fade" id="exampleModald{{$loop->index}}" tabindex="-1"
@@ -101,7 +93,7 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Delete Subject</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">{{__('subjects.delete_subject')}}</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                 </div>
@@ -110,10 +102,10 @@
                                                           action="{{route('admin.subjects.destroy',$row->id)}}">
                                                         @method('DELETE')
                                                         @csrf
-                                                        <p>Are You Sure Delete Subject ??</p>
+                                                        <p>{{__('subjects.sure_delete')}}</p>
                                                         <div class="col-12">
                                                             <label for="inputAddress2"
-                                                                   class="form-label">Name</label>
+                                                                   class="form-label">{{__('subjects.name')}}</label>
 
                                                             <input type="text" class="form-control" name="name"
                                                                    value="{{$row->name}}" readonly>
@@ -121,9 +113,9 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Close
+                                                            data-bs-dismiss="modal">{{__('subjects.close')}}
                                                     </button>
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                    <button type="submit" class="btn btn-danger">{{__('subjects.delete')}}</button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -133,7 +125,7 @@
 
                                     {{--=============Upadate=========================--}}
                                     <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal{{$loop->index}}">Update
+                                            data-bs-target="#exampleModal{{$loop->index}}">{{__('subjects.update')}}
                                     </button>
                                     <!-- Modal -->
                                     <div class="modal fade" id="exampleModal{{$loop->index}}" tabindex="-1"
@@ -142,8 +134,7 @@
                                             <div class="modal-content">
 
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Update
-                                                        Subject</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">{{__('subjects.update_subject')}}</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                 </div>
@@ -155,7 +146,7 @@
                                                         @method('PUT')
                                                         <div class="col-12">
                                                             <label for="inputAddress2"
-                                                                   class="form-label">Name En</label>
+                                                                   class="form-label">{{__('subjects.name_en')}}</label>
                                                             <input type="hidden" value="{{$row->id}}" name="id">
                                                             <input type="text" class="form-control" name="name_en"
                                                                    value="{{$row->getTranslation('name','en')}}">
@@ -163,20 +154,19 @@
                                                         </div>
                                                         <div class="col-12">
                                                             <label for="inputAddress2"
-                                                                   class="form-label">Name Ar</label>
+                                                                   class="form-label">{{__('subjects.name_ar')}}</label>
 
                                                             <input type="text" class="form-control" name="name_ar"
                                                                    value="{{$row->getTranslation('name','ar')}}">
                                                         </div>
 
 
-
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Close
+                                                            data-bs-dismiss="modal">{{__('subjects.close')}}
                                                     </button>
-                                                    <button type="submit" class="btn btn-success">Update</button>
+                                                    <button type="submit" class="btn btn-success">{{__('subjects.update')}}</button>
                                                 </div>
                                                 </form>
                                             </div>
@@ -223,6 +213,5 @@
     <script src="{{asset('assets/plugins/fancy-file-uploader/jquery.iframe-transport.js')}}"></script>
     <script src="{{asset('assets/plugins/fancy-file-uploader/jquery.fancy-fileupload.js')}}"></script>
     <script src="{{asset('assets/plugins/Drag-And-Drop/dist/imageuploadify.min.js')}}"></script>
-
 
 @endpush

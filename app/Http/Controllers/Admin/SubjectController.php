@@ -43,7 +43,7 @@ class SubjectController extends Controller
             Subject::create([
                 'name'=>['ar'=>$request->name_ar,'en'=>$request->name_en],
             ]);
-            return redirect()->back()->with('success', 'Success Added Subject');
+            return redirect()->back()->with('success',__('subjects.s_add_subject'));
         }catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -79,7 +79,7 @@ class SubjectController extends Controller
             $subject->update([
                 'name'=>['ar'=>$request->name_ar,'en'=>$request->name_en],
             ]);
-            return redirect()->back()->with('success', 'Success Update Subject');
+            return redirect()->back()->with('success', __('subjects.s_update_subject'));
         }catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -92,7 +92,7 @@ class SubjectController extends Controller
     {
         try{
             Subject::findOrFail($id)->delete();
-            return redirect()->back()->with('success', 'Success Deleted Subject');
+            return redirect()->back()->with('success', __('subjects.s_delete_subject'));
         }catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
