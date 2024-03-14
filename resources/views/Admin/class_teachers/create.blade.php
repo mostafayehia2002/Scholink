@@ -8,10 +8,10 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"><i
                                     class="bx bx-home-alt"></i></a>
-                            Home
+                            {{__('sidbar.home')}}
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Class Teacher</li>
-                        <li class="breadcrumb-item active" aria-current="page">Add Class Teacher</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('sidbar.class_teachers')}}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('class_teachers.new_class_teacher')}}</li>
                     </ol>
                 </nav>
             </div>
@@ -33,65 +33,65 @@
                         <div class="col-md-6 col-12">
                             <label for="inputTeacher" class="form-label">Teacher</label>
                             <select id="inputTeacher" class="form-select" name="teacher_id" required>
-                                <option selected="" disabled>Choose...</option>
+                                <option selected="" disabled>{{__('class_teachers.select')}}</option>
                                 @foreach($teachers as $teacher)
                                     <option @selected(old('teacher_id')==$teacher->id)  value="{{$teacher->id}}">{{$teacher->name}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-6 col-12">
-                            <label for="inputSubject" class="form-label">Subject</label>
+                            <label for="inputSubject" class="form-label">{{__('class_teachers.subject')}}</label>
                             <select id="inputSubject" class="form-select" name="subject_id" required>
-                                <option selected="" disabled>Choose...</option>
+                                <option selected="" disabled>{{__('class_teachers.select')}}</option>
                                 @foreach($subjects as $subject)
                                     <option @selected(old('subject_id')==$subject->id) value="{{$subject->id}}">{{$subject->name}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-6 col-12">
-                            <label for="inputClass" class="form-label">Level</label>
+                            <label for="inputClass" class="form-label">{{__('class_teachers.level')}}</label>
                             <select id="inputClass" class="form-select" name="level_id" required>
-                                <option selected="" disabled>Choose...</option>
+                                <option selected="" disabled>{{__('class_teachers.select')}}</option>
                                 @foreach($levels as $level)
                                     <option value="{{$level->id}}">{{$level->level_name}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-6 col-12">
-                            <label for="inputClass" class="form-label">Class</label>
+                            <label for="inputClass" class="form-label">{{__('class_teachers.class')}}</label>
                             <select id="inputClass" class="form-select" name="class_id" required>
                             </select>
                         </div>
 
                         <div class="col-md-6 col-12">
-                            <label for="inputDay" class="form-label">Day</label>
+                            <label for="inputDay" class="form-label">{{__('class_teachers.day')}}</label>
                             <select id="inputDay" class="form-select" name="day" required>
-                                <option selected="" disabled>Choose...</option>
+                                <option selected="" disabled>{{__('class_teachers.select')}}</option>
                                 @foreach($days as $day)
                                     <option @selected(old('day')==$day) value="{{$day}}">{{App\Enums\WeekDay::getTranslatedDay($day,app()->getLocale())}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-6 col-12">
-                            <label for="inputLastLesson" class="form-label">Number Lessons</label>
+                            <label for="inputLastLesson" class="form-label">{{__('class_teachers.num_lesson')}}</label>
                             <input type="number" name="number_lesson" value="{{old('number_lesson')}}" class="form-control" id="inputLastLesson">
                         </div>
 
 
                             <div class="col-md-6 col-12">
-                                <label class="form-label">Start At</label>
-                                <input type="text" name="start_at" placeholder="Select ......"
+                                <label class="form-label">{{__('class_teachers.start_at')}}</label>
+                                <input type="text" name="start_at"
                                        class="form-control timepicker"/>
                             </div>
                             <div class="col-md-6 col-12">
-                                <label class="form-label">End At</label>
-                                <input type="text" name="end_at" placeholder="Select ......"
+                                <label class="form-label">{{__('class_teachers.end_at')}}</label>
+                                <input type="text" name="end_at"
                                        class="form-control timepicker"/>
                             </div>
 
 
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary px-5">Create</button>
+                            <button type="submit" class="btn btn-primary px-5">{{__('class_teachers.create')}}</button>
                         </div>
                     </form>
                 </div>
@@ -115,7 +115,7 @@
                     success: function(data) {
                         $('select[name="class_id"]').empty();
                         $('select[name="class_id"]').append(
-                            "<option selected disabled >Select...</option>"
+                            "<option selected disabled >{{__('class_teachers.select')}}</option>"
                         );
                         $.each(data, function(key, value) {
                             $('select[name="class_id"]').append(

@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\ClassController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\ClassTeacherController;
+use App\Http\Controllers\Admin\StudentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,4 +48,5 @@ Route::group(
     Route::resource('teachers',TeacherController::class);
     Route::resource('class_teachers',ClassTeacherController::class);
     Route::get('getClasses/{id}',[ClassTeacherController::class,'getClass'])->name('getclass');
+    Route::resource('/students',StudentController::class);
 });

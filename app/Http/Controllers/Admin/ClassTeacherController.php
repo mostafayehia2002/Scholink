@@ -66,7 +66,7 @@ class ClassTeacherController extends Controller
                 return redirect()->back()->with('error', 'Teacher Is Already Exist');
             }
             ClassTeacher::create($validator->validated());
-            return redirect()->back()->with('success', 'Success Add Class Teacher');
+            return redirect()->back()->with('success', __('class_teachers.s_add_class_teacher'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -108,7 +108,7 @@ class ClassTeacherController extends Controller
     {
         try {
             ClassTeacher::findOrFail($id)->delete();
-            return redirect()->back()->with('success', 'Success Delete Class Teacher');
+            return redirect()->back()->with('success',  __('class_teachers.s_delete_class_teacher'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

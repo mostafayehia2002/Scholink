@@ -1,0 +1,22 @@
+<?php
+return [
+    'new_class' => 'Add New Class',
+    'name'=>'Class Name',
+    'num_seats'=>'Number Seats',
+    'available_seats'=>'Available Seats',
+    'level'=>'Level',
+    'select_level'=>'--select level--',
+    'update_class'=>'Update Class',
+    'delete_class'=>'Delete Class',
+    's_add_class'=>'Success Add Class',
+    's_update_class'=>'Success Update Class',
+    's_delete_class'=>'Success Delete Class',
+    'sure_delete'=>'Are Sure Of The Deleting Process ??',
+    'status'=>'Status',
+    'actions'=>'Actions',
+    'send'=>'Send',
+    'delete'=>'Delete',
+    'update'=>'Update',
+    'close'=>'Close',
+    'save'=>'Save',
+];

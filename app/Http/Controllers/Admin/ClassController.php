@@ -48,7 +48,7 @@ class ClassController extends Controller
                 'level_id' => $request->level_id,
                 'class_name' => $request->class_name,
             ]);
-            return redirect()->back()->with('success', 'Success Addedd Class');
+            return redirect()->back()->with('success', __('classes.s_add_class'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -85,7 +85,7 @@ class ClassController extends Controller
                 'level_id' => $request->level_id,
                 'class_name' => $request->class_name,
             ]);
-            return redirect()->back()->with('success', 'Success Updated Class');
+            return redirect()->back()->with('success', __('classes.s_update_class'));
         }catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -98,7 +98,7 @@ class ClassController extends Controller
     {
         try {
             Classe::findOrFail($id)->delete();
-            return redirect()->back()->with('success', 'Success Deleted Class');
+            return redirect()->back()->with('success', __('classes.s_delete_class'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

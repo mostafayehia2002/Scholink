@@ -6,11 +6,12 @@
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
-                            Home
+                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"><i
+                                    class="bx bx-home-alt"></i></a>
+                            {{__('sidbar.home')}}
                         </li>
 
-                        <li class="breadcrumb-item active" aria-current="page">Classes</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('sidbar.classes')}}</li>
                     </ol>
                 </nav>
             </div>
@@ -25,7 +26,7 @@
                 <div class="col-6 col-md-4">
                     {{--=====================Add=================--}}
                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                            data-bs-target="#exampleModaladd"><i class="bx bx-plus"></i> Add New Class
+                            data-bs-target="#exampleModaladd"><i class="bx bx-plus"></i> {{__('classes.new_class')}}
                     </button>
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModaladd" tabindex="-1"
@@ -34,8 +35,7 @@
                             <div class="modal-content">
 
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Add
-                                        Class</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">{{__('classes.new_class')}} </h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                 </div>
@@ -45,9 +45,9 @@
                                         @csrf
                                         <div class="col-12">
                                             <label for="inputAddress2"
-                                                   class="form-label">Level</label>
+                                                   class="form-label">{{__('classes.level')}} </label>
                                             <select class="form-select" id="inputProductType" name="level_id">
-                                                <option selected disabled>--select level--</option>
+                                                <option selected disabled>{{__('classes.select_level')}} </option>
                                                 @foreach($levels as $level)
                                                     <option value="{{$level->id}}">{{$level->level_name}}</option>
                                                 @endforeach
@@ -55,7 +55,7 @@
                                         </div>
                                         <div class="col-12">
                                             <label for="inputAddress2"
-                                                   class="form-label">Class Name</label>
+                                                   class="form-label">{{__('classes.name')}} </label>
 
                                             <input type="number" class="form-control" name="class_name"
                                                    value="">
@@ -65,9 +65,9 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close
+                                            data-bs-dismiss="modal">{{__('classes.close')}}
                                     </button>
-                                    <button type="submit" class="btn btn-primary">Send</button>
+                                    <button type="submit" class="btn btn-primary">{{__('classes.send')}} </button>
                                 </div>
                                 </form>
                             </div>
@@ -81,10 +81,11 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Level Name</th>
-                            <th>Class Name</th>
-                            <th>Number Seats</th>
-                            <th>Available Seats</th>
+                            <th>{{__('classes.level')}} </th>
+                            <th>{{__('classes.name')}} </th>
+                            <th>{{__('classes.num_seats')}}</th>
+                            <th>{{__('classes.available_seats')}}</th>
+                            <th>{{__('classes.actions')}} </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -101,7 +102,7 @@
                                 <td>
                                     {{--=============Delate Request=========================--}}
                                     <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModald{{$loop->index}}">Delete
+                                            data-bs-target="#exampleModald{{$loop->index}}">{{__('classes.delete')}}
                                     </button>
                                     <!-- Modal -->
                                     <div class="modal fade" id="exampleModald{{$loop->index}}" tabindex="-1"
@@ -118,17 +119,17 @@
                                                           action="{{route('admin.classes.destroy',$row->id)}}">
                                                         @method('DELETE')
                                                         @csrf
-                                                        <p>Are You Sure Delete Class ??</p>
+                                                        <p>{{__('classes.sure_delete')}}?</p>
                                                         <div class="col-12">
                                                             <label for="inputAddress2"
-                                                                   class="form-label">Level</label>
+                                                                   class="form-label">{{__('classes.level')}}</label>
 
                                                             <input type="text" class="form-control" name="name"
                                                                    value="{{$row->level->level_name}}" readonly>
                                                         </div>
                                                         <div class="col-12">
                                                             <label for="inputAddress2"
-                                                                   class="form-label">Class Name</label>
+                                                                   class="form-label">{{__('classes.name')}}</label>
 
                                                             <input type="text" class="form-control" name="name"
                                                                    value="{{$row->class_name}}" readonly>
@@ -136,9 +137,9 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Close
+                                                            data-bs-dismiss="modal">{{__('classes.close')}}
                                                     </button>
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                    <button type="submit" class="btn btn-danger">{{__('classes.delete')}}</button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -148,7 +149,7 @@
 
                                     {{--=============Upadate=========================--}}
                                     <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal{{$loop->index}}">Update
+                                            data-bs-target="#exampleModal{{$loop->index}}">{{__('classes.update')}}
                                     </button>
                                     <!-- Modal -->
                                     <div class="modal fade" id="exampleModal{{$loop->index}}" tabindex="-1"
@@ -157,8 +158,7 @@
                                             <div class="modal-content">
 
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Update
-                                                        Class</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">{{__('classes.update_class')}}</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                 </div>
@@ -170,7 +170,7 @@
                                                         @method('PUT')
                                                         <div class="col-12">
                                                             <label for="inputAddress2"
-                                                                   class="form-label">Level</label>
+                                                                   class="form-label">{{__('classes.level')}}</label>
                                                             <select class="form-select" id="inputProductType" name="level_id">
 
                                                                 @foreach($levels as $level)
@@ -180,7 +180,7 @@
                                                         </div>
                                                         <div class="col-12">
                                                             <label for="inputAddress2"
-                                                                   class="form-label">Class Name</label>
+                                                                   class="form-label">{{__('classes.name')}}</label>
                                                             <input type="number" class="form-control" name="class_name"
                                                                    value="{{$row->class_name}}">
                                                         </div>
@@ -188,9 +188,9 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Close
+                                                            data-bs-dismiss="modal">{{__('classes.close')}}
                                                     </button>
-                                                    <button type="submit" class="btn btn-success">Update</button>
+                                                    <button type="submit" class="btn btn-success">{{__('classes.update')}}</button>
                                                 </div>
                                                 </form>
                                             </div>
