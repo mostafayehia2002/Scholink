@@ -45,7 +45,9 @@ class LevelController extends Controller
                 'level_name'=>['ar'=>$request->name_ar,'en'=>$request->name_en],
                 'level_number'=>$request->level_number,
             ]);
-            return redirect()->back()->with('success', 'Success Addedd Level');
+
+
+            return redirect()->back()->with('success',__('levels.s_add_level'));
         }catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -83,7 +85,7 @@ class LevelController extends Controller
               'level_name'=>['ar'=>$request->name_ar,'en'=>$request->name_en],
               'level_number'=>$request->level_number,
           ]);
-            return redirect()->back()->with('success', 'Success Updated Level');
+            return redirect()->back()->with('success',__('levels.s_update_level') );
         }catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -96,7 +98,7 @@ class LevelController extends Controller
     {
         try{
             Level::findOrFail($id)->delete();
-            return redirect()->back()->with('success', 'Success Deleted Level');
+            return redirect()->back()->with('success',__('levels.s_delete_level'));
         }catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

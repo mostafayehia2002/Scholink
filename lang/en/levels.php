@@ -1,0 +1,21 @@
+<?php
+return [
+    'new_level' => 'Add New Level',
+    'name'=>'Level Name',
+    'name_en'=>'Name En',
+    'name_ar'=>"Name Ar",
+    'level_number'=>'Level Number',
+    'update_level'=>'Update Level',
+    'delete_level'=>'Delete Level',
+    's_add_level'=>'Success Add Level',
+    's_update_level'=>'Success Update Level',
+    's_delete_level'=>'Success Delete Level',
+    'sure_delete'=>'Are Sure Of The Deleting Process ??',
+    'status'=>'Status',
+    'actions'=>'Actions',
+    'send'=>'Send',
+    'delete'=>'Delete',
+    'update'=>'Update',
+    'close'=>'Close',
+    'save'=>'Save',
+];

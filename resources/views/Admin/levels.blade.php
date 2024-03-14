@@ -6,11 +6,12 @@
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
-                            Home
+                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"><i
+                                    class="bx bx-home-alt"></i></a>
+                            {{__('sidbar.home')}}
                         </li>
 
-                        <li class="breadcrumb-item active" aria-current="page">Levels</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('sidbar.levels')}}</li>
                     </ol>
                 </nav>
             </div>
@@ -25,7 +26,7 @@
                 <div class="col-6 col-md-4">
                     {{--=====================Add=================--}}
                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                            data-bs-target="#exampleModaladd"><i class="bx bx-plus"></i> Add New Level
+                            data-bs-target="#exampleModaladd"><i class="bx bx-plus"></i> {{__('levels.new_level')}}
                     </button>
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModaladd" tabindex="-1"
@@ -34,8 +35,7 @@
                             <div class="modal-content">
 
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Add
-                                        Level</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">{{__('levels.new_level')}}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                 </div>
@@ -45,14 +45,14 @@
                                         @csrf
                                         <div class="col-12">
                                             <label for="inputAddress2"
-                                                   class="form-label">Name En</label>
+                                                   class="form-label">{{__('levels.name_en')}} </label>
                                             <input type="text" class="form-control" name="name_en"
                                                    value="">
 
                                         </div>
                                         <div class="col-12">
                                             <label for="inputAddress2"
-                                                   class="form-label">Name Ar</label>
+                                                   class="form-label">{{__('levels.name_ar')}}</label>
 
                                             <input type="text" class="form-control" name="name_ar"
                                                    value="">
@@ -60,7 +60,7 @@
 
                                         <div class="col-12">
                                             <label for="inputAddress2"
-                                                   class="form-label">Number</label>
+                                                   class="form-label">{{__('levels.level_number')}}</label>
 
                                             <input type="number" class="form-control"
                                                    name="level_number" value="">
@@ -69,9 +69,9 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close
+                                            data-bs-dismiss="modal">{{__('levels.close')}}
                                     </button>
-                                    <button type="submit" class="btn btn-primary">Send</button>
+                                    <button type="submit" class="btn btn-primary">{{__('levels.send')}}</button>
                                 </div>
                                 </form>
                             </div>
@@ -85,9 +85,9 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Level Name</th>
-                            <th>Level Number</th>
-
+                            <th>{{__('levels.name')}}</th>
+                            <th>{{__('levels.level_number')}} </th>
+                            <th>{{__('levels.actions')}}</th>
 
                         </tr>
                         </thead>
@@ -101,7 +101,7 @@
                                 <td>
                                     {{--=============Delate Request=========================--}}
                                     <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModald{{$loop->index}}">Delete
+                                            data-bs-target="#exampleModald{{$loop->index}}">{{__('levels.delete')}}
                                     </button>
                                     <!-- Modal -->
                                     <div class="modal fade" id="exampleModald{{$loop->index}}" tabindex="-1"
@@ -109,7 +109,7 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Delete Level</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">{{__('levels.delete_level')}} </h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                 </div>
@@ -118,10 +118,10 @@
                                                           action="{{route('admin.levels.destroy',$row->id)}}">
                                                         @method('DELETE')
                                                         @csrf
-                                                        <p>Are You Sure Delete Level ??</p>
+                                                        <h6>{{__('levels.sure_delete')}}</h6>
                                                         <div class="col-12">
                                                             <label for="inputAddress2"
-                                                                   class="form-label">Name</label>
+                                                                   class="form-label">{{__('levels.name')}}</label>
 
                                                             <input type="text" class="form-control" name="name"
                                                                    value="{{$row->level_name}}" readonly>
@@ -129,9 +129,9 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Close
+                                                            data-bs-dismiss="modal">{{__('levels.close')}}
                                                     </button>
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                    <button type="submit" class="btn btn-danger">{{__('levels.delete')}}</button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -141,7 +141,7 @@
 
                                     {{--=============Upadate=========================--}}
                                     <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal{{$loop->index}}">Update
+                                            data-bs-target="#exampleModal{{$loop->index}}">{{__('levels.update')}}
                                     </button>
                                     <!-- Modal -->
                                     <div class="modal fade" id="exampleModal{{$loop->index}}" tabindex="-1"
@@ -150,8 +150,7 @@
                                             <div class="modal-content">
 
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Update
-                                                        Level</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">{{__('levels.update_level')}} </h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                 </div>
@@ -163,7 +162,7 @@
                                                         @method('PUT')
                                                         <div class="col-12">
                                                             <label for="inputAddress2"
-                                                                   class="form-label">Name En</label>
+                                                                   class="form-label">{{__('levels.name_en')}}</label>
                                                             <input type="hidden" value="{{$row->id}}" name="id">
                                                             <input type="text" class="form-control" name="name_en"
                                                                    value="{{$row->getTranslation('level_name','en')}}">
@@ -171,7 +170,7 @@
                                                         </div>
                                                         <div class="col-12">
                                                             <label for="inputAddress2"
-                                                                   class="form-label">Name Ar</label>
+                                                                   class="form-label">{{__('levels.name_ar')}}</label>
 
                                                             <input type="text" class="form-control" name="name_ar"
                                                                    value="{{$row->getTranslation('level_name','ar')}}">
@@ -179,7 +178,7 @@
 
                                                         <div class="col-12">
                                                             <label for="inputAddress2"
-                                                                   class="form-label">Number</label>
+                                                                   class="form-label">{{__('levels.level_number')}}</label>
 
                                                             <input type="number" class="form-control"
                                                                    name="level_number" value="{{$row->level_number}}">
@@ -188,9 +187,9 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Close
+                                                            data-bs-dismiss="modal">{{__('levels.close')}}
                                                     </button>
-                                                    <button type="submit" class="btn btn-success">Update</button>
+                                                    <button type="submit" class="btn btn-success">{{__('levels.update')}}</button>
                                                 </div>
                                                 </form>
                                             </div>

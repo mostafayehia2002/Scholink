@@ -6,11 +6,12 @@
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"><i class="bx bx-home-alt"></i></a>
-                            Home
+                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"><i
+                                    class="bx bx-home-alt"></i></a>
+                            {{__('sidbar.home')}}
                         </li>
 
-                        <li class="breadcrumb-item active" aria-current="page">Subjects</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('sidbar.subjects')}}</li>
                     </ol>
                 </nav>
             </div>

@@ -62,7 +62,7 @@ class RegisterController extends Controller
             ]);
             $data = Register::find($request->id);
             Mail::to($data->parent_email)->send(new MessageRequest($request->message, $data));
-            return redirect()->back()->with('success', 'Success Send Message');
+            return redirect()->back()->with('success',__('register.s_send_message'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -144,7 +144,7 @@ class RegisterController extends Controller
                 'student' => $student,
                 'class' => $level
             ]));
-            return redirect()->back()->with('success', 'Success Update Request');
+            return redirect()->back()->with('success',__('register.update_request'));
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->with('error', $e->getMessage());
@@ -161,7 +161,7 @@ class RegisterController extends Controller
             unlink(public_path($data->parent_personal_identification));
             unlink(public_path($data->child_birth_certificate));
             $data->forceDelete();
-            return redirect()->back()->with('success', 'Success Delete Request');
+            return redirect()->back()->with('success',__('register.delete_request') );
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

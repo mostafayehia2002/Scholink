@@ -14,9 +14,15 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         //
-        $data=['news','announcements','posts','guidelines','visions'];
-        foreach ($data as $d) {
-            Category::create(['name'=>$d]);
+        $data=[
+            ['name'=>['ar'=>'أخبار','en'=>'news']],
+            ['name'=>['ar'=>'إعلانات','en'=>'announcements']],
+            ['name'=>['ar'=>'مشاركات','en'=>'posts']],
+            ['name'=>['ar'=>'الإرشادات','en'=>'guidelines']],
+            ['name'=>['ar'=>'رؤى','en'=>'visions']],
+        ];
+        foreach ($data as $row) {
+            Category::create($row);
         }
     }
 }

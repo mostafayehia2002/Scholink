@@ -16,25 +16,25 @@
                 <a href="{{route('admin.dashboard')}}">
                     <div class="parent-icon"><i class='bx bx-home-circle'></i>
                     </div>
-                    <div class="menu-title">Home</div>
+                    <div class="menu-title">{{__('sidbar.home')}}</div>
                 </a>
             </li>
             <li>
                 <a href="{{route('admin.registers.index')}}">
                     <div class="parent-icon"><i class='bx bx-home-circle'></i>
                     </div>
-                    <div class="menu-title">Requests</div>
+                    <div class="menu-title">{{__('sidbar.requests')}}</div>
                 </a>
             </li>
             <li>
                 <a href="javascript:;" class="has-arrow">
                     <div class="parent-icon"><i class='bx bx-home-circle'></i>
                     </div>
-                    <div class="menu-title">Media</div>
+                    <div class="menu-title">{{__('sidbar.media')}}</div>
                 </a>
                 <ul>
                    @foreach(\App\Models\Category::all() as $category)
-                            <li> <a href="{{route("admin.".$category->name.".index")}}"><i class="bx bx-right-arrow-alt"></i>{{$category->name}}</a>
+                            <li> <a href="{{route("admin.".$category->getTranslation('name','en').".index")}}"><i class="bx bx-right-arrow-alt"></i>{{$category->name}}</a>
                             </li>
                    @endforeach
                 </ul>
@@ -43,35 +43,42 @@
                 <a href="{{route('admin.levels.index')}}">
                     <div class="parent-icon"><i class='bx bx-home-circle'></i>
                     </div>
-                    <div class="menu-title">Levels</div>
+                    <div class="menu-title">{{__('sidbar.levels')}}</div>
                 </a>
             </li>
             <li>
                 <a href="{{route('admin.classes.index')}}">
                     <div class="parent-icon"><i class='bx bx-home-circle'></i>
                     </div>
-                    <div class="menu-title">Classes</div>
+                    <div class="menu-title">{{__('sidbar.classes')}}</div>
                 </a>
             </li>
             <li>
                 <a href="{{route('admin.subjects.index')}}">
                     <div class="parent-icon"><i class='bx bx-home-circle'></i>
                     </div>
-                    <div class="menu-title">Subjects</div>
+                    <div class="menu-title">{{__('sidbar.subjects')}}</div>
                 </a>
             </li>
             <li>
                 <a href="{{route('admin.teachers.index')}}">
                     <div class="parent-icon"><i class='bx bx-home-circle'></i>
                     </div>
-                    <div class="menu-title">Teachers</div>
+                    <div class="menu-title">{{__('sidbar.teachers')}}</div>
                 </a>
             </li>
             <li>
                 <a href="{{route('admin.class_teachers.index')}}">
                     <div class="parent-icon"><i class='bx bx-home-circle'></i>
                     </div>
-                    <div class="menu-title">Class Teachers</div>
+                    <div class="menu-title">{{__('sidbar.class_teachers')}}</div>
+                </a>
+            </li>
+            <li>
+                <a href="{{route('admin.students.index')}}">
+                    <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                    </div>
+                    <div class="menu-title">{{__('sidbar.students')}}</div>
                 </a>
             </li>
         </ul>

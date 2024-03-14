@@ -8,11 +8,14 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Date;
+use Spatie\Translatable\HasTranslations;
 use function Laravel\Prompts\text;
 
 class Category extends Model
 {
-    use HasFactory,CustomiseDateTrait;
+    use HasFactory,CustomiseDateTrait,HasTranslations;
+    protected  $translatable=['name'];
+
     protected $fillable=['name'];
     protected $hidden = ['pivot'];
 
