@@ -21,7 +21,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $category_id = Category::where('name', 'posts')->first()->id;
+        $category_id = Category::whereJsonContains('name->en', 'posts')->first()->id;
         $data = Content::latest()->with(['comments', 'reactions', 'photos'])->where('category_id', $category_id)->paginate(20);
         return view('Admin.media.posts', compact('data'));
     }
@@ -38,7 +38,7 @@ class PostController extends Controller
                 'post_content' => 'required|string',
                 'images.*' => 'mimes:jpeg,png,jpg,gif'
             ]);
-            $category = Category::where('name', 'posts')->first();
+            $category = Category::whereJsonContains('name->en', 'posts')->first();
            $post=$category->contents()->create([
                 'content' => $request->post_content,
                 'admin_id'=>auth()->user()->id,

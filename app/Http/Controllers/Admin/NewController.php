@@ -20,7 +20,7 @@ class NewController extends Controller
     }
     public function index()
     {
-        $categories = Category::where('name', 'news')->first()->subcategories;
+        $categories = Category::whereJsonContains('name->en', 'news')->first()->subcategories;
         $data = News::latest()->paginate(15);
         return view('Admin.media.news', compact('data', 'categories'));
     }
@@ -46,7 +46,7 @@ class NewController extends Controller
                 'title'=>"required|string|max:255",
                 'images.*' => 'required|mimes:jpeg,png,jpg,gif'
             ]);
-            $category_id =Category::where('name', 'news')->first()->id;
+            $category_id =Category::whereJsonContains('name->en', 'news')->first()->id;
             $new = News::create([
                 'category_id' => $category_id,
                 'subcategory_id' => $request->subcategory_id,
