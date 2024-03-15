@@ -21,7 +21,7 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
-        $announcement = Category::where('name', 'announcements')->first();
+        $announcement = Category::whereJsonContains('name->en', 'announcements')->first();
         $data = SubCategory::with('announcements')->where('category_id', $announcement->id)->get();
         $categories = $announcement->subcategories;
         $data=Announcement::latest()->paginate(20);

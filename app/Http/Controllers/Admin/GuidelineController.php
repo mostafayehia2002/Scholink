@@ -21,7 +21,7 @@ class GuidelineController extends Controller
      */
     public function index()
     {
-        $category=Category::where('name','guidelines')->first();
+        $category=Category::whereJsonContains('name->en','guidelines')->first();
         $data=$category->contents()->latest()->paginate(20);
         return view('Admin.media.guidelines',compact('data'));
     }
@@ -41,7 +41,7 @@ class GuidelineController extends Controller
     {
         try {
             $validator=Validator::make($request->all(),['content'=>'required|string']);
-            $category=Category::where('name','guidelines')->first();
+            $category=Category::whereJsonContains('name->en','guidelines')->first();
             $data=$validator->validated();
             $data['admin_id']=auth()->user()->id;
             $category->contents()->create($data);

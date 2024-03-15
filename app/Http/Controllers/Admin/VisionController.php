@@ -20,7 +20,7 @@ class VisionController extends Controller
      */
     public function index()
     {
-        $category_id = Category::where('name', 'visions')->first()->id;
+        $category_id = Category::whereJsonContains('name->en', 'visions')->first()->id;
         $data = Content::latest()->with(['comments', 'reactions', 'photos'])->where('category_id', $category_id)->paginate(20);
         return view('Admin.media.visions', compact('data'));
     }
@@ -44,7 +44,7 @@ class VisionController extends Controller
                 'images.*' => 'required|mimes:jpeg,png,jpg,gif'
             ]);
 
-            $category_id = Category::where('name', 'visions')->first()->id;
+            $category_id = Category::whereJsonContains('name->en', 'visions')->first()->id;
             $post = Content::create([
                 'category_id' => $category_id,
                 'content' => $request->vision_content,
