@@ -33,10 +33,11 @@
                     <div class="menu-title">{{__('sidbar.media')}}</div>
                 </a>
                 <ul>
-                   @foreach(\App\Models\Category::all() as $category)
-                            <li> <a href="{{route("admin.".$category->getTranslation('name','en').".index")}}"><i class="bx bx-right-arrow-alt"></i>{{$category->name}}</a>
-                            </li>
-                   @endforeach
+                    @foreach(\App\Models\Category::all() as $category)
+                        <li><a href="{{route("admin.".$category->getTranslation('name','en').".index")}}"><i
+                                    class="bx bx-right-arrow-alt"></i>{{$category->name}}</a>
+                        </li>
+                    @endforeach
                 </ul>
             </li>
             <li>
@@ -81,6 +82,21 @@
                     <div class="menu-title">{{__('sidbar.students')}}</div>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('admin.admins.index') }}">
+                    <div class="parent-icon"><i class="fadeIn animated bx bx-street-view"></i>
+                    </div>
+                    <div class="menu-title"> {{__('sidbar.admins')}}</div>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.roles.index') }}">
+                    <div class="parent-icon"><i class="fadeIn animated bx bx-detail"></i>
+                    </div>
+                    <div class="menu-title">{{__('sidbar.roles')}}</div>
+                </a>
+            </li>
+
         </ul>
     @elseauth('teacher')
         <ul class="metismenu" id="menu">
@@ -98,9 +114,9 @@
                     <div class="menu-title">Dashboard</div>
                 </a>
                 <ul>
-                    <li> <a href="index.html"><i class="bx bx-right-arrow-alt"></i>Default</a>
+                    <li><a href="index.html"><i class="bx bx-right-arrow-alt"></i>Default</a>
                     </li>
-                    <li> <a href="index2.html"><i class="bx bx-right-arrow-alt"></i>Alternate</a>
+                    <li><a href="index2.html"><i class="bx bx-right-arrow-alt"></i>Alternate</a>
                     </li>
                 </ul>
             </li>

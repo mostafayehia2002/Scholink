@@ -9,5 +9,7 @@ return [
     'subjects'=>'Subjects',
     'teachers'=>'Teachers',
     'class_teachers'=>'Class Teachers',
-    'students'=>'Students',
+    'students'=>'students',
+    'admins'=>'Admins',
+    'roles'=>'Roles',
 ];
