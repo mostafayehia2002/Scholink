@@ -32,12 +32,12 @@
                     </div>
                     <div class="menu-title">{{__('sidbar.media')}}</div>
                 </a>
-                <ul>
-                   @foreach(\App\Models\Category::all() as $category)
-                            <li> <a href="{{route("admin.".$category->getTranslation('name','en').".index")}}"><i class="bx bx-right-arrow-alt"></i>{{$category->name}}</a>
-                            </li>
-                   @endforeach
-                </ul>
+               <ul>
+                  @foreach(\App\Models\Category::get() as $category)
+                            <li> <a href="{{$category->name}}"><i class="bx bx-right-arrow-alt"></i>{{$category->name}}</a>
+                           </li>
+                  @endforeach
+             </ul>
             </li>
             <li>
                 <a href="{{route('admin.levels.index')}}">
