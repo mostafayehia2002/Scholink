@@ -18,7 +18,7 @@ class StudentController extends Controller
         $levels=Level::all();
         $data=Level::with('students')->where('level_number',1)->paginate(20);
 //        return  $data;
-        return view('Admin.Students.index',compact('data','levels'));
+        return view('Admin.students.index',compact('data','levels'));
     }
 
     /**

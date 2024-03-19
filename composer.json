@@ -11,7 +11,9 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "laravelcollective/html": "^6.4",
         "mcamara/laravel-localization": "^1.8",
+        "spatie/laravel-permission": "^6.4",
         "spatie/laravel-translatable": "^6.5",
         "tymon/jwt-auth": "^2.0"
     },

@@ -10,4 +10,6 @@ return [
     'teachers'=>'المعلمين',
     'class_teachers'=>'معلمي الصفوف',
     'students'=>'الطلاب',
+    'admins'=>'المسؤولين',
+    'roles'=>'الادوار',
 ];
