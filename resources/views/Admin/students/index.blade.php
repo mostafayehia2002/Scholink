@@ -6,11 +6,12 @@
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"><i class="bx bx-home-alt"></i></a>
-                            Home
-                        </li>
 
-                        <li class="breadcrumb-item active" aria-current="page">Students</li>
+                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"><i
+                                    class="bx bx-home-alt"></i></a>
+                            {{__('sidbar.home')}}
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('sidbar.students')}}</li>
                     </ol>
                 </nav>
             </div>
@@ -18,7 +19,6 @@
         <!--end breadcrumb-->
 
         <div class="card">
-
             <div class="card-body">
                 <div class="col-12">
                     <form  method="GET" action="{{route('admin.students.index')}}" id="form_select">
@@ -46,12 +46,12 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Parent Name</th>
-                            <th>Level</th>
-                            <th>Class</th>
-                            <th>Action</th>
+                            <th>{{__('students.name')}}</th>
+                            <th>{{__('students.email')}}</th>
+                            <th>{{__('students.parent_name')}}</th>
+                            <th>{{__('students.level')}}</th>
+                            <th>{{__('students.class')}}</th>
+                            <th>{{__('students.actions')}}</th>
                         </tr>
                         </thead>
                         <tbody>
