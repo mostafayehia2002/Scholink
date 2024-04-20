@@ -21,24 +21,31 @@
         <div class="card">
             <div class="card-body">
                 <div class="col-12">
-                    <form  method="GET" action="{{route('admin.students.index')}}" id="form_select">
+                    <form method="GET" action="{{route('admin.students.index')}}" id="form_select">
 
-                      <div class="row">
-                          <label for="inputEmail" class="form-label">Filter By : </label>
-                          <div class="col-12 col-md-6">
-                              <select class="form-select mb-3" name="level_id"  id="level_id" aria-label="Default select example">
-                                  <option selected disabled>select Levels</option>
-                                  @foreach($levels as $level)
-                                      <option value="{{$level->id}}">{{$level->level_name}}</option>
-                                  @endforeach
-                              </select>
-                          </div>
-                          <div class="col-12 col-md-6">
-                              <select class="form-select mb-3" name="class_id"  id="class_id" aria-label="Default select example">
-                                  <option selected disabled>select Class</option>
-                              </select>
-                          </div>
-                      </div>
+                        <div class="row">
+                            <label for="inputEmail" class="form-label">Filter By : </label>
+                            <div class="col-12 col-md-5">
+                                <select class="form-select mb-3" name="level_id" id="level_id"
+                                        aria-label="Default select example">
+                                    <option selected disabled>{{__('students.select_level')}}</option>
+                                    @foreach($levels as $level)
+                                        <option @selected($level->id==request('level_id')) value="{{$level->id}}">{{$level->level_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-5">
+                                <select class="form-select mb-3" name="class_id" id="class_id"
+                                        aria-label="Default select example">
+                                    <option selected disabled>{{__('students.select_class')}}</option>
+                                    @if(request('class_id'))
+                                        <option selected value="{{$classe->id}}">{{$classe->class_name}}</option>
+                                    @endif
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-2">
+                                <button class="btn btn-primary d-block" type="submit">{{__('students.search')}}</button>
+                            </div>
                     </form>
                 </div>
                 <div class="table-responsive">
@@ -56,7 +63,7 @@
                         </thead>
                         <tbody>
 
-                        @foreach($data[0]->students as $row)
+                        @foreach($data as $row)
                             <tr>
                                 <td>{{$loop->index+1}}</td>
                                 <td>{{$row->name}}</td>
@@ -64,20 +71,53 @@
                                 <td>{{$row->parent->name}}</td>
                                 <td>{{$row->classe->level->level_name}}</td>
                                 <td>{{$row->classe->class_name}}</td>
-{{--                                <td>--}}
-{{--                                    @if($row->status=='reject')--}}
-{{--                                        <span class="badge bg-danger">{{$row->status}}</span>--}}
-{{--                                    @elseif($row->status=='pending')--}}
-{{--                                        <span class="badge bg-info">{{$row->status}}</span>--}}
-{{--                                    @elseif($row->status=='accept')--}}
-{{--                                        <span class="badge bg-success">{{$row->status}}</span>--}}
-{{--                                    @elseif($row->status=='confirmed')--}}
-{{--                                        <span class="badge bg-warning">{{$row->status}}</span>--}}
-{{--                                    @endif--}}
-{{--                                </td>--}}
                                 <td>
 
+                                    {{-- =============Delate Request========================= --}}
+                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModald{{ $loop->index }}">{{__('students.delete')}}
+                                    </button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModald{{ $loop->index }}" tabindex="-1"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title"
+                                                        id="exampleModalLabel">{{__('students.delete_student')}}</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form class="row g-3" method="POST"
+                                                          action="{{ route('admin.students.destroy', $row->id) }}">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                        <p>{{__('students.sure_delete')}}</p>
+                                                        <div class="col-12">
+                                                            <label for="inputAddress2"
+                                                                   class="form-label">{{__('students.name')}}</label>
+                                                            <input type="text" class="form-control"
+                                                                   id="inputAddress2" name="name" readonly
+                                                                   value="{{ $row->name }}">
+                                                        </div>
 
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">{{__('students.close')}}
+                                                    </button>
+                                                    <button type="submit"
+                                                            class="btn btn-danger">{{__('students.delete')}}</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {{-- =============Upadate========================= --}}
+                                    <a href="{{ route('admin.students.edit', $row->id) }}"
+                                       class="btn btn-success btn-sm">{{__('students.update')}}</a>
                                 </td>
 
 
@@ -99,22 +139,20 @@
 
 @push('js')
 
-
-
     <script>
-        $('select[name="level_id"]').on('change', function() {
+        $('select[name="level_id"]').on('change', function () {
             var level_id = $(this).val();
             if (level_id) {
                 $.ajax({
                     url: "{{ route('admin.getclass', '') }}/" + level_id,
                     type: "GET",
                     dataType: "json",
-                    success: function(data) {
+                    success: function (data) {
                         $('select[name="class_id"]').empty();
                         $('select[name="class_id"]').append(
-                            "<option selected disabled >Select...</option>"
+                            "<option selected disabled >{{__('students.select_class')}}</option>"
                         );
-                        $.each(data, function(key, value) {
+                        $.each(data, function (key, value) {
                             $('select[name="class_id"]').append(
                                 '<option value="' + value + '">' + key +
                                 '</option>');
@@ -130,15 +168,15 @@
     <script src="{{asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js')}}"></script>
     <script>
 
-        $(document).ready(function() {
-            var table = $('#example2').DataTable( {
-                "paging":   false,
+        $(document).ready(function () {
+            var table = $('#example2').DataTable({
+                "paging": false,
                 "ordering": false,
-                "info":     false
-            } );
+                "info": false
+            });
             // $('#select_status').on('change', function() {
             //     this.form.submit();
             // });
-        } );
+        });
     </script>
 @endpush
