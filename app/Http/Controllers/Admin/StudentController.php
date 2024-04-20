@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Classe;
 use App\Models\Level;
+use App\Models\ParentStudent;
+use App\Models\Student;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -11,14 +15,20 @@ class StudentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-//        $data=Level::with('students')->paginate(20);
-//        return  $data;
         $levels=Level::all();
-        $data=Level::with('students')->where('level_number',1)->paginate(20);
-//        return  $data;
-        return view('Admin.students.index',compact('data','levels'));
+        $classe='';
+        if($request->has('class_id')){
+            $classe=Classe::findOrFail($request->class_id);
+            $leval=$classe->level->id;
+        }
+        $data=Student::where(function ($query)use($request){
+            if($request->has('class_id')){
+                $query->where('class_id',$request->class_id);
+            }
+        })->paginate(10);
+        return view('Admin.students.index',compact('data','classe','levels'));
     }
 
     /**
@@ -50,7 +60,14 @@ class StudentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        try{
+            $parents=ParentStudent::all();
+            $levels=Level::all();
+            $student=Student::findOrFail($id);
+            return view('Admin.students.edit',compact('student','parents','levels'));
+        }catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -58,7 +75,39 @@ class StudentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try{
+
+
+
+            $request->validate([
+                'name_ar' => "required|regex:/^[\p{Arabic} ]+/u",
+                "name_en" => ["required", "regex:/^[a-zA-Z ]+/"],
+                'email'=>"required|email|unique:students,email,".$id,
+                'parent_id'=>"required|exists:parents,id",
+                'level_id'=>"required|exists:levels,id",
+                'class_id'=>"required|exists:classes,id",
+                'term'=>"required|in:first,second",
+                'gender'=>"required|in:male,female",
+                'date_birth'=>'required',
+            ]);
+            $student=Student::findOrFail($id);
+            if($student->date_birth!=$request->date_birth){
+                $request->date_birth = Carbon::createFromFormat('d F, Y', $request->date_birth)->format('Y-m-d');
+            }
+
+            $student->update([
+                'name'=>['ar'=>$request->name_ar,'en'=>$request->name_en],
+                'email'=>$request->email,
+                'parent_id'=>$request->parent_id,
+                'class_id'=>$request->class_id,
+                'term'=>$request->term,
+                'gender'=>$request->gender,
+                'date_birth'=>$request->date_birth,
+            ]);
+            return redirect()->back()->with('success', __('students.s_update_student'));
+        }catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -66,6 +115,11 @@ class StudentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try{
+            Student::findOrFail($id)->delete();
+            return redirect()->back()->with('success', __('students.s_delete_student'));
+        }catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 }
