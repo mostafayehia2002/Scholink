@@ -37,7 +37,7 @@ class Teacher extends Authenticatable
 
     public function  classes(): belongsToMany
     {
-        return $this->belongsToMany(Classe::class,'class_teachers','teacher_id');
+        return $this->belongsToMany(Classe::class,'class_teachers','teacher_id','class_id');
     }
 
 

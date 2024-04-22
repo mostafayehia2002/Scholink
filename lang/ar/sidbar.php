@@ -12,4 +12,6 @@ return [
     'students'=>'الطلاب',
     'admins'=>'المسؤولين',
     'roles'=>'الادوار',
+    'timetable'=>"الجدول الزمني",
+    'attendance'=>'الغياب والحضور'
 ];

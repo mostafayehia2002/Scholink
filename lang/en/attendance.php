@@ -9,6 +9,8 @@ return [
     'subject'=>'Subject',
     'start_at'=>'Start_At',
     'end_at'=>'End_At',
+    'absence'=>'Absence',
+    'date'=>"Date",
     'number_lesson'=>'Number Lesson',
     'select_level'=>'--select level--',
     'update_class'=>'Update Class',

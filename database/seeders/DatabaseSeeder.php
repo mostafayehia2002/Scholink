@@ -21,18 +21,20 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-  $this->call([
-      PermissionTableSeeder::class,
-      AdminSeeder::class,
-      teacherSeeder::class,
-      LevelsSeeder::class,
-      ClasseSeeder::class,
-      ParentSeeder::class,
-      StudentSeeder::class,
-      CategorySeeder::class,
-      SubCategorySeeder::class,
-      SubjectSeeder::class,
-      Materials::class
-  ]);
+        $this->call([
+            SettingSeeder::class,
+            PermissionTableSeeder::class,
+            AdminSeeder::class,
+            teacherSeeder::class,
+            TermSeeder::class,
+            LevelsSeeder::class,
+            ClasseSeeder::class,
+            ParentSeeder::class,
+            StudentSeeder::class,
+            CategorySeeder::class,
+            SubCategorySeeder::class,
+            SubjectSeeder::class,
+            Materials::class
+        ]);
     }
 }
