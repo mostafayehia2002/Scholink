@@ -102,10 +102,31 @@
     @elseauth('teacher')
         <ul class="metismenu" id="menu">
             <li>
-                <a href="#">
+                <a href="{{route('teacher.dashboard')}}">
                     <div class="parent-icon"><i class='bx bx-home-circle'></i>
                     </div>
-                    <div class="menu-title">Widgets</div>
+                    <div class="menu-title">{{__('sidbar.home')}}</div>
+                </a>
+            </li>
+            <li>
+                <a href="{{route('teacher.subjects.index')}}">
+                    <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                    </div>
+                    <div class="menu-title">{{__('sidbar.subjects')}}</div>
+                </a>
+            </li>
+            <li>
+                <a href="{{route('teacher.classes.index')}}">
+                    <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                    </div>
+                    <div class="menu-title">{{__('sidbar.timetable')}}</div>
+                </a>
+            </li>
+            <li>
+                <a href="{{route('teacher.attendance.index')}}">
+                    <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                    </div>
+                    <div class="menu-title">{{__('sidbar.attendance')}}</div>
                 </a>
             </li>
             <li>

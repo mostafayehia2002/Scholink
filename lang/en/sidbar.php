@@ -12,4 +12,6 @@ return [
     'students'=>'students',
     'admins'=>'Admins',
     'roles'=>'Roles',
+    'timetable'=>"Timetable",
+    'attendance'=>"Absence and presence"
 ];
