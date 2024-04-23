@@ -21,6 +21,7 @@ class RegisterController extends Controller
     {
         $this->middleware('auth:admin');
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -62,7 +63,7 @@ class RegisterController extends Controller
             ]);
             $data = Register::find($request->id);
             Mail::to($data->parent_email)->send(new MessageRequest($request->message, $data));
-            return redirect()->back()->with('success',__('register.s_send_message'));
+            return redirect()->back()->with('success', __('register.s_send_message'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -100,29 +101,35 @@ class RegisterController extends Controller
                 $data->update(['status' => $request->status]);
                 return redirect()->back()->with('success', 'Success Reject Request');
             } elseif ($request->status == 'accept') {
-
                 DB::beginTransaction();
                 $data->update(['status' => $request->status]);
-                $parent = ParentStudent::create([
-                    'name' => ['ar'=>$data->getTranslation('parent_name','ar'),'en'=>$data->getTranslation('parent_name','en'),],
-                    'mobile' => $data->parent_mobile,
-                    'email' => $data->parent_email,
-                    'national_id' => $data->parent_national_id,
-                    'address' => $data->parent_address,
-                    'job' => $data->parent_job,
-                    'gender' => $data->parent_gender,
-                    'date_birth' => $data->parent_data_birth,
-                    'password' => bcrypt($data->parent_national_id),
-                ]);
+                $parent='';
+                $checkParent = ParentStudent::where('national_id', $data->parent_national_id)->first();
+                if (!$checkParent) {
+                    $parent = ParentStudent::create([
+                        'name' => ['ar' => $data->getTranslation('parent_name', 'ar'), 'en' => $data->getTranslation('parent_name', 'en'),],
+                        'mobile' => $data->parent_mobile,
+                        'email' => $data->parent_email,
+                        'national_id' => $data->parent_national_id,
+                        'address' => $data->parent_address,
+                        'job' => $data->parent_job,
+                        'gender' => $data->parent_gender,
+                        'date_birth' => $data->parent_data_birth,
+                        'password' => bcrypt($data->parent_national_id),
+                    ]);
+                }else{
+                    $parent=ParentStudent::where('national_id', $data->parent_national_id)->first();
+                }
 
-                $level=Level::where('id',$data->child_level)->with(['classes'=>function ($query){
+
+                $level = Level::where('id', $data->child_level)->with(['classes' => function ($query) {
                     $query->where('available_seats', '<=', 30)->where('available_seats', '!=', 0)->first();
                 }])->first();
 
                 if ($level) {
                     $student = Student::create([
                         'parent_id' => $parent->id,
-                        'name' => ['ar'=>$data->getTranslation('child_name','ar'),'en'=>$data->getTranslation('child_name','en'),],
+                        'name' => ['ar' => $data->getTranslation('child_name', 'ar'), 'en' => $data->getTranslation('child_name', 'en'),],
                         'email' => substr($data->getTranslation('child_name', 'en'), 0, 10) . rand(1111, 9999) . "@gmail.com",
                         'gender' => $data->child_gender,
                         'class_id' => $level->classes[0]->id,
@@ -144,7 +151,7 @@ class RegisterController extends Controller
                 'student' => $student,
                 'class' => $level
             ]));
-            return redirect()->back()->with('success',__('register.update_request'));
+            return redirect()->back()->with('success', __('register.update_request'));
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->with('error', $e->getMessage());
@@ -161,7 +168,7 @@ class RegisterController extends Controller
             unlink(public_path($data->parent_personal_identification));
             unlink(public_path($data->child_birth_certificate));
             $data->forceDelete();
-            return redirect()->back()->with('success',__('register.delete_request') );
+            return redirect()->back()->with('success', __('register.delete_request'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

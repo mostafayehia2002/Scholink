@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->integer('number_seats');
+            $table->text('discription');
+            $table->string('name');
+            $table->string('logo');
             $table->timestamps();
         });
     }
