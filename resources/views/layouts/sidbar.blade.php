@@ -84,6 +84,13 @@
                 </a>
             </li>
             <li>
+                <a href="{{route('admin.settings.index')}}">
+                    <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                    </div>
+                    <div class="menu-title">{{__('sidbar.settings')}}</div>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('admin.admins.index') }}">
                     <div class="parent-icon"><i class="fadeIn animated bx bx-street-view"></i>
                     </div>

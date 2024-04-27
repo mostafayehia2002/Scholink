@@ -13,5 +13,6 @@ return [
     'admins'=>'المسؤولين',
     'roles'=>'الادوار',
     'timetable'=>"الجدول الزمني",
-    'attendance'=>'الغياب والحضور'
+    'attendance'=>'الغياب والحضور',
+    'settings'=>'الاعدادات',
 ];

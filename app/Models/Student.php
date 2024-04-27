@@ -66,7 +66,6 @@ class Student extends Authenticatable implements JWTSubject
     {
         return Attribute::make(
             get: fn (string $value) => asset("$value"),
-
         );
     }
 
