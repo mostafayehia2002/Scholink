@@ -52,8 +52,13 @@ Route::group(
     Route::resource('class_teachers',ClassTeacherController::class);
     Route::get('getClasses/{id}',[ClassTeacherController::class,'getClass'])->name('getclass');
     Route::resource('/students',StudentController::class);
+
+
+
     Route::resource('roles', RoleController::class);
     Route::resource('admins', AdminController::class);
+
     Route::get('settings',[SettingController::class,'index'])->name('settings.index');
     Route::post('settings',[SettingController::class,'update'])->name('settings.update');
+
 });

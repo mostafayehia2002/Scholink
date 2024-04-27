@@ -1,7 +1,7 @@
 <?php
 return[
-    'User_Not_Found'=>'Admin Is Not Found',
-    'User_Is_Found'=>'Admin Is Found',
+    'User_Not_Found'=>'User Is Not Found',
+    'User_Is_Found'=>'User Is Found',
     'Successfully_Send_Code'=>'Successfully Send Code',
     'Successfully_Confirm_Code'=>'Successfully Confirm Code',
     'Successfully_Send_Data'=>'Successfully Send Data',

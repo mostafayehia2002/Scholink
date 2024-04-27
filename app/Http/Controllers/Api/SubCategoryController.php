@@ -24,7 +24,7 @@ class SubCategoryController extends Controller
                     $query->where('id',$request->id);
                 }
             })->where(function ($query) use ($request){
-               $news=Category::where('name','news')->first();
+               $news=Category::whereJsonContains('name', ['en' => 'news'])->first();
                 $query->where('category_id',$news->id);
             })->orderBy('created_at','desc')->get();
 
@@ -42,7 +42,7 @@ class SubCategoryController extends Controller
     public function getAnnouncements(Request $request)
     {
         try {
-            $announcement=Category::where('name','announcements')->first();
+            $announcement=Category::whereJsonContains('name',['en'=>'announcements'])->first();
             $data=SubCategory::with('announcements')->where(function ($query) use ($request) {
                 if ($request->has('id') && SubCategory::find($request->id)){
                     $query->where('id',$request->id);

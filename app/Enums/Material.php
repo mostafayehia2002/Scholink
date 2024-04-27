@@ -7,9 +7,9 @@ use BenSampo\Enum\Enum;
 
 class Material extends Enum implements LocalizedEnum
 {
-    const SUNDAY='lesson';
-    const MONDAY='exam';
-    const TUESDAY='video';
+    const lesson='lesson';
+    const exam='exam';
+    const video='video';
 
     public static function getTranslatedDay($type, $language)
     {

@@ -15,7 +15,7 @@ class ContentController extends Controller
   public function getPosts()
   {
       try{
-          $category=Category::where('name','posts')->pluck('id');
+          $category=Category::whereJsonContains('name',['en'=>'posts'])->pluck('id');
       $data= Content::with(['comments','reactions','photos'])->where('category_id',$category)->orderBy('created_at','desc')->get();
       if(count($data)>0){
           return $this->data(200,'posts',PostsResource::collection($data));
@@ -29,7 +29,7 @@ class ContentController extends Controller
     public function getGuidelines()
     {
         try{
-            $category=Category::where('name','guidelines')->pluck('id');
+            $category=Category::whereJsonContains('name',['en'=>'guidelines'])->pluck('id');
             $data= Content::where('category_id',$category)->orderBy('created_at','desc')->get();
             if(count($data)>0){
                 return $this->data(200,'guidelines',$data);
@@ -42,7 +42,7 @@ class ContentController extends Controller
     public function getVision()
     {
         try{
-            $category=Category::where('name','visions')->pluck('id');
+            $category=Category::whereJsonContains('name',['en'=>'visions'])->pluck('id');
             $data= Content::with('photos')->where('category_id',$category)->orderBy('created_at','desc')->get();
             if(count($data)>0){
                 return $this->data(200,'visions',$data);

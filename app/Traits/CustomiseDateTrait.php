@@ -2,18 +2,22 @@
 
 namespace App\Traits;
 
+use Carbon\Carbon;
+
 trait CustomiseDateTrait
 {
     public function getCreatedAtAttribute($value)
     {
-
-        return date('Y-M-d h:i A', strtotime($value));
+        $createdAt = new Carbon($value);
+        return $createdAt->diffForHumans();
     }
 
     public function getUpdatedAtAttribute($value)
     {
+        $updatedAt = new Carbon($value);
+        return $updatedAt-> diffForHumans();
 
-        return date('Y-M-d h:i A', strtotime($value));
+
     }
-
+   // date('Y-M-d h:i A', strtotime($value));
 }
