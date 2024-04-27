@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\ClassTeacherController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SettingController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,4 +54,6 @@ Route::group(
     Route::resource('/students',StudentController::class);
     Route::resource('roles', RoleController::class);
     Route::resource('admins', AdminController::class);
+    Route::get('settings',[SettingController::class,'index'])->name('settings.index');
+    Route::post('settings',[SettingController::class,'update'])->name('settings.update');
 });

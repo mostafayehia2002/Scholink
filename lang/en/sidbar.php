@@ -13,5 +13,6 @@ return [
     'admins'=>'Admins',
     'roles'=>'Roles',
     'timetable'=>"Timetable",
-    'attendance'=>"Absence and presence"
+    'attendance'=>"Absence and presence",
+    'settings'=>'Settings',
 ];

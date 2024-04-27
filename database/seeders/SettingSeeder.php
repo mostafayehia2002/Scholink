@@ -14,6 +14,8 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         Setting::create([
+            'name'=>"Smart School",
+            'logo'=>"upload\logo\logo.png",
             'number_seats'=>30,
         ]);
     }
