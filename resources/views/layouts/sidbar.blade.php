@@ -135,6 +135,14 @@
                     <div class="menu-title">{{__('sidbar.attendance')}}</div>
                 </a>
             </li>
+
+            <li>
+                <a href="{{route('teacher.materials.index')}}">
+                    <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                    </div>
+                    <div class="menu-title">{{__('sidbar.materials')}}</div>
+                </a>
+            </li>
             <li>
                 <a href="javascript:;" class="has-arrow">
                     <div class="parent-icon"><i class='bx bx-home-circle'></i>

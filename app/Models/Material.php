@@ -17,7 +17,7 @@ class Material extends Model
     }
     public function subject()
     {
-        return $this->belongsTo(Classe::class,'subject_id');
+        return $this->belongsTo(Subject::class,'subject_id');
     }
 
     public function attachments()

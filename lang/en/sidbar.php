@@ -15,4 +15,5 @@ return [
     'timetable'=>"Timetable",
     'attendance'=>"Absence and presence",
     'settings'=>'Settings',
+    'materials'=>'Material',
 ];

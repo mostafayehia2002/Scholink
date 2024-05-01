@@ -56,4 +56,5 @@ Route::group(
     Route::resource('admins', AdminController::class);
     Route::get('settings',[SettingController::class,'index'])->name('settings.index');
     Route::post('settings',[SettingController::class,'update'])->name('settings.update');
+
 });

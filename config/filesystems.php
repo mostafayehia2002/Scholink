@@ -64,6 +64,14 @@ return [
             'visibility' => 'public',
             'throw' => false,
         ],
+        'materials' => [
+            'driver' => 'local',
+            'root' => public_path('uploads/materials'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         'logo' => [
             'driver' => 'local',
             'root' => public_path('uploads/logo'),
