@@ -15,4 +15,5 @@ return [
     'timetable'=>"الجدول الزمني",
     'attendance'=>'الغياب والحضور',
     'settings'=>'الاعدادات',
+
 ];

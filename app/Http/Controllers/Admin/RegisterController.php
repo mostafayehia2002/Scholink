@@ -103,7 +103,7 @@ class RegisterController extends Controller
             } elseif ($request->status == 'accept') {
                 DB::beginTransaction();
                 $data->update(['status' => $request->status]);
-                $parent='';
+                $parent = '';
                 $checkParent = ParentStudent::where('national_id', $data->parent_national_id)->first();
                 if (!$checkParent) {
                     $parent = ParentStudent::create([
@@ -117,13 +117,14 @@ class RegisterController extends Controller
                         'date_birth' => $data->parent_data_birth,
                         'password' => bcrypt($data->parent_national_id),
                     ]);
-                }else{
-                    $parent=ParentStudent::where('national_id', $data->parent_national_id)->first();
+                } else {
+                    $parent = ParentStudent::where('national_id', $data->parent_national_id)->first();
                 }
 
+                $setting = Setting::first();
 
-                $level = Level::where('id', $data->child_level)->with(['classes' => function ($query) {
-                    $query->where('available_seats', '<=', 30)->where('available_seats', '!=', 0)->first();
+                $level = Level::where('id', $data->child_level)->with(['classes' => function ($query)use($setting) {
+                    $query->where('available_seats', '<=', $setting->number_seats)->where('available_seats', '!=', 0)->first();
                 }])->first();
 
                 if ($level) {
