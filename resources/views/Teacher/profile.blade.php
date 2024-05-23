@@ -9,7 +9,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="bx bx-home-alt"></i></a>
                             {{ __('sidbar.home') }}
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('sidbar.settings') }}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ __('sidbar.profile') }}</li>
                     </ol>
                 </nav>
             </div>
@@ -21,74 +21,95 @@
                 <div class="row">
 
                     <div class="col-lg-8">
-                        <form method="POST" method="{{ route('admin.settings.update') }}" class="card"
+                        <form method="POST" method="{{ route('teacher.profile.update') }}" class="card"
                             enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">{{ __('settings.name') }}</h6>
+                                        <h6 class="mb-0">{{ __('profile.name_ar') }}</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" name="name" class="form-control"
-                                            value="{{ $setting->name }}" />
-                                        @error('name')
+                                        <input type="text" name="name_ar" class="form-control"
+                                            value="{{ $user->getTranslation('name', 'ar') }}" />
+                                        @error('name_ar')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">{{ __('settings.num_seats') }}</h6>
+                                        <h6 class="mb-0">{{ __('profile.name_en') }}</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="number" min="1" name="number_seats" class="form-control"
-                                            value="{{ $setting->number_seats }}" />
-                                        @error('number_seats')
+                                        <input type="text" name="name_en" class="form-control"
+                                            value="{{ $user->getTranslation('name', 'en') }}" />
+                                        @error('name_en')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">{{ __('settings.description') }}</h6>
+                                        <h6 class="mb-0">{{ __('profile.phone') }}</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <textarea name="description" id="" class="form-control" rows="3">{{ $setting->description }}</textarea>
-                                        @error('description')
+                                        <input type="text" name="phone" class="form-control"
+                                            value="{{ $user->phone }}" />
+                                        @error('phone')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">{{ __('settings.logo') }}</h6>
+                                        <h6 class="mb-0">{{ __('profile.email') }}</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input name="logo" type="file" class="dropify" data-height="100"
-                                            accept=".jpg, .png, image/jpeg, image/png" />
-                                        @error('logo')
+                                        <input type="text" name="email" class="form-control"
+                                            value="{{ $user->email }}" />
+                                        @error('email')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0"></h6>
+                                        <h6 class="mb-0">{{ __('profile.address') }}</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <img class="w-100" src=" {{ $setting->logo }}" alt="45" />
+                                        <textarea name="address" id="" class="form-control" rows="3">{{ $user->address }}</textarea>
+                                        @error('address')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                 </div>
-
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">{{ __('profile.password') }}</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="password" name="password" class="form-control" />
+                                        @error('password')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">{{ __('profile.confirm_password') }}</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="password" name="password_confirmation" class="form-control" />
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-sm-3"></div>
                                     <div class="col-sm-9 text-secondary">
                                         <input type="submit" class="btn btn-primary px-4"
-                                            value="{{ __('settings.save') }}" />
+                                            value="{{ __('profile.save') }}" />
                                     </div>
                                 </div>
-
                             </div>
                         </form>
                     </div>

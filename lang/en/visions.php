@@ -1,0 +1,23 @@
+<?php
+return [
+    'new_vision' => 'Add New Vision',
+    'visions' => "Visions",
+    'name' => 'Vision Name',
+    'content' => "Content",
+    'photos' => "Photos",
+    'enter_content' => "Enter Content ........",
+    'update_vision' => 'Update Vision',
+    'delete_vision' => 'Delete Vision',
+    's_add_vision' => 'Success Add Vision',
+    's_update_vision' => 'Success Update Vision',
+    's_delete_vision' => 'Success Delete Vision',
+    'no_visions' => 'No Visions Found',
+    'sure_delete' => 'Are Sure Of The Deleting Process ??',
+    'status' => 'Status',
+    'actions' => 'Actions',
+    'send' => 'Send',
+    'delete' => 'Delete',
+    'update' => 'Update',
+    'close' => 'Close',
+    'save' => 'Save',
+];

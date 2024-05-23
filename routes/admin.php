@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\ClassTeacherController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
 /*
@@ -34,27 +35,31 @@ Route::group(
         'prefix' => LaravelLocalization::setLocale() . '/admin',
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'auth:admin'],
         'as' => 'admin.'
-    ], function () {
-    Route::get('/', function () {
-        return view('Admin.dashboard');
-    })->name('dashboard');
-    Route::resource('registers', RegisterController::class);
-    //News
-    Route::resource('news', NewController::class);
-    Route::resource('posts', PostController::class);
-    Route::resource('guidelines', GuidelineController::class);
-    Route::resource('visions', VisionController::class);
-    Route::resource('announcements', AnnouncementController::class);
-    Route::resource('levels',LevelController::class);
-    Route::resource('classes',ClassController::class);
-    Route::resource('subjects',SubjectController::class);
-    Route::resource('teachers',TeacherController::class);
-    Route::resource('class_teachers',ClassTeacherController::class);
-    Route::get('getClasses/{id}',[ClassTeacherController::class,'getClass'])->name('getclass');
-    Route::resource('/students',StudentController::class);
-    Route::resource('roles', RoleController::class);
-    Route::resource('admins', AdminController::class);
-    Route::get('settings',[SettingController::class,'index'])->name('settings.index');
-    Route::post('settings',[SettingController::class,'update'])->name('settings.update');
+    ],
+    function () {
+        Route::get('/', function () {
+            return view('Admin.dashboard');
+        })->name('dashboard');
+        Route::resource('registers', RegisterController::class);
+        //News
+        Route::resource('news', NewController::class);
+        Route::resource('posts', PostController::class);
+        Route::resource('guidelines', GuidelineController::class);
+        Route::resource('visions', VisionController::class);
+        Route::resource('announcements', AnnouncementController::class);
+        Route::resource('levels', LevelController::class);
+        Route::resource('classes', ClassController::class);
+        Route::resource('subjects', SubjectController::class);
+        Route::resource('teachers', TeacherController::class);
+        Route::resource('class_teachers', ClassTeacherController::class);
+        Route::get('getClasses/{id}', [ClassTeacherController::class, 'getClass'])->name('getclass');
+        Route::resource('/students', StudentController::class);
+        Route::resource('roles', RoleController::class);
+        Route::resource('admins', AdminController::class);
+        Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
+        Route::post('settings', [SettingController::class, 'update'])->name('settings.update');
 
-});
+        Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+        Route::post('profile', [ProfileController::class, 'update'])->name('profile.update');
+    }
+);
