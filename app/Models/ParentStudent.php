@@ -73,6 +73,31 @@ class ParentStudent extends Authenticatable implements JWTSubject
         return$this->morphMany(Reaction::class,'reactable');
     }
 
+    public function conversation()
+    {
+        return $this->morphOne(Conversation::class,'participant');
+    }
+
+    public function conversations()
+    {
+         return $this->morphMany(Conversation::class,'participant');
+    }
+
+    //to get conversation through conversation model
+    public function getTeachersConversations()
+    {
+        return $this->hasManyThrough(Teacher::class, Conversation::class, 'participant_id', 'id', 'id', 'teacher_id');
+    }
+
+    public function messages()
+    {
+        return $this->morphMany(Message::class, 'sender');
+    }
+    public function message()
+    {
+        return $this->morphOne(Message::class, 'sender');
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();

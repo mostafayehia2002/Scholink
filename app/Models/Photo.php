@@ -18,7 +18,7 @@ class Photo extends Model
             get: fn (string $value) => asset($value),
         );
     }
-    public function photoble()
+    public function participant()
     {
         return $this->morphTo();
     }

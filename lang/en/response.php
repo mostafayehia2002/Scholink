@@ -31,4 +31,5 @@ return[
     'Or'=>'Or',
     'Student'=>'Student',
     'Parent'=>'Parent',
+    "Me"=>"Me"
 ];
