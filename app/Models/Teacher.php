@@ -40,5 +40,13 @@ class Teacher extends Authenticatable
         return $this->belongsToMany(Classe::class,'class_teachers','teacher_id','class_id');
     }
 
+    public function conversations()
+    {
+        return $this->hasMany(Conversation::class);
+    }
 
+    public function messages()
+    {
+        return $this->morphMany(Message::class, 'sender');
+    }
 }

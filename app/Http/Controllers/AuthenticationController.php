@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\TestEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Broadcast;
 
 class AuthenticationController extends Controller
 {
@@ -22,13 +24,20 @@ class AuthenticationController extends Controller
         $remember=$request->remember?true:false;
         if($request->type=='admin'){
             if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password],$remember)) {
+
+
                 return redirect()->route('admin.dashboard')->with('success',__('login.success'));
             }
         }else{
             if (Auth::guard('teacher')->attempt(['email' => $request->email, 'password' => $request->password],$remember)) {
+
+
                 return redirect()->route('teacher.dashboard')->with('success',__('login.success'));
             }
         }
+
+
+
         return redirect()->back()->withInput($request->only('email'))->with('error',__('login.error'));
     }
 
