@@ -28,9 +28,22 @@ window.Echo = new Echo({
     forceTLS: false,
     disableStats: true,
     cluster:"mt1",
+   // authEndpoint:'/broadcasting/auth',
+    // auth: {
+    //     headers: {
+    //         Authorization: 'Bearer ' + userToken
+    //     }
+    // }
+
+
 });
-let id=3;
-window.Echo.private(`chat${id}`)
+
+window.Echo.private('chat.teacher.1')
     .listen('SendMessage', (data) => {
         console.log(data);
+    });
+
+window.Echo.private('notification.teacher.1')
+    .listen('.Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', (e) => {
+        console.log(e);
     });

@@ -1,5 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -41,7 +43,4 @@ Route::get('/clear', function () {
     });
 
 
-Route::get('/test',function (){
 
-   broadcast(new \App\Events\TestEvent('hello'));
-});

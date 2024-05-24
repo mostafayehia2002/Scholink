@@ -32,6 +32,7 @@ class AuthenticationController extends Controller
         if (!$token = auth()->guard($this->status)->attempt($credentials)) {
             return $this->errorMessage(  401,trans('response.User_Not_Found'));
         }
+//        $user = auth()->guard($this->status)->user();
 
         return  $this->data(200, 'token', $token);
     }

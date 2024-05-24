@@ -11,14 +11,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Lcobucci\JWT\Token\Builder;
 use Spatie\Translatable\HasTranslations;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\JWT;
 
 class ParentStudent extends Authenticatable implements JWTSubject
 {
     use HasApiTokens,HasTranslations, HasFactory, Notifiable, SoftDeletes,CustomiseDateTrait;
     protected $table = 'parents';
     public $timestamps = true;
+
+    protected $Token;
     public $translatable =['name'];
     protected $fillable = [
         'name',
@@ -106,4 +111,5 @@ class ParentStudent extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
 }

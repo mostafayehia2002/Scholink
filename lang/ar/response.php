@@ -32,4 +32,5 @@ return [
     'Student' => 'الطالب',
     'Parent' => 'الوالد',
     'Me'=>"انا",
+    "send_message_to"=>"ارسل لك رسالة",
 ];

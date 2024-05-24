@@ -31,5 +31,6 @@ return[
     'Or'=>'Or',
     'Student'=>'Student',
     'Parent'=>'Parent',
-    "Me"=>"Me"
+    "Me"=>"Me",
+    "send_message_to"=>"Send Message To",
 ];
