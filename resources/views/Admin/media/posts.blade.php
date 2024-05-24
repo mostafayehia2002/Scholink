@@ -1,4 +1,3 @@
-
 @extends('layouts.master')
 
 @section('content')
@@ -19,6 +18,7 @@
             font-weight: 500;
             position: relative;
         }
+
         .left .like-container,
         .right .comment-container {
             position: absolute;
@@ -39,12 +39,14 @@
         .right .comment-container.active {
             display: block;
         }
+
         .left .like-container .likes-content,
         .right .comment-container .comments-content {
             display: flex;
             flex-direction: column;
             position: relative;
         }
+
         .left .like-container span,
         .right .comment-container span {
             position: absolute;
@@ -60,11 +62,13 @@
             justify-content: center;
             cursor: pointer;
         }
+
         .left .like-container span,
         .right .comment-container span {
             color: #000;
             font-size: 15px;
         }
+
         .left .like-container h3,
         .right .comment-container h3 {
             text-align: center;
@@ -72,22 +76,26 @@
             font-style: italic;
             color: blue;
         }
+
         .left .like-container .content {
             display: flex;
             align-items: center;
             justify-content: space-around;
             padding: 20px 0px;
         }
+
         .right .comment-container .content {
             display: flex;
             align-items: center;
             padding: 20px 0px;
         }
+
         .left .like-container .content h3,
         .right .comment-container .content h3 {
             font-size: 20px;
             color: #000;
         }
+
         .right .comment-container .content .single-comment {
             margin-left: 10px;
             padding: 10px;
@@ -97,6 +105,7 @@
             align-items: start;
             border-radius: 5px;
         }
+
         .left .like-container .content a {
             font-size: 15px;
             color: #000;
@@ -107,6 +116,7 @@
             .post-container {
                 width: 300px;
             }
+
             .left .like-container,
             .right .comment-container {
                 left: 50px;
@@ -120,11 +130,10 @@
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"><i class="bx bx-home-alt"></i></a>
-                            Home
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="bx bx-home-alt"></i></a>
+                            {{ __('sidbar.home') }}
                         </li>
-
-                        <li class="breadcrumb-item active" aria-current="page">Posts</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ __('posts.posts') }}</li>
                     </ol>
                 </nav>
             </div>
@@ -133,44 +142,39 @@
         <div class="row">
             <div class="col-6 col-md-4">
                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                        data-bs-target="#exampleModaladd"><i class="bx bx-plus"></i> Add New Post
+                    data-bs-target="#exampleModaladd"><i class="bx bx-plus"></i> {{ __('posts.new_post') }}
                 </button>
                 <!-- Modal -->
-                <div class="modal fade" id="exampleModaladd" tabindex="-1"
-                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="exampleModaladd" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
 
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Add
-                                    Post</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">{{ __('posts.new_post') }}</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                                    aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form class="row g-3" method="POST"
-                                      action="{{route('admin.posts.store')}}" enctype="multipart/form-data">
+                                <form class="row g-3" method="POST" action="{{ route('admin.posts.store') }}"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="col-12">
-                                        <label for="inputAddress2"
-                                               class="form-label">Content</label>
-                                        <textarea class="form-control" id="inputAddress2"
-                                                  name="post_content" required
-                                                  placeholder="Enter Message"
-                                                  rows="3"></textarea>
+                                        <label for="inputAddress2" class="form-label">{{ __('posts.content') }}</label>
+                                        <textarea class="form-control" id="inputAddress2" name="post_content" required placeholder="Enter Message"
+                                            rows="3"></textarea>
                                     </div>
                                     <div class="col-12">
-                                        <label for="inputAddress2"
-                                               class="form-label">Photos</label>
+                                        <label for="inputAddress2" class="form-label">{{ __('posts.photos') }}</label>
                                         <input type="file" name="images[]" multiple accept="images/*">
                                     </div>
 
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close
+                                    data-bs-dismiss="modal">{{ __('posts.close') }}
                                 </button>
-                                <button type="submit" class="btn btn-primary">Send</button>
+                                <button type="submit" class="btn btn-primary">{{ __('posts.send') }}</button>
                             </div>
                             </form>
                         </div>
@@ -185,42 +189,42 @@
                     <div class="top">
                         <div class="user_details">
                             <div class="profile_img">
-                                <img src="{{asset('uploads/students/profile.jpg')}}" alt="user" class="cover"/>
+                                <img src="{{ asset('uploads/students/profile.jpg') }}" alt="user" class="cover" />
                             </div>
                             <h3>
-                                {{$row->admin->name}}<br/><span class="role">admin</span>
-                                <span class="date">{{$row->created_at}}</span>
+                                {{ $row->admin->name }}<br /><span class="role">admin</span>
+                                <span class="date">{{ $row->created_at }}</span>
                                 <span class="globDot">.</span>
                             </h3>
                         </div>
                         <div>
-                            {{--=============Delate Request=========================--}}
+                            {{-- =============Delate Request========================= --}}
                             <button type="button" class="btn btn-danger btn-sm text-center" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModald{{$loop->index}}"><i class="bx bxs-trash"></i>
+                                data-bs-target="#exampleModald{{ $loop->index }}"><i class="bx bxs-trash"></i>
                             </button>
                             <!-- Modal -->
-                            <div class="modal fade" id="exampleModald{{$loop->index}}" tabindex="-1"
-                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="exampleModald{{ $loop->index }}" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Delete Post</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">{{ __('posts.delete_post') }}
+                                            </h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                                aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <form class="row g-3" method="POST"
-                                                  action="{{route('admin.posts.destroy',$row->id)}}">
+                                                action="{{ route('admin.posts.destroy', $row->id) }}">
                                                 @method('DELETE')
                                                 @csrf
-                                                <p>Are You Sure Delete Post</p>
-
+                                                <p>{{ __('posts.sure_delete') }}</p>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close
+                                                data-bs-dismiss="modal">{{ __('posts.close') }}
                                             </button>
-                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                            <button type="submit" class="btn btn-danger">{{ __('posts.delete') }}</button>
                                             </form>
                                         </div>
                                     </div>
@@ -229,53 +233,53 @@
 
 
 
-                            {{--                        =============Upadate=========================--}}
+                            {{-- =============Upadate========================= --}}
                             <button type="button" class="btn btn-primary btn-sm text-center" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal{{$loop->index}}"><i class="bx bxs-edit"></i>
+                                data-bs-target="#exampleModal{{ $loop->index }}"><i class="bx bxs-edit"></i>
                             </button>
                             <!-- Modal -->
-                            <div class="modal fade" id="exampleModal{{$loop->index}}" tabindex="-1"
-                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="exampleModal{{ $loop->index }}" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
-
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Update
-                                                Post</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">{{ __('posts.update_post') }}
+                                            </h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                                aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <form class="row g-3" method="POST"
-                                                  action="{{route('admin.posts.update',$row->id)}}" enctype="multipart/form-data">
+                                                action="{{ route('admin.posts.update', $row->id) }}"
+                                                enctype="multipart/form-data">
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="col-12">
                                                     <label for="inputAddress2"
-                                                           class="form-label">Content</label>
-                                                    <input type="hidden" value="{{$row->id}}" name="id">
-                                                    <textarea class="form-control" id="inputAddress2"
-                                                              name="post_content" required
-                                                              placeholder="Enter Message"
-                                                              rows="3">{{$row->content}}</textarea>
+                                                        class="form-label">{{ __('posts.content') }}</label>
+                                                    <input type="hidden" value="{{ $row->id }}" name="id">
+                                                    <textarea class="form-control" id="inputAddress2" name="post_content" required placeholder="Enter Message"
+                                                        rows="3">{{ $row->content }}</textarea>
                                                 </div>
                                                 <div class="col-12">
                                                     <label for="inputAddress2"
-                                                           class="form-label">Photos</label>
+                                                        class="form-label">{{ __('posts.photos') }}</label>
                                                     <input type="file" name="images[]" multiple accept="images/*">
                                                 </div>
                                                 <div class="col-12">
-                                                    @foreach($row->photos as $image)
-                                                        <img style="width: 50px;height: 50px;border-radius: 50%" src="{{$image->name}}">
+                                                    @foreach ($row->photos as $image)
+                                                        <img style="width: 50px;height: 50px;border-radius: 50%"
+                                                            src="{{ $image->name }}">
                                                     @endforeach
                                                 </div>
 
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close
+                                                data-bs-dismiss="modal">{{ __('posts.close') }}
                                             </button>
-                                            <button type="submit" class="btn btn-success">Update</button>
+                                            <button type="submit"
+                                                class="btn btn-success">{{ __('posts.update') }}</button>
                                         </div>
                                         </form>
                                     </div>
@@ -286,36 +290,32 @@
 
 
                     </div>
-                    <p>{{$row->content}}</p>
-                    @if(count($row->photos))
+                    <p>{{ $row->content }}</p>
+                    @if (count($row->photos))
                         <div class="images-container swiper">
                             <div class="imgage-content swiper-wrapper">
-                                @foreach($row->photos as $photo)
-                                    <img src="{{$photo->name}}" alt="" class="swiper-slide"/>
+                                @foreach ($row->photos as $photo)
+                                    <img src="{{ $photo->name }}" alt="" class="swiper-slide" />
                                 @endforeach
                             </div>
                             <div class="swiper-button-prev prev"></div>
                             <div class="swiper-button-next next"></div>
                         </div>
                     @endif
-
-
-
-
-
                     <div class="btns">
                         <div class="left">
-                            <h4>{{count($row->reactions)}} React</h4>
+                            <h4>{{ count($row->reactions) }} React</h4>
                             <div class="like-container">
-                                <h3>{{count($row->reactions)}} React</h3>
+                                <h3>{{ count($row->reactions) }} React</h3>
                                 <div class="likes-content">
                                     <span><i class="lni lni-close"></i></span>
-                                    @foreach($row->reactions as $react)
+                                    @foreach ($row->reactions as $react)
                                         <div class="content">
                                             <div class="profile_img">
-                                                <img src="{{asset($react->reactable->photo)}}"  alt="user" class="cover">
+                                                <img src="{{ asset($react->reactable->photo) }}" alt="user"
+                                                    class="cover">
                                             </div>
-                                            <h3>{{$react->reactable->name}}</h3>
+                                            <h3>{{ $react->reactable->name }}</h3>
                                             <a href="#">View Profile</a>
                                         </div>
                                     @endforeach
@@ -323,54 +323,44 @@
                             </div>
                         </div>
                         <div class="right">
-                            <h4>{{count($row->comments)}} comments</h4>
+                            <h4>{{ count($row->comments) }} comments</h4>
                             <div class="comment-container">
-                                <h3>{{count($row->comments)}} comments</h3>
+                                <h3>{{ count($row->comments) }} comments</h3>
                                 <div class="comments-content">
                                     <span><i class="lni lni-close"></i></span>
                                 </div>
-                                @foreach($row->comments as $comment)
+                                @foreach ($row->comments as $comment)
                                     <div class="content">
                                         <div class="profile_img">
-                                            <img src="{{asset($comment->commentable->photo)}}" alt="user" class="cover">
+                                            <img src="{{ asset($comment->commentable->photo) }}" alt="user"
+                                                class="cover">
                                         </div>
                                         <div class="single-comment">
-
-
-                                            <h3>{{$comment->commentable->name}}</h3>
-                                            <p>{{$comment->comment}}</p>
+                                            <h3>{{ $comment->commentable->name }}</h3>
+                                            <p>{{ $comment->comment }}</p>
                                         </div>
                                     </div>
                                 @endforeach
-
                             </div>
                         </div>
                     </div>
 
-
-
-
-{{--                    <div class="btns">--}}
-{{--                        <div class="left">--}}
-{{--                            <h4>{{count($row->reactions)}} like</h4>--}}
-{{--                        </div>--}}
-{{--                        <div class="right">--}}
-{{--                            <h4>{{count($row->comments)}} comments</h4>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                    {{--                    <div class="btns"> --}}
+                    {{--                        <div class="left"> --}}
+                    {{--                            <h4>{{count($row->reactions)}} like</h4> --}}
+                    {{--                        </div> --}}
+                    {{--                        <div class="right"> --}}
+                    {{--                            <h4>{{count($row->comments)}} comments</h4> --}}
+                    {{--                        </div> --}}
+                    {{--                    </div> --}}
                 </div>
-
             @empty
-                <h1 class="text-center text-danger">No Posts Found</h1>
+                <h1 class="text-center text-danger">{{ __('posts.no_posts') }}</h1>
             @endforelse
-
-
             <div>
-                {{$data->links()}}
+                {{ $data->links() }}
             </div>
         </div>
-
-
     </div>
 @endsection
 
@@ -386,33 +376,24 @@
         const removeLike = document.querySelector('.likes-content span');
         const removeComment = document.querySelector('.comments-content span');
 
-        like.addEventListener('click',()=>{
+        like.addEventListener('click', () => {
             likesContainer.classList.toggle('active');
             commentsContainer.classList.remove('active');
         });
 
-        removeLike.addEventListener('click',()=>{
+        removeLike.addEventListener('click', () => {
             likesContainer.classList.remove('active');
         });
 
-        comment.addEventListener('click',()=>{
+        comment.addEventListener('click', () => {
             commentsContainer.classList.toggle('active');
             likesContainer.classList.remove('active');
         });
 
-        removeComment.addEventListener('click',()=>{
+        removeComment.addEventListener('click', () => {
             commentsContainer.classList.remove('active');
         });
     </script>
-    <script src="{{asset('js/swiper-bundle.min.js')}}"></script>
-    <script src="{{asset('js/script.js')}}"></script>
+    <script src="{{ asset('js/swiper-bundle.min.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
 @endpush
-
-
-
-
-
-
-
-
-
