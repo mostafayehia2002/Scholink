@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\SendMessage;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ConversationResource;
 use App\Http\Resources\MessageResource;
@@ -11,6 +12,8 @@ use App\Models\Level;
 use App\Models\Message;
 use App\Models\ParentStudent;
 use App\Models\Student;
+use App\Models\Teacher;
+use App\Notifications\PersonalNotification;
 use App\Traits\GeneralResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -99,25 +102,29 @@ class StudentConversationController extends Controller
                 return $this->error(422, $validate->errors());
             }
             // Get the authenticated user
-            $user = Student::find(auth('student')->id());
+            $student = Student::find(auth('student')->id());
                 // If conversation ID is not provided or doesn't match, check if there's an existing conversation
                 $conversation = Conversation::where('teacher_id', $request->teacher_id)
-                    ->where('participant_id', $user->id)
-                    ->where('participant_type', get_class($user))
+                    ->where('participant_id', $student->id)
+                    ->where('participant_type', get_class($student))
                     ->first();
                 if (!$conversation) {
                     // If no existing conversation is found, create a new one
-                    $conversation = $user->conversations()->create([
+                    $conversation = $student->conversations()->create([
                         'teacher_id' => $request->teacher_id,
                     ]);
                 }
 
             // Add the message to the (existing or new) conversation
-            $user->messages()->create([
+            $student->messages()->create([
                 'conversation_id' => $conversation->id,
                 'content' => $request->message,
             ]);
-
+            $teacher=Teacher::find($request->teacher_id);
+            //push message to teacher through his private channel
+            broadcast(new SendMessage($student,$teacher,'teacher',$conversation->id,$request->message,now() ));
+            //send notification to teacher in PersonalNotification channel and save it in database
+            $teacher->notify(new PersonalNotification($student,$teacher,'teacher','message'));
             return $this->successMessage(201, 'Message sent successfully');
         } catch (\Exception $e) {
             return $this->errorMessage(500, $e->getMessage());
