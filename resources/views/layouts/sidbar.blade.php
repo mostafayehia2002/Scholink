@@ -37,6 +37,7 @@
                     </div>
                     <div class="menu-title">{{ __('sidbar.media') }}</div>
                 </a>
+
                 <ul>
                     @foreach (\App\Models\Category::all() as $category)
                         <li><a href="{{ route('admin.' . $category->getTranslation('name', 'en') . '.index') }}"><i

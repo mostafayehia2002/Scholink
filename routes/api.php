@@ -5,8 +5,10 @@ use App\Http\Controllers\Api\ContentController;
 use App\Http\Controllers\Api\LevelController;
 use App\Http\Controllers\Api\MarkController;
 use App\Http\Controllers\Api\MaterialController;
+use App\Http\Controllers\Api\ParentConversationController;
 use App\Http\Controllers\Api\ReactionController;
 use App\Http\Controllers\Api\RegisterController;
+use App\Http\Controllers\Api\StudentConversationController;
 use App\Http\Controllers\Api\SubCategoryController;
 use App\Http\Controllers\Api\SubjectController;
 use App\Http\Controllers\Api\TableController;
@@ -81,6 +83,12 @@ Route::group(
             Route::get('/marks', [MarkController::class, 'getStudentMarks']);
             Route::get('/table', [TableController::class, 'getStudentTable']);
             Route::get('/materials', [MaterialController::class, 'getMaterials']);
+
+            //chat
+            Route::get('/participants',[StudentConversationController::class,'getParticipants']);
+            Route::get('/conversations',[StudentConversationController::class,'getConversations']);
+            Route::get('/messages',[StudentConversationController::class,'getMessages']);
+            Route::Post('/send-message',[StudentConversationController::class,'sendMessage']);
         });
 
 
@@ -102,6 +110,13 @@ Route::group(
             Route::get('/table', [TableController::class, 'getTable']);
             Route::get('/levels', [LevelController::class, 'getLevel']);
             Route::get('/marks', [MarkController::class, 'getMarks']);
+
+
+            //chat
+            Route::get('/participants',[ParentConversationController::class,'getParticipants']);
+            Route::get('/conversations',[ParentConversationController::class,'getConversations']);
+            Route::get('/messages',[ParentConversationController::class,'getMessages']);
+            Route::Post('/send-message',[ParentConversationController::class,'sendMessage']);
         });
     }
 );
