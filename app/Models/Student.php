@@ -97,6 +97,7 @@ class Student extends Authenticatable implements JWTSubject
         return $this->hasMany(Mark::class,'student_id');
     }
 
+
     public function conversation()
     {
         return $this->morphOne(Conversation::class,'participant');

@@ -10,36 +10,34 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class PostsResource extends JsonResource
 {
-   private $Comments=[],$Reactions=[];
-    public function toArray(Request $request): array
+    public function toArray($request)
     {
-        $i=0;
-        foreach ($this->comments as $comment){
-             $id=$comment->commentable_id;
-             $model=$comment->commentable_type;
-             $content=$comment->comment;
-             $user=$comment->commentable;
-            $this->Comments[$i++]=['id'=>$comment->id,'username'=>$user->name,'email'=>$user->email,'comment'=>$content,'created_at'=>$comment->created_at];
-        }
+        // Load comments and reactions eagerly
+        $this->load('comments.commentable', 'reactions.reactable');
 
-        $x=0;
-        foreach ($this->reactions as $reaction){
-            $id=$reaction->reactable_id;
-            $model=$reaction->reactable_type;
-            $user=$reaction->reactable;
-            $this->Reactions[$x++]=['username'=>$user->name,'email'=>$user->email,'created_at'=>$comment->created_at];
-        }
-
-        //date_format(,'d-M-Y h:i A'),
         return [
-            'id'=>$this->id,
-            'content'=>$this->content,
-            'total_comments'=>count($this->Comments),
-            'total_reactions'=>count($this->Reactions),
-            'created_at'=>$this->created_at,
-             'comments'=>$this->Comments,
-            'reactions'=>$this->Reactions,
-            'photos'=>$this->photos,
+            'id' => $this->id,
+            'content' => $this->content,
+            'total_comments' => $this->comments->count(),
+            'total_reactions' => $this->reactions->count(),
+            'created_at' => $this->created_at,
+            'comments' => $this->comments->map(function ($comment) {
+                return [
+                    'id' => $comment->id,
+                    'username' => $comment->commentable->name,
+                    'email' => $comment->commentable->email,
+                    'comment' => $comment->comment,
+                    'created_at' => $comment->created_at,
+                ];
+            }),
+            'reactions' => $this->reactions->map(function ($reaction) {
+                return [
+                    'username' => $reaction->reactable->name,
+                    'email' => $reaction->reactable->email,
+                    'created_at' => $reaction->created_at,
+                ];
+            }),
+            'photos' => $this->photos,
         ];
     }
 }

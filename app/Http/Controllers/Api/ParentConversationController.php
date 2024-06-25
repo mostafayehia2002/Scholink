@@ -83,6 +83,7 @@ class ParentConversationController extends Controller
            if ($messages->isEmpty()){
                return $this->errorMessage(404,trans('response.Data_Not_Found'));
            }
+          //
            return  $this->data(200,'messages',MessageResource::collection($messages)->additional(['guard'=>'parent']));
 
        }catch (\Exception $e){
