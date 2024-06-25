@@ -8,18 +8,21 @@ use Illuminate\Support\Facades\Auth;
 
 class MessageResource extends JsonResource
 {
+
+
     /**
      * Transform the resource into an array.
      *
      * @return array<string, mixed>
      */
-    public function toArray(Request $request): array
+    public function toArray($request): array
     {
-        return[
-            'send_by_me'=>$this->sender->name==auth($request->guard)->user()->name?true:false,
-            'sender'=> $this->sender->name==auth($request->guard)->user()->name?trans('response.Me'):$this->sender->name,
-            'message'=>$this->content,
-            'send_at'=>$this->created_at,
+        $user = auth($request->guard)->user();
+        return [
+            'send_by_me' => $this->sender->name == $user->name,
+            'sender' => $this->sender->name == $user->name ? trans('response.Me') : $this->sender->name,
+            'message' => $this->content,
+            'send_at' => $this->created_at,
         ];
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\ContentController;
 use App\Http\Controllers\Api\LevelController;
 use App\Http\Controllers\Api\MarkController;
 use App\Http\Controllers\Api\MaterialController;
+use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\ParentConversationController;
 use App\Http\Controllers\Api\ReactionController;
 use App\Http\Controllers\Api\RegisterController;
@@ -89,6 +90,12 @@ Route::group(
             Route::get('/conversations',[StudentConversationController::class,'getConversations']);
             Route::get('/messages',[StudentConversationController::class,'getMessages']);
             Route::Post('/send-message',[StudentConversationController::class,'sendMessage']);
+
+            //notifications
+            Route::get('/notifications',[NotificationController::class,'getAllNotifications']);
+            Route::get('/unread-notifications',[NotificationController::class,'getUnReadNotifications']);
+            Route::get('/delete-notifications',[NotificationController::class,'deleteAllNotifications']);
+
         });
 
 
@@ -117,6 +124,11 @@ Route::group(
             Route::get('/conversations',[ParentConversationController::class,'getConversations']);
             Route::get('/messages',[ParentConversationController::class,'getMessages']);
             Route::Post('/send-message',[ParentConversationController::class,'sendMessage']);
+
+            //notifications
+            Route::get('/notifications',[NotificationController::class,'getAllNotifications']);
+            Route::get('/unread-notifications',[NotificationController::class,'getUnReadNotifications']);
+            Route::get('/delete-notifications',[NotificationController::class,'deleteAllNotifications']);
         });
     }
 );

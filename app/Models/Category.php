@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Date;
 use Spatie\Translatable\HasTranslations;
 use function Laravel\Prompts\text;
 
+/**
+ * @method static where(string $string, string $string1)
+ */
 class Category extends Model
 {
     use HasFactory,CustomiseDateTrait,HasTranslations;

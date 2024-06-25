@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
+/**
+ * @method static create(array[] $array)
+ */
 class Subject extends Model
 {
     use HasFactory,HasTranslations,CustomiseDateTrait;
