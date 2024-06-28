@@ -21,11 +21,15 @@ class Assignment extends Model
 
     }
 
-    //done
-        public function class()
+    public function class()
     {
-        return $this->belongsToMany(Classe::class,'assignments','assignment_id');
+        return $this->belongsTo(Classe::class);
     }
+    //done
+//        public function class()
+//    {
+//        return $this->belongsToMany(Classe::class,'assignments','assignment_id');
+//    }
 
     //done
     public function students()

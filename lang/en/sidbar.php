@@ -16,6 +16,7 @@ return [
     'attendance' => "Absence and presence",
     'settings' => 'Settings',
     'materials' => 'Material files',
+    'assignments'=>'Assignments',
     'profile' => 'Profile',
     'logout' => 'Logout',
     'search' => 'Type To Search .......',

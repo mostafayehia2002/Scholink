@@ -4,7 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!--favicon-->
     <link rel="icon" href="{{ asset('assets/images/favicon-32x32.png') }}" type="image/png" />
-   @vite('resources/js/app.js')
+
+{{--    @vite('resources/js/app.js')--}}
 
     <!--plugins-->
     <link href="{{ asset('assets/plugins/vectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet" />
