@@ -4,7 +4,7 @@
             <img src="{{ asset('assets/images/logo-icon.png') }}" class="logo-icon" alt="logo icon">
         </div>
         <div>
-            <h4 class="logo-text">SmartSchool</h4>
+            <h4 class="logo-text">SchoLink</h4>
         </div>
         @if (app()->getLocale() == 'en')
             <div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
@@ -131,6 +131,13 @@
                 <a href="{{ route('teacher.classes.index') }}">
                     <div class="parent-icon"><i class='bx bx-home-circle'></i>
                     </div>
+                    <div class="menu-title">{{ __('sidbar.classes') }}</div>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('teacher.timetable.index') }}">
+                    <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                    </div>
                     <div class="menu-title">{{ __('sidbar.timetable') }}</div>
                 </a>
             </li>
@@ -141,7 +148,6 @@
                     <div class="menu-title">{{ __('sidbar.attendance') }}</div>
                 </a>
             </li>
-
             <li>
                 <a href="{{ route('teacher.materials.index') }}">
                     <div class="parent-icon"><i class='bx bx-home-circle'></i>
@@ -150,18 +156,25 @@
                 </a>
             </li>
             <li>
-                <a href="javascript:;" class="has-arrow">
+                <a href="{{ route('teacher.assignments.index') }}">
                     <div class="parent-icon"><i class='bx bx-home-circle'></i>
                     </div>
-                    <div class="menu-title">Dashboard</div>
+                    <div class="menu-title">{{ __('sidbar.assignments') }}</div>
                 </a>
-                <ul>
-                    <li><a href="index.html"><i class="bx bx-right-arrow-alt"></i>Default</a>
-                    </li>
-                    <li><a href="index2.html"><i class="bx bx-right-arrow-alt"></i>Alternate</a>
-                    </li>
-                </ul>
             </li>
+{{--            <li>--}}
+{{--                <a href="javascript:;" class="has-arrow">--}}
+{{--                    <div class="parent-icon"><i class='bx bx-home-circle'></i>--}}
+{{--                    </div>--}}
+{{--                    <div class="menu-title">Dashboard</div>--}}
+{{--                </a>--}}
+{{--                <ul>--}}
+{{--                    <li><a href="index.html"><i class="bx bx-right-arrow-alt"></i>Default</a>--}}
+{{--                    </li>--}}
+{{--                    <li><a href="index2.html"><i class="bx bx-right-arrow-alt"></i>Alternate</a>--}}
+{{--                    </li>--}}
+{{--                </ul>--}}
+{{--            </li>--}}
         </ul>
     @endauth
     <!--end navigation-->

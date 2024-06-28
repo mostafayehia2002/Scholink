@@ -23,7 +23,9 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        $data = Material::paginate(10);
+        $subjects_id=ClassTeacher::where('teacher_id',auth('teacher')->user()->id)->pluck('subject_id');
+        $classes=ClassTeacher::where('teacher_id',auth('teacher')->user()->id)->distinct()->pluck('class_id');
+        $data = Material::whereIn('class_id',$classes)->whereIn('subject_id',$subjects_id)->paginate(10);
         return view('Teacher.materials.index', compact('data'));
     }
 

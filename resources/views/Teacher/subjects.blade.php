@@ -6,11 +6,10 @@
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"><i
+                        <li class="breadcrumb-item"><a href="{{route('teacher.dashboard')}}"><i
                                     class="bx bx-home-alt"></i></a>
                             {{__('sidbar.home')}}
                         </li>
-
                         <li class="breadcrumb-item active" aria-current="page">{{__('sidbar.subjects')}}</li>
                     </ol>
                 </nav>
@@ -19,12 +18,7 @@
         <!--end breadcrumb-->
 
         <div class="card">
-
-
             <div class="card-body">
-
-
-
                 <div class="table-responsive">
                     <table id="example2" class="table table-striped table-bordered">
                         <thead>

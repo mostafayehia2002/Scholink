@@ -7,6 +7,7 @@ use App\Http\Controllers\Teacher\SubjectController;
 use App\Http\Controllers\Teacher\AttendanceController;
 use App\Http\Controllers\Teacher\MaterialController;
 use App\Http\Controllers\Teacher\ProfileController;
+use App\Http\Controllers\Teacher\AssignmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,9 @@ Route::group(
         Route::get('/', function () {
             return view('Teacher.dashboard');
         })->name('dashboard');
-        Route::get('classes', [ClasseController::class, 'index'])->name('classes.index');
+        Route::get('timetables', [ClasseController::class, 'index'])->name('timetable.index');
+        Route::get('classes', [ClasseController::class, 'classes'])->name('classes.index');
+        Route::get('classes/students/{id}', [ClasseController::class, 'students'])->name('classes.students.index');
         Route::get('subjects', [SubjectController::class, 'index'])->name('subjects.index');
         Route::get('attendance', [AttendanceController::class, 'index'])->name('attendance.index');
         Route::get('attendance/absence/{class_id}', [AttendanceController::class, 'showAbsence'])->name('attendance.showAbsence');
@@ -38,7 +41,7 @@ Route::group(
         Route::resource('materials', MaterialController::class);
         Route::get('getClasses/{id}', [MaterialController::class, 'getClass'])->name('getclass');
         Route::get('get-subject/{class_id}', [MaterialController::class, 'getSubject'])->name('getSubject');
-
+        Route::resource('assignments', AssignmentController::class);
 
         Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
         Route::post('profile', [ProfileController::class, 'update'])->name('profile.update');

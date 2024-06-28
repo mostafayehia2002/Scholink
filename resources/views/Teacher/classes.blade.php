@@ -6,12 +6,12 @@
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"><i
+                        <li class="breadcrumb-item"><a href="{{route('teacher.dashboard')}}"><i
                                     class="bx bx-home-alt"></i></a>
                             {{__('sidbar.home')}}
                         </li>
 
-                        <li class="breadcrumb-item active" aria-current="page">{{__('sidbar.timetable')}}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('sidbar.classes')}}</li>
                     </ol>
                 </nav>
             </div>
@@ -19,8 +19,6 @@
         <!--end breadcrumb-->
 
         <div class="card">
-
-
             <div class="card-body">
                 <div class="table-responsive">
                     <table id="example2" class="table table-striped table-bordered">
@@ -29,11 +27,7 @@
                             <th>#</th>
                             <th>{{__('classes.level')}} </th>
                             <th>{{__('classes.name')}} </th>
-                            <th>{{__('classes.subject')}}</th>
-                            <th>{{__('classes.day')}}</th>
-                            <th>{{__('classes.number_lesson')}}</th>
-                            <th>{{__('classes.start_at')}}</th>
-                            <th>{{__('classes.end_at')}}</th>
+                            <th>{{__('classes.actions')}}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -41,13 +35,13 @@
                         @foreach($data as $row)
                             <tr>
                                 <td>{{$loop->index+1}}</td>
-                                <td>{{$row->classe->level->level_name}}</td>
-                                <td>{{$row->classe->class_name}}</td>
-                                <td>{{$row->subject->name}}</td>
-                                <td>{{$row->day}}</td>
-                                <td>{{$row->number_lesson}}</td>
-                                <td>{{$row->start_at}}</td>
-                                <td>{{$row->end_at}}</td>
+                                <td>{{$row->level->level_name}}</td>
+                                <td>{{$row->class_name}}</td>
+                                <td>
+                                    <a href="{{route('teacher.classes.students.index',$row->id)}}"  class="btn btn-warning">
+                                        عرض الطلاب
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -80,24 +74,4 @@
     </script>
 
 
-
-    <script src="{{asset('assets/plugins/fancy-file-uploader/jquery.ui.widget.js')}}"></script>
-    <script src="{{asset('assets/plugins/fancy-file-uploader/jquery.fileupload.js')}}"></script>
-    <script src="{{asset('assets/plugins/fancy-file-uploader/jquery.iframe-transport.js')}}"></script>
-    <script src="{{asset('assets/plugins/fancy-file-uploader/jquery.fancy-fileupload.js')}}"></script>
-    <script src="{{asset('assets/plugins/Drag-And-Drop/dist/imageuploadify.min.js')}}"></script>
-    {{--    <script>--}}
-    {{--        $('#fancy-file-upload').FancyFileUpload({--}}
-    {{--            params: {--}}
-    {{--                action: 'fileuploader'--}}
-    {{--            },--}}
-    {{--            maxfilesize: 1000000 *5,--}}
-    {{--        });--}}
-    {{--    </script>--}}
-
-    <script>
-        $(document).ready(function () {
-            $('#image-uploadify').imageuploadify();
-        })
-    </script>
 @endpush
