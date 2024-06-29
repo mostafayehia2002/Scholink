@@ -34,8 +34,6 @@ class StudentConversationController extends Controller
             return $this->errorMessage(500, $e->getMessage());
         }
     }
-
-
     public function  getConversations()
     {
         try{
@@ -51,7 +49,6 @@ class StudentConversationController extends Controller
 
             return $this->errorMessage(500, $e->getMessage());}
     }
-
    public function getMessages(Request $request)
    {
        try{

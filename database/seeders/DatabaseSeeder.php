@@ -14,6 +14,7 @@ use App\Models\Reaction;
 use App\Models\Student;
 use App\Models\Teacher;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
@@ -47,10 +48,10 @@ class DatabaseSeeder extends Seeder
                $admin->assignRole($adminRole);
            }
        });
-        Teacher::factory(50)->create();
-        ParentStudent::factory(100)->create();
-        Student::factory(100)->create();
-        Content::factory(100)->create()->each(function ($content){
+        Teacher::factory(20)->create();
+        ParentStudent::factory(20)->create();
+        Student::factory(50)->create();
+        Content::factory(20)->create()->each(function ($content){
             //if not guidlines
           if($content->category_id !=4 && fake()->boolean(50)){
                   $image = fake()->image('public/uploads/medias/', 680, 480);
@@ -59,13 +60,14 @@ class DatabaseSeeder extends Seeder
         });
        Comment::factory(100)->create();
        Reaction::factory(100)->create();
-         News::factory(100)->create()->each(function ($news){
+         News::factory(10)->create()->each(function ($news){
              if(fake()->boolean(50)){
                  $image = fake()->image('public/uploads/medias/', 680, 480);
                  $news->photo()->create(['name' => "uploads/medias/".basename($image)]);
              }
          });
-        Announcement::factory(100)->create();
+        Announcement::factory(10)->create();
+
     }
 
 }
