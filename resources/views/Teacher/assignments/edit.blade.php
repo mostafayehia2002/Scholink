@@ -6,14 +6,14 @@
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="bx bx-home-alt"></i></a>
+                        <li class="breadcrumb-item"><a href="{{ route('teacher.dashboard') }}"><i
+                                    class="bx bx-home-alt"></i></a>
                             {{ __('sidbar.home') }}
                         </li>
-
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('sidbar.materials') }}</li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('materials.new_material') }}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ __('sidbar.assignments') }}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ __('assignments.update_assignment') }}
+                        </li>
                     </ol>
-
                 </nav>
             </div>
         </div>
@@ -25,19 +25,19 @@
                     <div class="card-title d-flex align-items-center">
                         <div><i class="bx bxs-user me-1 font-22 text-primary"></i>
                         </div>
-                        <h5 class="mb-0 text-primary">{{ __('materials.new_material') }}</h5>
+                        <h5 class="mb-0 text-primary">{{ __('assignments.update_assignments') }}</h5>
                     </div>
                     <hr>
-                    <form class="row g-3" action="{{ route('teacher.materials.store') }}" method="POST"
+                    <form class="row g-3" action="{{ route('teacher.assignments.update', $assignment->id) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
-
+                        @method('PUT')
                         <div class="col-12 col-md-6">
                             <select class="form-select mb-3" name="level_id" id="level_id"
                                 aria-label="Default select example">
-                                <option selected disabled>{{ __('materials.select_level') }}</option>
+                                <option selected disabled>{{ __('assignments.select_level') }}</option>
                                 @foreach ($levels as $level)
-                                    <option @selected($level->id == request('level_id')) value="{{ $level->id }}">
+                                    <option @selected($level->id == $assignment->class->level_id) value="{{ $level->id }}">
                                         {{ $level->level_name }}</option>
                                 @endforeach
                             </select>
@@ -45,51 +45,57 @@
                         <div class="col-12 col-md-6">
                             <select class="form-select mb-3" name="class_id" id="class_id"
                                 aria-label="Default select example">
-                                <option selected disabled>{{ __('materials.select_class') }}</option>
+                                <option selected disabled>{{ __('assignments.select_class') }}</option>
+                                <option value="{{ $assignment->class_id }}" selected>
+                                    {{ $assignment->class->class_name }}</option>
                             </select>
                         </div>
-                        <div class="col-12 col-md-6">
+                        <div class="col-12 ">
                             <select class="form-select mb-3" name="subject_id" id="subject_id"
                                 aria-label="Default select example">
-                                <option selected disabled>{{ __('materials.select_subject') }}</option>
-
-                            </select>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <select class="form-select mb-3" name="type" id="type"
-                                aria-label="Default select example">
-                                <option selected disabled>{{ __('materials.select_type') }}</option>
-                                <option value="lesson">{{ __('materials.lesson') }}</option>
-                                <option value="exam">{{ __('materials.exam') }}</option>
-                                <option value="video">{{ __('materials.video') }}</option>
+                                <option selected disabled>{{ __('assignments.select_subject') }}</option>
+                                <option value="{{ $assignment->subject_id }}" selected>
+                                    {{ $assignment->subject->name }}</option>
                             </select>
                         </div>
 
-                        <div class="col-12 pb-3">
-                            <label for="inputName" class="form-label">{{ __('materials.title') }}</label>
-                            <input type="text" name="title" value="{{ old('title') }}" class="form-control" required
-                                id="inputName">
+                        <div class="col-12 col-md-6 pb-3">
+                            <label for="inputName" class="form-label">{{ __('assignments.grade') }}</label>
+                            <input type="number" name="grade" value="{{ $assignment->grade }}" class="form-control" required
+                                   id="inputName">
+                            @error('grade')
+                            <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+
+                        <div class="col-12 col-md-6 pb-3">
+                            <label for="inputName" class="form-label">{{ __('assignments.title') }}</label>
+                            <input type="text" name="title" value="{{ $assignment->title }}" class="form-control"
+                                required id="inputName">
                             @error('title')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <div class="col-12 pb-3">
-                            <label for="inputName" class="form-label">{{ __('materials.descriptions') }}</label>
-                            <textarea name="descriptions" class="form-control"></textarea>
-                            @error('descriptions')
-                                <p class="text-danger">{{ $message }}</p>
+                        <div class="col-12 col-md-6 pb-3">
+                            <label for="inputName" class="form-label">{{ __('assignments.deadline') }}</label>
+                            <input type="date" name="deadline" value="{{ $assignment->deadline }}" class="form-control" required
+                                   id="inputName">
+                            @error('deadline')
+                            <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="row mb-3">
-                            <label for="inputName" class="form-label">{{ __('materials.materials') }}</label>
-                            <input name="material[]" multiple type="file" class="dropify" data-height="100" required />
-                            @error('material')
-                                <p class="text-danger">{{ $message }}</p>
+
+                        <div class="col-12 pb-3">
+                            <label for="inputName" class="form-label">{{ __('assignments.task') }}</label>
+                            <textarea name="task" class="form-control">{{ $assignment->task }}</textarea>
+                            @error('task')
+                            <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary px-5">{{ __('materials.save') }}</button>
+                            <button type="submit" class="btn btn-primary px-5">{{ __('assignments.save') }}</button>
                         </div>
                     </form>
                 </div>
@@ -117,7 +123,7 @@
                     success: function(data) {
                         $('select[name="class_id"]').empty();
                         $('select[name="class_id"]').append(
-                            "<option selected disabled >{{ __('materials.select_class') }}</option>"
+                            "<option selected disabled >{{ __('assignments.select_class') }}</option>"
                         );
                         $.each(data, function(key, value) {
                             $('select[name="class_id"]').append(
@@ -141,7 +147,7 @@
                     success: function(data) {
                         $('select[name="subject_id"]').empty();
                         $('select[name="subject_id"]').append(
-                            "<option selected disabled >{{ __('materials.select_subject') }}</option>"
+                            "<option selected disabled >{{ __('assignments.select_subject') }}</option>"
                         );
                         $.each(data, function(key, value) {
                             var jsonString = key;

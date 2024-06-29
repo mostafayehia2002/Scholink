@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\ClassTeacherController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
 /*
@@ -34,6 +35,7 @@ Route::group(
         'prefix' => LaravelLocalization::setLocale() . '/admin',
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'auth:admin'],
         'as' => 'admin.'
+
     ], function () {
     Route::get('/', function () {
         return view('Admin.dashboard');
@@ -61,4 +63,7 @@ Route::group(
     Route::get('settings',[SettingController::class,'index'])->name('settings.index');
     Route::post('settings',[SettingController::class,'update'])->name('settings.update');
 
-});
+        Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+        Route::post('profile', [ProfileController::class, 'update'])->name('profile.update');
+    }
+);

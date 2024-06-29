@@ -9,6 +9,7 @@ use App\Models\Level;
 use App\Models\Material;
 use App\Models\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class MaterialController extends Controller
 {
@@ -22,7 +23,9 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        $data = Material::paginate(10);
+        $subjects_id=ClassTeacher::where('teacher_id',auth('teacher')->user()->id)->pluck('subject_id');
+        $classes=ClassTeacher::where('teacher_id',auth('teacher')->user()->id)->distinct()->pluck('class_id');
+        $data = Material::whereIn('class_id',$classes)->whereIn('subject_id',$subjects_id)->paginate(10);
         return view('Teacher.materials.index', compact('data'));
     }
 
@@ -64,8 +67,8 @@ class MaterialController extends Controller
      */
     public function show(string $id)
     {
-        $material=Material::findOrFail($id);
-        return view('Teacher.materials.show',compact('material'));
+        $material = Material::findOrFail($id);
+        return view('Teacher.materials.show', compact('material'));
     }
 
     /**
@@ -73,7 +76,10 @@ class MaterialController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $level_ids = auth('teacher')->user()->classes->pluck('level_id');
+        $levels = Level::whereIn('id', $level_ids)->get();
+        $material = Material::findOrFail($id);
+        return view('Teacher.materials.edit', compact('material', 'levels'));
     }
 
     /**
@@ -81,7 +87,32 @@ class MaterialController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $material = Material::findOrFail($id);
+        $request->validate([
+            'class_id' => 'required',
+            'subject_id' => 'required',
+            'title' => 'required',
+            'descriptions' => 'nullable',
+            'type' => "required|in:lesson,video,exam",
+            'material.*' => 'nullable|mimes:jpeg,png,jpg,gif,pdf'
+        ]);
+        $data = $request->except('material', 'level_id');
+        $material->update($data);
+        if ($request->hasFile('material')) {
+            //Delete Old Materials
+            foreach ($material->attachments as $material) {
+                File::delete(ltrim(parse_url($material->url)['path'], '/'));
+                $material->delete();
+            }
+
+            //Add New Materials
+            foreach ($request->file('material') as $image) {
+                $name = uniqid(10) . $image->getClientOriginalName();
+                $image->storeAs('', $name, 'materials');
+                $material->attachments()->create(['url' => "uploads/materials/$name"]);
+            }
+        }
+        return redirect()->back()->with('success', __('materials.s_update_material'));
     }
 
     /**
@@ -89,7 +120,14 @@ class MaterialController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $material = Material::findOrFail($id);
+        //Delete Old Materials
+        foreach ($material->attachments as $material) {
+            File::delete(ltrim(parse_url($material->url)['path'], '/'));
+            $material->delete();
+        }
+        $material->delete();
+        return redirect()->back()->with('success', __('materials.s_delete_material'));
     }
 
     public function getClass($level_id)

@@ -6,11 +6,13 @@
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
+
                         <li class="breadcrumb-item"><a href="{{route('teacher.dashboard')}}"><i
                                     class="bx bx-home-alt"></i></a>
                             {{__('sidbar.home')}}
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">{{__('sidbar.subjects')}}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('sidbar.classes')}}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('sidbar.students')}}</li>
                     </ol>
                 </nav>
             </div>
@@ -24,14 +26,23 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>{{__('subjects.name')}}</th>
+                            <th>{{__('students.name')}}</th>
+                            <th>{{__('students.email')}}</th>
+                            <th>{{__('students.parent_name')}}</th>
+                            <th>{{__('students.level')}}</th>
+                            <th>{{__('students.class')}}</th>
                         </tr>
                         </thead>
                         <tbody>
+
                         @foreach($data as $row)
                             <tr>
                                 <td>{{$loop->index+1}}</td>
                                 <td>{{$row->name}}</td>
+                                <td>{{$row->email}}</td>
+                                <td>{{$row->parent->name}}</td>
+                                <td>{{$row->classe->level->level_name}}</td>
+                                <td>{{$row->classe->class_name}}</td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -46,19 +57,3 @@
     </div>
 @endsection
 
-
-
-@push('js')
-    <script src="{{asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js')}}"></script>
-    <script>
-
-        $(document).ready(function () {
-            var table = $('#example2').DataTable({
-                "paging": false,
-                "ordering": false,
-                "info": false
-            });
-        });
-    </script>
-@endpush
