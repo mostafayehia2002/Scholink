@@ -9,6 +9,7 @@ use App\Models\Classe;
 use App\Models\Level;
 use App\Models\ParentStudent;
 use App\Models\Register;
+use App\Models\Setting;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

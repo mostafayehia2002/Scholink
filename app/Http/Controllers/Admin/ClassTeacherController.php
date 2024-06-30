@@ -56,17 +56,28 @@ class ClassTeacherController extends Controller
                 'end_at' => "required",
             ]);
 
-            $teacher=ClassTeacher::where('teacher_id', $request->teacher_id)
-                ->where('subject_id', $request->subject_id)
-                ->where('class_id', $request->class_id)
-                ->where('start_at', $request->start_at)
-                ->where('day',$request->day)
-                ->first();
+            $teacher = ClassTeacher::where(function ($query) use ($request) {
+                $query->where('day', $request->day)
+                    ->where('start_at', $request->start_at)
+                    ->where('end_at', $request->end_at)
+                    ->where(function ($subQuery) use ($request) {
+                        $subQuery->where('teacher_id', $request->teacher_id)
+                            ->where('subject_id', $request->subject_id)
+                            ->where('class_id', $request->class_id);
+                    })
+                    ->orWhere(function ($subQuery) use ($request) {
+                        $subQuery->where('subject_id', $request->subject_id)
+                            ->where('class_id', $request->class_id);
+                    });
+            })->first();
+
+
             if ($teacher) {
-                return redirect()->back()->with('error', 'Teacher Is Already Exist');
+                return redirect()->back()->with('error', 'Time Is Already Exist');
+            }else{
+                ClassTeacher::create($validator->validated());
+                return redirect()->back()->with('success', __('class_teachers.s_add_class_teacher'));
             }
-            ClassTeacher::create($validator->validated());
-            return redirect()->back()->with('success', __('class_teachers.s_add_class_teacher'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
